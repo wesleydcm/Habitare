@@ -7,10 +7,13 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { FormContainer } from "./styles";
+import { UserContext } from "../../providers/User";
+import { useContext } from "react";
 
 function Login() {
+  const { userLogin } = useContext(UserContext);
   const schema = yup.object().shape({
-    email: yup.string().email("Email inválido").required("Campo obrigatório!"),
+    username: yup.string().required("Campo obrigatório!"),
     password: yup.string().required("Campo obrigatório!"),
   });
 
@@ -25,13 +28,14 @@ function Login() {
   const history = useHistory();
 
   const onSubmitFunction = (data) => {
-    api.post("sessions/", data).then((response) => {
-      const { access } = response.data;
-
-      localStorage.setItem("@Habitare:token", JSON.stringify(access));
-
-      return history.push("/dashboard");
-    });
+    api
+      .post("sessions/", data)
+      .then((response) => {
+        const { access } = response.data;
+        userLogin(access);
+        return history.push("/dashboard");
+      })
+      .catch((err) => console.log(JSON.stringify(err)));
   };
 
   return (
@@ -41,10 +45,10 @@ function Login() {
           <h1>Login</h1>
           <Input
             register={register}
-            name="email"
-            label="Email"
-            placeholder="Digite seu email"
-            error={errors.email?.message}
+            name="username"
+            label="Username"
+            placeholder="Digite seu usuário"
+            error={errors.username?.message}
           ></Input>
           <Input
             register={register}

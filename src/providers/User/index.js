@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import jwt_decode from "jwt-decode";
+import api from "../../services/api";
 export const UserContext = createContext([]);
 
 export const UserProvider = ({ children }) => {
@@ -8,8 +9,10 @@ export const UserProvider = ({ children }) => {
 
   const userLogin = (userToken) => {
     localStorage.setItem(`@Habitare:Token`, JSON.stringify(userToken));
-    const userInfo = jwt_decode(userToken);
-    setUser(userInfo);
+    const userId = jwt_decode(userToken).user_id;
+    api.get(`users/${userId}/`).then((response) => {
+      setUser(response.data);
+    });
     setAuthenticated(true);
   };
 
