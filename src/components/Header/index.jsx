@@ -22,9 +22,9 @@ const Header = ({ setAuthenticated }) => {
 
   return (
     <HeaderContainer>
-      <a href="/">
+      <Link to="/">
         <img src={Logo} alt="Habitare" />
-      </a>
+      </Link>
       <ButtonsWrapper>
         {pathname === "/" ||
         pathname === "/login" ||
