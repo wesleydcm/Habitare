@@ -1,17 +1,18 @@
 import { ButtonsWrapper, HeaderContainer } from "./styles";
 import Logo from "../../assets/images/Habitare-logo.svg";
-import { Redirect, useLocation } from "react-router";
+import { Redirect, useHistory, useLocation } from "react-router";
 import Button from "../Button";
 import { Link } from "react-router-dom";
 
 const Header = ({ setAuthenticated }) => {
   const {pathname} = useLocation();
+  const history = useHistory()
 
   const handleLocation = (location) => {
     if (location === "login") {
-      return <Redirect to="/login" />;
+      history.push('/login');
     } else if (location === "signup") {
-      return <Redirect to="/signup" />;
+      history.push('/signup');
     }
   };
 

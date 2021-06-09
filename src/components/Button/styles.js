@@ -6,7 +6,7 @@ export const ButtonItem = styled.button`
   color: ${(props) => (props.whiteSchema ? 'var(--purple)'  : 'var(--white)' )};
   font-size: 18px;
   font-weight: 500;
-  transition: 0.5s;
+  transition: 300ms;
   padding: 6px 32px;
   border: 3px solid ${(props) => (props.whiteSchema ? 'var(--purple)' : 'transparent')};
   
