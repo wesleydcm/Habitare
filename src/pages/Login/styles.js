@@ -32,7 +32,7 @@ export const FormContainer = styled.form`
     height: 30px;
   }
   > p {
-    font-size: 12px;
+    font-size: 14px;
   }
   > button {
     align-self: flex-end;
