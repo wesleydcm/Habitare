@@ -1,11 +1,12 @@
 import { Link, useHistory } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { AnimationContainer, Background, Container, Content } from "./styles";
+import { Container, Content } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
+import { FormContainer } from "./styles";
 
 function Login() {
   const schema = yup.object().shape({
@@ -36,32 +37,29 @@ function Login() {
   return (
     <Container>
       <Content>
-        <AnimationContainer>
-          <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <h1>Login</h1>
-            <Input
-              register={register}
-              name="email"
-              label="Email"
-              placeholder="Digite seu email"
-              error={errors.email?.message}
-            ></Input>
-            <Input
-              register={register}
-              name="password"
-              label="Senha"
-              placeholder="Digite sua senha"
-              type="password"
-              error={errors.password?.message}
-            ></Input>
-            <p>
-              Não possui conta? <Link to="/signup">Cadastre-se aqui!</Link>
-            </p>
-            <Button type="submit">Entrar</Button>
-          </form>
-        </AnimationContainer>
+        <FormContainer onSubmit={handleSubmit(onSubmitFunction)}>
+          <h1>Login</h1>
+          <Input
+            register={register}
+            name="email"
+            label="Email"
+            placeholder="Digite seu email"
+            error={errors.email?.message}
+          ></Input>
+          <Input
+            register={register}
+            name="password"
+            label="Senha"
+            placeholder="Digite sua senha"
+            type="password"
+            error={errors.password?.message}
+          ></Input>
+          <p>
+            Não possui conta? <Link to="/signup">Cadastre-se aqui!</Link>
+          </p>
+          <Button type="submit">Entrar</Button>
+        </FormContainer>
       </Content>
-      <Background />
     </Container>
   );
 }
