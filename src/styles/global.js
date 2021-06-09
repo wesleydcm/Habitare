@@ -69,6 +69,9 @@ export const GlobalStyles = createGlobalStyle`
         border: none;
     }
 
+    button, input{
+        outline: none;
+    }
 
     body {
         background-color: var(--gray);
