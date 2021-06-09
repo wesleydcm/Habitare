@@ -66,11 +66,12 @@ export const GlobalStyles = createGlobalStyle`
 
     button {
         cursor: pointer;
+        border: none;
     }
 
 
     body {
         background-color: var(--gray);
-        padding-top: 80px;
+        padding-top: 90px;
     }
 `;
