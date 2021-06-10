@@ -18,7 +18,7 @@ export const AsideContainer = styled.aside`
   grid-template-columns: 1fr 1fr;
   background-color: var(--purple);
 
-  @media screen and (min-width: 540px) {
+  @media screen and (min-width: 720px) {
     min-height: 100vh;
     width: 275px;
 
@@ -58,7 +58,7 @@ export const ProfileWrapper = styled.div`
     text-align: center;
   }
 
-  @media screen and (min-width: 540px) {
+  @media screen and (min-width: 720px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,7 +89,9 @@ export const LevelInfo = styled.div`
   border-radius: 24px;
   display: flex;
   align-items: center;
-
+  position: relative;
+  z-index: 500;
+  
   span {
     text-transform: uppercase;
     color: var(--purple);
@@ -105,7 +107,7 @@ export const LevelInfo = styled.div`
     height: 24px;
   }
 
-  @media screen and (min-width: 540px) {
+  @media screen and (min-width: 720px) {
     background-color: var(--gray);
     padding: 4px 18px;
     border-radius: 24px;
@@ -211,7 +213,7 @@ export const MenuWrapper = styled.nav`
     }
   }
 
-  @media screen and (min-width: 540px) {
+  @media screen and (min-width: 720px) {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -299,7 +301,7 @@ export const ButtonLogoffWrapper = styled.div`
   padding-right: 8px;
   padding-top: 18px;
 
-  @media screen and (min-width: 540px) {
+  @media screen and (min-width: 720px) {
     display: none;
   }
 `;

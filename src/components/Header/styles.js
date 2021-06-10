@@ -22,7 +22,7 @@ export const HeaderContainer = styled.header`
     width: 110px;
   }
 
-  @media screen and (min-width: 540px) {
+  @media screen and (min-width: 720px) {
     width: 100%;
     background-color: var(--white);
     padding: 24px 48px;
@@ -53,7 +53,7 @@ export const ButtonsWrapper = styled.div`
     padding: 4px 8px;
   }
 
-  @media screen and (min-width: 540px) {
+  @media screen and (min-width: 720px) {
     button {
       font-size: inherit;
       padding: 6px 32px;
