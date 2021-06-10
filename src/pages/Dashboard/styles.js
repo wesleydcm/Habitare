@@ -19,7 +19,7 @@ export const DashboardContainer = styled.main`
 
 export const MainCard = styled.div`
   width: 100%;
-  max-width: 980px;
+  max-width: 1280px;
   height: 200px;
   background: linear-gradient(84.94deg, #a331b4 -21.8%, #7a5aed 98.1%);
   border-radius: 30px;
@@ -61,8 +61,6 @@ export const MainCard = styled.div`
     }
   }
   @media screen and (min-width: 1140px) {
-    height: 230px;
-
     h1 {
       font-size: 42px;
     }
@@ -114,14 +112,14 @@ export const FiltersAndButtonsWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 980px;
+  max-width: 1280px;
   margin-top: 32px;
   
 `
 
 export const CardsList = styled.div`
   width: 100%;
-  max-width: 980px;
+  max-width: 1280px;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 18px;
@@ -129,5 +127,9 @@ export const CardsList = styled.div`
 
   @media screen and (min-width: 980px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1600px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
