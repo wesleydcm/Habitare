@@ -222,6 +222,7 @@ export const MenuWrapper = styled.nav`
     a {
       display: flex;
       align-items: center;
+      justify-content: flex-start;
       padding: 8px 24px;
       position: relative;
       z-index: 450;
