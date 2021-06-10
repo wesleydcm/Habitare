@@ -22,23 +22,25 @@ const Header = ({ setAuthenticated }) => {
   };
 
   return (
-    <HeaderContainer>
+    <HeaderContainer location={pathname}>
       <Link to="/">
         <img src={Logo} alt="Habitare" />
       </Link>
-      <ButtonsWrapper>
+      <ButtonsWrapper location={pathname}>
         {pathname === "/" ||
         pathname === "/login" ||
         pathname === "/signup" ? (
           <>
             <Button
               whiteSchema={pathname === "/login" ? true : false}
+              className="btb-login"
               onClickFunc={() => handleLocation("login")}
             >
               Login
             </Button>
             <Button
               whiteSchema={pathname === "/signup" ? true : false}
+              className="btb-signup"
               onClickFunc={() => handleLocation("signup")}
             >
               Cadastro
