@@ -1,12 +1,11 @@
 import NewHabit from "../../components/NewHabit";
 import Aside from "../../components/Aside";
 import Lottie from "react-lottie";
-
 import animationData from "../../assets/lotties/main.json";
-
 import {
   CardsList,
   DashboardContainer,
+  FiltersAndButtonsWrapper,
   ImageMainCard,
   MainCard,
 } from "./styles";
@@ -77,10 +76,6 @@ const Dashboard = () => {
     <>
       <Aside />
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        {" "}
-        <NewHabit />
-      </div>
       <DashboardContainer>
         <MainCard>
           <h1>Olá, Kenzie Academy!</h1>
@@ -89,6 +84,12 @@ const Dashboard = () => {
             <Lottie options={lottieOptions} />
           </ImageMainCard>
         </MainCard>
+        <FiltersAndButtonsWrapper>
+          <div></div>
+          <div>
+            <NewHabit />
+          </div>
+        </FiltersAndButtonsWrapper>
         <CardsList>
           {MOCK_HABIT.map((habit, index) => (
             <HabitCard habit={habit} key={index} />

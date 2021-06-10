@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Button } from "antd";
+// import { Button } from "antd";
+
+import Button from '../Button'
 import "antd/dist/antd.css";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaPlus } from "react-icons/fa";
 import {
   CustomModal,
   Container,
@@ -34,8 +36,8 @@ const NewHabit = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Criar novo hábito
+      <Button  onClick={showModal}>
+        NOVO HÁBITO <FaPlus />
       </Button>
 
       <CustomModal
