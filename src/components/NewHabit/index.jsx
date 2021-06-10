@@ -1,9 +1,20 @@
 import React, { useState } from "react";
-import { Modal, Button } from "antd";
+import { Button } from "antd";
 import "antd/dist/antd.css";
 
-import { CustomModal, InputModal, CardCategory, CardFrequency } from "./styles";
-import { InputItem } from "../Input/styles";
+import {
+  CustomModal,
+  Container,
+  InputModal,
+  CardCategory,
+  CardFrequency,
+  CardContainer,
+  WrapStars,
+} from "./styles";
+
+import filledStar from "../../assets/svg/filledStar.svg";
+import emptyStar from "../../assets/svg/emptyStar.svg";
+import selectedStar from "../../assets/svg/selectedStar.svg";
 
 const NewHabit = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -32,13 +43,15 @@ const NewHabit = () => {
         onCancel={handleCancel}
         width={700}
         title="Criar novo hábito"
-        style={{ borderRadius: "20px" }}
+        okText="Criar"
+        cancelText="Cancelar"
       >
+        <Container></Container>
         <div className="wrap">
           <InputModal placeholder="Qual seu novo hábito?" />
         </div>
         <p>Em qual categoria seu hábito se encaixa?</p>
-        <div className="cardContainer">
+        <CardContainer>
           <CardCategory color="var(--colorSpirit)">
             <p>Corpo e mente saudáveis</p>
           </CardCategory>
@@ -57,7 +70,7 @@ const NewHabit = () => {
           <CardCategory color="var(--colorNight)">
             <p>Boa noite</p>
           </CardCategory>
-        </div>
+        </CardContainer>
         <p>Com qual frequência?</p>
         <div className="wrap">
           <CardFrequency>
@@ -74,6 +87,13 @@ const NewHabit = () => {
           </CardFrequency>
         </div>
         <p>O quanto é difícil para você manter esse hábito?</p>
+        <WrapStars>
+          <img src={filledStar} alt="filled star" />
+          <img src={filledStar} alt="filled star" />
+          <img src={selectedStar} alt="selected star" />
+          <img src={emptyStar} alt="empty star" />
+          <img src={emptyStar} alt="empty star" />
+        </WrapStars>
       </CustomModal>
     </>
   );

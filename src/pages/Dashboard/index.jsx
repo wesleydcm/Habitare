@@ -5,8 +5,11 @@ const Dashboard = () => {
   return (
     <>
       <Aside />
-      <div>Dashboard</div>
-      <NewHabit />
+
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {" "}
+        <NewHabit />
+      </div>
     </>
   );
 };

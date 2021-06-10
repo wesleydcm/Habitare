@@ -1,17 +1,16 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Modal } from "antd";
-import Input from "../Input";
 
 export const CustomModal = styled(Modal)`
   h3 {
     font-weight: bold;
     position: relative;
-
     bottom: 18px;
   }
 
   p {
     font-size: 13px;
+    margin-left: 8px;
   }
 
   .ant-modal-header {
@@ -31,7 +30,7 @@ export const CustomModal = styled(Modal)`
 
   .ant-modal-body {
     background-color: var(--gray);
-    padding: 16px 24px;
+    padding: 16px 54px;
   }
 
   .ant-modal-footer {
@@ -45,16 +44,60 @@ export const CustomModal = styled(Modal)`
     justify-content: center;
   }
 
-  .cardContainer {
-    display: flex;
-    flex-flow: row wrap;
+  .ant-btn {
+    width: 100px;
+    border-radius: 20px;
+    background-color: var(--white);
+    border: 1px solid var(--purple);
+    margin: 0 auto;
+
+    &:hover {
+      filter: brightness(0.7);
+    }
+  }
+
+  .ant-btn:last-child {
+    background-color: var(--purple);
+  }
+
+  .ant-btn span {
+    color: var(--purple);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .ant-btn:last-child span {
+    color: var(--white);
+  }
+
+  @media (min-width: 430px) {
+    p {
+      font-size: 16px;
+    }
   }
 
   @media (min-width: 460px) {
     .ant-modal-title {
       font-size: 30px;
     }
+    p {
+      margin: 5px 8px;
+    }
+
+    @media (min-width: 600px) {
+      p {
+        margin: 10px 8px;
+      }
+
+      .ant-btn {
+        width: 150px;
+      }
+    }
   }
+`;
+
+export const Container = styled.div`
+  max-width: 620px;
 `;
 
 export const InputModal = styled.input`
@@ -67,11 +110,10 @@ export const InputModal = styled.input`
   height: 20px;
   padding: 20px 12px;
 
-  @media (min-width: 800px) {
+  @media (min-width: 540px) {
     font-size: 20px;
-    height: 22px;
-    width: 250px;
-    padding: 8px 16px;
+    width: 90%;
+    padding: 25px 12px;
   }
 `;
 
@@ -80,33 +122,84 @@ export const CardCategory = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 46%;
   height: 30px;
   margin: 4px;
   border-radius: 30px;
   padding: 2px 0;
-
+  filter: brightness(0.7);
+  cursor: pointer;
   p {
     font-size: 10px;
     color: var(--white);
     text-align: center;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  @media (min-width: 430px) {
+    height: 40px;
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 540px) {
+    width: 31%;
+  }
+`;
+
+export const CardContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  div:hover {
+    filter: brightness(0.9);
   }
 `;
 
 export const CardFrequency = styled.div`
+  cursor: pointer;
   background: var(--purple);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 53px;
+  width: 25%;
   height: 30px;
   margin: 4px;
   border-radius: 30px;
   padding: 2px 0;
+  filter: brightness(0.7);
 
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  div:hover {
+    filter: brightness(0.89);
+  }
   p {
     font-size: 10px;
     color: var(--white);
     text-align: center;
+    margin: 0;
+  }
+
+  @media (min-width: 430px) {
+    height: 40px;
+
+    p {
+      font-size: 14px;
+    }
+  }
+`;
+export const WrapStars = styled.div`
+  width: 100%;
+  display: flex;
+
+  img {
+    cursor: pointer;
   }
 `;
