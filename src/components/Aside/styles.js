@@ -89,7 +89,9 @@ export const LevelInfo = styled.div`
   border-radius: 24px;
   display: flex;
   align-items: center;
-
+  position: relative;
+  z-index: 500;
+  
   span {
     text-transform: uppercase;
     color: var(--purple);
