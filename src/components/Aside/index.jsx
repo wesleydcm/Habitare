@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaTrophy, FaCrown, FaUsers, FaClipboardList } from "react-icons/fa";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
+
 import {
   AsideContainer,
   ButtonLogoffWrapper,
@@ -9,10 +11,12 @@ import {
 } from "./styles";
 
 import AvatarNotFound from "../../assets/images/avatar.svg";
-import { NavLink, useLocation } from "react-router-dom";
 import Button from "../Button";
+import { UserContext } from "../../providers/User";
 
 const Aside = () => {
+  const {userLogoff} = useContext(UserContext);
+  const history = useHistory();
   const { pathname } = useLocation();
 
   const [topIndicator, setTopIndicator] = useState(0);
@@ -40,6 +44,11 @@ const Aside = () => {
     getDimensions();
   };
 
+  const logOff = () => {
+    userLogoff()
+    history.push("/")
+  };
+
   return (
     <AsideContainer>
       <ProfileWrapper>
@@ -52,7 +61,7 @@ const Aside = () => {
       </ProfileWrapper>
       <div>
         <ButtonLogoffWrapper>
-          <Button whiteSchema>Sair</Button>
+          <Button whiteSchema onClickFunc={logOff}>Sair</Button>
         </ButtonLogoffWrapper>
         <MenuWrapper topIndicator={topIndicator} leftIndicator={leftIndicator}>
           <NavLink
