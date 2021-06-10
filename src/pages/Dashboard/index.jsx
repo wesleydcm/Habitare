@@ -1,8 +1,6 @@
 import Aside from "../../components/Aside";
 import Lottie from "react-lottie";
-
 import animationData from "../../assets/lotties/main.json";
-
 import {
   CardsList,
   DashboardContainer,
@@ -62,7 +60,6 @@ const MOCK_HABIT = [
   },
   
 ];
-
 
 
 const Dashboard = () => {
