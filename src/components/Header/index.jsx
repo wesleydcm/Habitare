@@ -1,10 +1,13 @@
 import { ButtonsWrapper, HeaderContainer } from "./styles";
 import Logo from "../../assets/images/Habitare-logo.svg";
-import { Redirect, useHistory, useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import Button from "../Button";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../providers/User";
 
-const Header = ({ setAuthenticated }) => {
+const Header = () => {
+  const {userLogoff} = useContext(UserContext)
   const {pathname} = useLocation();
   const history = useHistory()
 
@@ -17,8 +20,8 @@ const Header = ({ setAuthenticated }) => {
   };
 
   const logOff = () => {
-    setAuthenticated(false);
-    return <Redirect to="/" />;
+    userLogoff()
+    history.push("/")
   };
 
   return (
