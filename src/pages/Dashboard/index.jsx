@@ -1,3 +1,4 @@
+import NewHabit from "../../components/NewHabit";
 import Aside from "../../components/Aside";
 import Lottie from "react-lottie";
 
@@ -60,10 +61,7 @@ const MOCK_HABIT = [
     achieved: false,
     how_much_achieved: 15,
   },
-  
 ];
-
-
 
 const Dashboard = () => {
   const lottieOptions = {
@@ -78,6 +76,11 @@ const Dashboard = () => {
   return (
     <>
       <Aside />
+
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {" "}
+        <NewHabit />
+      </div>
       <DashboardContainer>
         <MainCard>
           <h1>Olá, Kenzie Academy!</h1>
@@ -87,9 +90,9 @@ const Dashboard = () => {
           </ImageMainCard>
         </MainCard>
         <CardsList>
-          {
-            MOCK_HABIT.map((habit, index) => <HabitCard habit={habit} key={index} />)
-          }
+          {MOCK_HABIT.map((habit, index) => (
+            <HabitCard habit={habit} key={index} />
+          ))}
         </CardsList>
       </DashboardContainer>
     </>
