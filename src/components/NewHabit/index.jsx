@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "antd";
 import "antd/dist/antd.css";
-
+import { FaTimes } from "react-icons/fa";
 import {
   CustomModal,
   Container,
@@ -10,6 +10,7 @@ import {
   CardFrequency,
   CardContainer,
   WrapStars,
+  LabelContainer,
 } from "./styles";
 
 import filledStar from "../../assets/svg/filledStar.svg";
@@ -45,8 +46,8 @@ const NewHabit = () => {
         title="Criar novo hábito"
         okText="Criar"
         cancelText="Cancelar"
+        closeIcon={<FaTimes />}
       >
-        <Container></Container>
         <div className="wrap">
           <InputModal placeholder="Qual seu novo hábito?" />
         </div>

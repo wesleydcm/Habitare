@@ -30,7 +30,6 @@ export const CustomModal = styled(Modal)`
 
   .ant-modal-body {
     background-color: var(--gray);
-    padding: 16px 54px;
   }
 
   .ant-modal-footer {
@@ -52,7 +51,7 @@ export const CustomModal = styled(Modal)`
     margin: 0 auto;
 
     &:hover {
-      filter: brightness(0.7);
+      filter: brightness(0.85);
     }
   }
 
