@@ -3,7 +3,7 @@ import Aside from "../../components/Aside";
 import Lottie from "react-lottie";
 import animationData from "../../assets/lotties/main.json";
 import FilterCategory from "../../components/Filter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHabit } from "../../providers/Habit";
 
 import {
@@ -14,6 +14,8 @@ import {
   MainCard,
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
+import { Redirect } from "react-router-dom";
+import { UserContext } from "../../providers/User";
 
 const MOCK_HABIT = [
   {
@@ -67,6 +69,8 @@ const MOCK_HABIT = [
 ];
 
 const Dashboard = () => {
+  const { authenticated } = useContext(UserContext);
+
   const lottieOptions = {
     loop: true,
     autoplay: true,
@@ -103,6 +107,9 @@ const Dashboard = () => {
     }
   };
 
+  if (!authenticated) {
+    return <Redirect to="/login" />;
+  }
   return (
     <>
       <Aside />
