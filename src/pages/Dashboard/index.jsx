@@ -1,14 +1,15 @@
+import NewHabit from "../../components/NewHabit";
 import Aside from "../../components/Aside";
 import Lottie from "react-lottie";
 import animationData from "../../assets/lotties/main.json";
 import FilterCategory from "../../components/Filter";
-import { useContext, useState, useEffect } from "react";
-import { HabitContext } from "../../providers/Habit";
+import { useState, useEffect } from "react";
 import { useHabit } from "../../providers/Habit";
 
 import {
   CardsList,
   DashboardContainer,
+  FiltersAndButtonsWrapper,
   ImageMainCard,
   MainCard,
 } from "./styles";
@@ -82,6 +83,7 @@ const Dashboard = () => {
   useEffect(() => {
     loadHabits();
     console.log(myHabits);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -104,6 +106,7 @@ const Dashboard = () => {
   return (
     <>
       <Aside />
+
       <DashboardContainer>
         <MainCard>
           <h1>Olá, Kenzie Academy!</h1>
@@ -112,7 +115,14 @@ const Dashboard = () => {
             <Lottie options={lottieOptions} />
           </ImageMainCard>
         </MainCard>
-        <FilterCategory handleFilter={handleFilter} />
+
+        <FiltersAndButtonsWrapper>
+          <FilterCategory handleFilter={handleFilter} />
+          <div>
+            <NewHabit />
+          </div>
+        </FiltersAndButtonsWrapper>
+
         <CardsList>
           {habits.length > 0 && !allHabits
             ? myHabits.map((habit) => (
