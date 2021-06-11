@@ -10,14 +10,14 @@ export const InputItem = styled.input`
     `}
   color: var(--black);
   font-size: 16px;
-  width: 200px;
-  height: 20px;
+  width: 100%;
+  /* height: 20px; */
   padding: 8px 16px;
 
   @media (min-width: 800px) {
     font-size: 20px;
-    height: 22px;
-    width: 250px;
+    /* height: 22px; */
+    width: 100%;
     padding: 8px 16px;
   }
 `;
