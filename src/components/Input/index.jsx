@@ -1,7 +1,7 @@
 import { InputItem } from "./styles";
 
 const Input = ({ placeholder, error, register, name, ...rest }) => {
-  return register === true ? (
+  return register ? (
     <InputItem
       {...register(name)}
       isErrored={!!error}

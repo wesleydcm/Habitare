@@ -17,6 +17,12 @@ import filledStar from "../../assets/svg/filledStar.svg";
 import emptyStar from "../../assets/svg/emptyStar.svg";
 import selectedStar from "../../assets/svg/selectedStar.svg";
 
+import RadioInput from "./RadioInput";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useHistory } from "react-router-dom";
+
 const NewHabit = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -31,6 +37,15 @@ const NewHabit = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const handleForm = (res) => console.log(res);
 
   return (
     <>
@@ -47,10 +62,14 @@ const NewHabit = () => {
         okText="Criar"
         cancelText="Cancelar"
         closeIcon={<FaTimes />}
+        okButtonProps={{ htmlType: "submit" }}
       >
+        <RadioInput {...register("course_module")} />
+
         <div className="wrap">
           <InputModal placeholder="Qual seu novo hábito?" />
         </div>
+
         <p>Em qual categoria seu hábito se encaixa?</p>
         <CardContainer>
           <CardCategory color="var(--colorSpirit)">

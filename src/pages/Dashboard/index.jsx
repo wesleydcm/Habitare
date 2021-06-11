@@ -75,13 +75,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <Aside />
+      {/* <Aside /> */}
 
       <div style={{ display: "flex", justifyContent: "center" }}>
         {" "}
         <NewHabit />
       </div>
-      <DashboardContainer>
+      {/* <DashboardContainer>
         <MainCard>
           <h1>Olá, Kenzie Academy!</h1>
           <h3>Qual hábito quer começar hoje?</h3>
@@ -94,7 +94,7 @@ const Dashboard = () => {
             <HabitCard habit={habit} key={index} />
           ))}
         </CardsList>
-      </DashboardContainer>
+      </DashboardContainer> */}
     </>
   );
 };

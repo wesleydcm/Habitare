@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Modal } from "antd";
+import React from "react";
 
 export const CustomModal = styled(Modal)`
   h3 {
@@ -116,7 +117,7 @@ export const InputModal = styled.input`
   }
 `;
 
-export const CardCategory = styled.div`
+export const CardCategory = styled.label`
   background: ${(props) => props.color};
   display: flex;
   justify-content: center;
