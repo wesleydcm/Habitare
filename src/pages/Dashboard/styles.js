@@ -110,11 +110,19 @@ export const ImageMainCard = styled.div`
 export const FiltersAndButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap-reverse;
   justify-content: space-between;
   width: 100%;
   max-width: 1280px;
   margin-top: 32px;
-  
+
+  > div {
+    margin-bottom: 18px;
+
+    &:first-child{
+      margin-bottom: 0;
+    }
+  }
 `
 
 export const CardsList = styled.div`
