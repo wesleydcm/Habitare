@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  FaRegListAlt,
+  FaIcons,
   FaHands,
   FaSeedling,
   FaCompressArrowsAlt,
@@ -25,7 +25,7 @@ const FilterCategory = ({ handleFilter }) => {
           onClick={() => handleClick("displayAll")}
           filterSelect={filterSelect === "displayAll" ? true : false}
         >
-          <FaRegListAlt />
+          <FaIcons />
         </IconContainer>
         <IconContainer
           color="spirit"

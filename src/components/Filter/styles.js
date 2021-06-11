@@ -25,9 +25,6 @@ export const IconContainer = styled.div`
     stroke: ${(props) =>
       props.filterSelect ? "rgba(0,0,0,0.7)" : "transparent"};
     stroke-width: ${(props) => (props.filterSelect ? "35" : "0")};
-    padding-bottom: 4px;
-    border-bottom: 2px solid
-      ${(props) => (props.filterSelect ? "rgba(0,0,0,0.4)" : "transparent")};
 
     path {
       color: ${(props) =>
