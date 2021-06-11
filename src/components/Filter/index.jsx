@@ -1,4 +1,5 @@
 import {
+  FaRegListAlt,
   FaHands,
   FaSeedling,
   FaCompressArrowsAlt,
@@ -7,15 +8,18 @@ import {
   FaMoon,
 } from "react-icons/fa";
 import { Container, FiltersContent, IconContainer } from "./styles";
-// spirit fit focus money house night
-const FilterCategory = (handleFilter) => {
+
+const FilterCategory = ({ handleFilter }) => {
   const handleClick = (category) => {
-    /* handleFilter(category); */
+    handleFilter(category);
   };
   return (
     <Container>
       <span>Filtrar categorias</span>
       <FiltersContent>
+        <IconContainer color="spirit" onClick={() => handleClick("displayAll")}>
+          <FaRegListAlt />
+        </IconContainer>
         <IconContainer color="spirit" onClick={() => handleClick("spirit")}>
           <FaHands />
         </IconContainer>

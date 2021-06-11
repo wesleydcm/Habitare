@@ -9,17 +9,17 @@ import {
   FaRegStar,
 } from "react-icons/fa";
 
-import SpiritLottie from '../assets/lotties/spirit.json';
-import FitLottie from '../assets/lotties/fit.json';
-import HouseLottie from '../assets/lotties/house.json';
-import MoneyLottie from '../assets/lotties/money.json';
-import NightLottie from '../assets/lotties/night.json';
-import FocusLottie from '../assets/lotties/focus.json';
+import SpiritLottie from "../assets/lotties/spirit.json";
+import FitLottie from "../assets/lotties/fit.json";
+import HouseLottie from "../assets/lotties/house.json";
+import MoneyLottie from "../assets/lotties/money.json";
+import NightLottie from "../assets/lotties/night.json";
+import FocusLottie from "../assets/lotties/focus.json";
 
 const CATEGORIES = {
   spirit: {
     title: "Corpo e mente saudáveis",
-    icon: FaHands,
+    icon: <FaHands />,
     color: "var(--colorSpirit)",
     image: {
       loop: true,
@@ -27,8 +27,8 @@ const CATEGORIES = {
       animationData: SpiritLottie,
       rendererSettings: {
         preserveAspectRatio: "xMidYMid slice",
-      }
-    }
+      },
+    },
   },
   fit: {
     title: "Ficando em forma",
@@ -40,8 +40,8 @@ const CATEGORIES = {
       animationData: FitLottie,
       rendererSettings: {
         preserveAspectRatio: "xMidYMid slice",
-      }
-    }
+      },
+    },
   },
   money: {
     title: "Me poupe",
@@ -53,8 +53,8 @@ const CATEGORIES = {
       animationData: MoneyLottie,
       rendererSettings: {
         preserveAspectRatio: "xMidYMid slice",
-      }
-    }
+      },
+    },
   },
   focus: {
     title: "Foco, força e fé",
@@ -67,7 +67,7 @@ const CATEGORIES = {
       rendererSettings: {
         preserveAspectRatio: "xMidYMid slice",
       },
-    }
+    },
   },
   night: {
     title: "Boa noite",
@@ -79,8 +79,8 @@ const CATEGORIES = {
       animationData: NightLottie,
       rendererSettings: {
         preserveAspectRatio: "xMidYMid slice",
-      }
-    }
+      },
+    },
   },
   house: {
     title: "Lar doce lar",
@@ -92,8 +92,8 @@ const CATEGORIES = {
       animationData: HouseLottie,
       rendererSettings: {
         preserveAspectRatio: "xMidYMid slice",
-      }
-    }
+      },
+    },
   },
 };
 
