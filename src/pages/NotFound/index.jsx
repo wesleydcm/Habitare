@@ -50,7 +50,7 @@ const NotFound = () => {
         duration: .5,
         yoyo: true,
         repeat: -1,
-        ease:"steps(2)"
+        ease:"steps(4)"
       })
       .to(sticksRight.current, {
         scale: 0,
@@ -60,7 +60,7 @@ const NotFound = () => {
         duration: .5,
         yoyo: true,
         repeat: -1,
-        ease:"steps(2)"
+        ease:"steps(4)"
       }, "<")
       ;
   });
