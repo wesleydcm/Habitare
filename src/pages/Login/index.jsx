@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { Background, Container, Content } from "./styles";
@@ -13,7 +13,7 @@ import gsap from "gsap";
 import { CSSPlugin } from "gsap/CSSPlugin";
 
 function Login() {
-  const { userLogin } = useContext(UserContext);
+  const { userLogin, authenticated } = useContext(UserContext);
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório!"),
     password: yup.string().required("Campo obrigatório!"),
@@ -49,99 +49,107 @@ function Login() {
   const content = useRef([]);
 
   gsap.registerPlugin(CSSPlugin);
-
   useEffect(() => {
-    const totalLengtRight = Math.ceil(rigthSVGLine.current.getTotalLength());
-    const totalLengtLeft = Math.ceil(leftSVGLine.current.getTotalLength());
-    const totalLengtBottom = Math.ceil(bottomSVGLine.current.getTotalLength());
-
-    gsap.set(rigthSVGLine.current, {
-      strokeDasharray: totalLengtRight,
-      strokeDashoffset: totalLengtRight,
-      opacity: 0,
-    });
-
-    gsap.set(leftSVGLine.current, {
-      strokeDasharray: totalLengtLeft,
-      strokeDashoffset: totalLengtLeft,
-      opacity: 0,
-    });
-
-    gsap.set(bottomSVGLine.current, {
-      strokeDasharray: totalLengtBottom,
-      strokeDashoffset: totalLengtBottom,
-      opacity: 0,
-    });
-
-    gsap
-      .timeline()
-      .to(rigthSVG.current, {
-        duration: 1.5,
-        opacity: 1,
-      })
-      .to(
-        rigthSVGLine.current,
-        {
-          strokeDashoffset: totalLengtRight / 2,
-          opacity: 1,
-          duration: 3,
-        },
-        "-=1"
-      )
-      .to(
-        leftSVG.current,
-        {
-          duration: 1.2,
-          opacity: 1,
-        },
-        "-=3.5"
-      )
-      .to(
-        leftSVGLine.current,
-        {
-          strokeDashoffset: totalLengtLeft / 2,
-          opacity: 1,
-          duration: 2,
-        },
-        "-=2.5"
-      )
-      .to(
-        bottomSVG.current,
-        {
-          duration: 1,
-          opacity: 1,
-        },
-        "-=3"
-      )
-      .to(
-        bottomSVGLine.current,
-        {
-          strokeDashoffset: totalLengtBottom / 2,
-          opacity: 1,
-          duration: 2,
-        },
-        "-=2.5"
-      )
-      .from(
-        content.current,
-        {
-          translateY: -40,
-          opacity: 0,
-          stagger: {
-            amount: 0.4,
-          },
-        },
-        "-=3"
+    if (!authenticated) {
+      const totalLengtRight = Math.ceil(rigthSVGLine.current.getTotalLength());
+      const totalLengtLeft = Math.ceil(leftSVGLine.current.getTotalLength());
+      const totalLengtBottom = Math.ceil(
+        bottomSVGLine.current.getTotalLength()
       );
+
+      gsap.set(rigthSVGLine.current, {
+        strokeDasharray: totalLengtRight,
+        strokeDashoffset: totalLengtRight,
+        opacity: 0,
+      });
+
+      gsap.set(leftSVGLine.current, {
+        strokeDasharray: totalLengtLeft,
+        strokeDashoffset: totalLengtLeft,
+        opacity: 0,
+      });
+
+      gsap.set(bottomSVGLine.current, {
+        strokeDasharray: totalLengtBottom,
+        strokeDashoffset: totalLengtBottom,
+        opacity: 0,
+      });
+
+      gsap
+        .timeline()
+        .to(rigthSVG.current, {
+          duration: 1.5,
+          opacity: 1,
+        })
+        .to(
+          rigthSVGLine.current,
+          {
+            strokeDashoffset: totalLengtRight / 2,
+            opacity: 1,
+            duration: 3,
+          },
+          "-=1"
+        )
+        .to(
+          leftSVG.current,
+          {
+            duration: 1.2,
+            opacity: 1,
+          },
+          "-=3.5"
+        )
+        .to(
+          leftSVGLine.current,
+          {
+            strokeDashoffset: totalLengtLeft / 2,
+            opacity: 1,
+            duration: 2,
+          },
+          "-=2.5"
+        )
+        .to(
+          bottomSVG.current,
+          {
+            duration: 1,
+            opacity: 1,
+          },
+          "-=3"
+        )
+        .to(
+          bottomSVGLine.current,
+          {
+            strokeDashoffset: totalLengtBottom / 2,
+            opacity: 1,
+            duration: 2,
+          },
+          "-=2.5"
+        )
+        .from(
+          content.current,
+          {
+            translateY: -40,
+            opacity: 0,
+            stagger: {
+              amount: 0.4,
+            },
+          },
+          "-=3"
+        );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (authenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>
       <Container>
         <Content>
           <FormContainer onSubmit={handleSubmit(onSubmitFunction)}>
-            <h1 ref={el => content.current.push(el)}>Login</h1>
-            <div ref={el => content.current.push(el)}>
+            <h1 ref={(el) => content.current.push(el)}>Login</h1>
+            <div ref={(el) => content.current.push(el)}>
               <Input
                 register={register}
                 name="username"
@@ -150,7 +158,7 @@ function Login() {
                 error={errors.username?.message}
               ></Input>
             </div>
-            <div ref={el => content.current.push(el)}>
+            <div ref={(el) => content.current.push(el)}>
               <Input
                 register={register}
                 name="password"
@@ -160,10 +168,10 @@ function Login() {
                 error={errors.password?.message}
               ></Input>
             </div>
-            <p ref={el => content.current.push(el)}>
+            <p ref={(el) => content.current.push(el)}>
               Não possui conta? <Link to="/signup">Cadastre-se aqui!</Link>
             </p>
-            <div ref={el => content.current.push(el)}>
+            <div ref={(el) => content.current.push(el)}>
               <Button type="submit">Entrar</Button>
             </div>
           </FormContainer>

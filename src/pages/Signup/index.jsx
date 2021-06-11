@@ -5,12 +5,14 @@ import { Background, Container, Content } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useHistory } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import { useContext, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { CSSPlugin } from "gsap/CSSPlugin";
+import { UserContext } from "../../providers/User";
 
 const Signup = () => {
+  const { authenticated } = useContext(UserContext);
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório!"),
     email: yup.string().email("E-mail inválido").required("Campo obrigatório!"),
@@ -54,89 +56,98 @@ const Signup = () => {
   gsap.registerPlugin(CSSPlugin);
 
   useEffect(() => {
-    const totalLengtRight = Math.ceil(rigthSVGLine.current.getTotalLength());
-    const totalLengtLeft = Math.ceil(leftSVGLine.current.getTotalLength());
-    const totalLengtBottom = Math.ceil(bottomSVGLine.current.getTotalLength());
-
-    gsap.set(rigthSVGLine.current, {
-      strokeDasharray: totalLengtRight,
-      strokeDashoffset: totalLengtRight,
-      opacity: 0,
-    });
-
-    gsap.set(leftSVGLine.current, {
-      strokeDasharray: totalLengtLeft,
-      strokeDashoffset: totalLengtLeft,
-      opacity: 0,
-    });
-
-    gsap.set(bottomSVGLine.current, {
-      strokeDasharray: totalLengtBottom,
-      strokeDashoffset: totalLengtBottom,
-      opacity: 0,
-    });
-
-    gsap
-      .timeline()
-      .to(rigthSVG.current, {
-        duration: 1.5,
-        opacity: 1,
-      })
-      .to(
-        rigthSVGLine.current,
-        {
-          strokeDashoffset: totalLengtRight / 2,
-          opacity: 1,
-          duration: 3,
-        },
-        "-=1"
-      )
-      .to(
-        leftSVG.current,
-        {
-          duration: 1.2,
-          opacity: 1,
-        },
-        "-=4"
-      )
-      .to(
-        leftSVGLine.current,
-        {
-          strokeDashoffset: totalLengtLeft / 2,
-          opacity: 1,
-          duration: 2,
-        },
-        "-=2.5"
-      )
-      .to(
-        bottomSVG.current,
-        {
-          duration: 1,
-          opacity: 1,
-        },
-        "-=3"
-      )
-      .to(
-        bottomSVGLine.current,
-        {
-          strokeDashoffset: totalLengtBottom / 2,
-          opacity: 1,
-          duration: 2,
-        },
-        "-=2.5"
-      )
-      .from(
-        content.current,
-        {
-          translateY: -50,
-          opacity: 0,
-          stagger: {
-            amount: 0.5,
-          },
-        },
-        "-=3"
+    if (!authenticated) {
+      const totalLengtRight = Math.ceil(rigthSVGLine.current.getTotalLength());
+      const totalLengtLeft = Math.ceil(leftSVGLine.current.getTotalLength());
+      const totalLengtBottom = Math.ceil(
+        bottomSVGLine.current.getTotalLength()
       );
+
+      gsap.set(rigthSVGLine.current, {
+        strokeDasharray: totalLengtRight,
+        strokeDashoffset: totalLengtRight,
+        opacity: 0,
+      });
+
+      gsap.set(leftSVGLine.current, {
+        strokeDasharray: totalLengtLeft,
+        strokeDashoffset: totalLengtLeft,
+        opacity: 0,
+      });
+
+      gsap.set(bottomSVGLine.current, {
+        strokeDasharray: totalLengtBottom,
+        strokeDashoffset: totalLengtBottom,
+        opacity: 0,
+      });
+
+      gsap
+        .timeline()
+        .to(rigthSVG.current, {
+          duration: 1.5,
+          opacity: 1,
+        })
+        .to(
+          rigthSVGLine.current,
+          {
+            strokeDashoffset: totalLengtRight / 2,
+            opacity: 1,
+            duration: 3,
+          },
+          "-=1"
+        )
+        .to(
+          leftSVG.current,
+          {
+            duration: 1.2,
+            opacity: 1,
+          },
+          "-=4"
+        )
+        .to(
+          leftSVGLine.current,
+          {
+            strokeDashoffset: totalLengtLeft / 2,
+            opacity: 1,
+            duration: 2,
+          },
+          "-=2.5"
+        )
+        .to(
+          bottomSVG.current,
+          {
+            duration: 1,
+            opacity: 1,
+          },
+          "-=3"
+        )
+        .to(
+          bottomSVGLine.current,
+          {
+            strokeDashoffset: totalLengtBottom / 2,
+            opacity: 1,
+            duration: 2,
+          },
+          "-=2.5"
+        )
+        .from(
+          content.current,
+          {
+            translateY: -50,
+            opacity: 0,
+            stagger: {
+              amount: 0.5,
+            },
+          },
+          "-=3"
+        );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (authenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>

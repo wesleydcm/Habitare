@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 // import { Button } from "antd";
 
-import Button from '../Button'
+import Button from "../Button";
 import "antd/dist/antd.css";
 import { FaTimes, FaPlus } from "react-icons/fa";
 import {
   CustomModal,
-  Container,
   InputModal,
   CardCategory,
   CardFrequency,
   CardContainer,
   WrapStars,
-  LabelContainer,
 } from "./styles";
 
 import filledStar from "../../assets/svg/filledStar.svg";
@@ -36,7 +34,7 @@ const NewHabit = () => {
 
   return (
     <>
-      <Button  onClick={showModal}>
+      <Button onClick={showModal}>
         NOVO HÁBITO <FaPlus />
       </Button>
 
