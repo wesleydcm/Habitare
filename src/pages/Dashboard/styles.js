@@ -109,6 +109,16 @@ export const ImageMainCard = styled.div`
   }
 `;
 
+export const FiltersAndButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 980px;
+  margin-top: 32px;
+  
+`
+
 export const CardsList = styled.div`
   width: 100%;
   max-width: 980px;

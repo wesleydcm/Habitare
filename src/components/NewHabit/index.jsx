@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Button } from "antd";
+// import { Button } from "antd";
+
+import Button from "../Button";
 import "antd/dist/antd.css";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaPlus } from "react-icons/fa";
 import {
   CustomModal,
   InputModal,
@@ -9,7 +11,6 @@ import {
   CardFrequency,
   CardContainer,
   WrapStars,
-  LabelContainer,
   ButtonForm,
   StartsInput,
   ButtonWrap,
@@ -19,11 +20,7 @@ import filledStar from "../../assets/svg/filledStar.svg";
 import emptyStar from "../../assets/svg/emptyStar.svg";
 import selectedStar from "../../assets/svg/selectedStar.svg";
 
-import RadioInput from "./RadioInput";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useHistory } from "react-router-dom";
 
 import {
   Item,
@@ -66,19 +63,14 @@ const NewHabit = () => {
     setSelectDificulty(value);
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const handleForm = (res) => console.log(res);
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Criar novo hábito
+      <Button onClick={showModal}>
+        NOVO HÁBITO <FaPlus />
       </Button>
 
       <CustomModal
@@ -102,9 +94,6 @@ const NewHabit = () => {
           <p>Em qual categoria seu hábito se encaixa?</p>
           <CardContainer>
             <Item onChange={(event) => handleSelectChange(event)}>
-              {/* <CustomText color="var(--colorSpirit)">
-                Corpo e mente saudáveis
-              </CustomText> */}
               <RadioButton
                 type="radio"
                 name="radio"
@@ -121,7 +110,6 @@ const NewHabit = () => {
             </Item>
 
             <Item onChange={(event) => handleSelectChange(event)}>
-              {/* <CustomText color="var(--colorFit)">Ficando em forma</CustomText> */}
               <RadioButton
                 type="radio"
                 name="radio"
@@ -138,9 +126,6 @@ const NewHabit = () => {
             </Item>
 
             <Item onChange={(event) => handleSelectChange(event)}>
-              {/* <CustomText color="var(--colorFocus)">
-                foco, força e fé
-              </CustomText> */}
               <RadioButton
                 type="radio"
                 name="radio"
@@ -157,7 +142,6 @@ const NewHabit = () => {
             </Item>
 
             <Item onChange={(event) => handleSelectChange(event)}>
-              {/* <CustomText color="var(--colorMoney)">Me poupe</CustomText> */}
               <RadioButton
                 type="radio"
                 name="radio"
@@ -172,7 +156,6 @@ const NewHabit = () => {
             </Item>
 
             <Item onChange={(event) => handleSelectChange(event)}>
-              {/* <CustomText color="var(--colorHouse)">Lar doce lar</CustomText> */}
               <RadioButton
                 type="radio"
                 name="radio"
@@ -187,7 +170,6 @@ const NewHabit = () => {
             </Item>
 
             <Item onChange={(event) => handleSelectChange(event)}>
-              {/* <CustomText color="var(--colorNight)">Boa noite</CustomText> */}
               <RadioButton
                 type="radio"
                 name="radio"

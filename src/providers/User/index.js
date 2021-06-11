@@ -1,11 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import jwt_decode from "jwt-decode";
 import api from "../../services/api";
 export const UserContext = createContext([]);
 
+let authorized = localStorage.getItem("@Habitare:Token") ? true : false;
+
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState([]);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(authorized);
 
   const userLogin = (userToken) => {
     localStorage.setItem(`@Habitare:Token`, JSON.stringify(userToken));
@@ -30,3 +32,5 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
+
+export const useUser = () => useContext(UserContext);

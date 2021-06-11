@@ -107,11 +107,4 @@ export const RadioButtonDificulty = styled.input`
 
   height: 50px;
   margin-right: 20px;
-
-  &:hover ~ ${CardFrequency} {
-    background: #ccc;
-  }
-  &:checked + ${CardFrequency} {
-    background: black;
-  }
 `;

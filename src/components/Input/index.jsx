@@ -9,7 +9,7 @@ const Input = ({ placeholder, error, register, name, ...rest }) => {
       {...rest}
     ></InputItem>
   ) : (
-    <InputItem placeholder={placeholder} />
+    <InputItem placeholder={placeholder} {...rest} />
   );
 };
 
