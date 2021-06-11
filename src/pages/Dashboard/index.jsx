@@ -1,7 +1,10 @@
 import Aside from "../../components/Aside";
 import Lottie from "react-lottie";
-
 import animationData from "../../assets/lotties/main.json";
+import FilterCategory from "../../components/Filter";
+import { useContext, useState, useEffect } from "react";
+import { HabitContext } from "../../providers/Habit";
+import { useHabit } from "../../providers/Habit";
 
 import {
   CardsList,
@@ -60,10 +63,7 @@ const MOCK_HABIT = [
     achieved: false,
     how_much_achieved: 15,
   },
-  
 ];
-
-
 
 const Dashboard = () => {
   const lottieOptions = {
@@ -73,6 +73,32 @@ const Dashboard = () => {
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
+  };
+
+  const { habits, loadHabits } = useHabit();
+  const [myHabits, setMyHabits] = useState(habits);
+  const [allHabits, setAllHabits] = useState(true);
+
+  useEffect(() => {
+    loadHabits();
+    console.log(myHabits);
+  }, []);
+
+  useEffect(() => {
+    setMyHabits(habits);
+  }, [habits]);
+
+  const handleFilter = (category) => {
+    console.log(category);
+    if (category === "displayAll") {
+      setAllHabits(true);
+    } else if (myHabits) {
+      const filteredHabits = habits.filter(
+        (habit) => habit.category === category
+      );
+      setMyHabits(filteredHabits);
+      setAllHabits(false);
+    }
   };
 
   return (
@@ -86,10 +112,17 @@ const Dashboard = () => {
             <Lottie options={lottieOptions} />
           </ImageMainCard>
         </MainCard>
+        <FilterCategory handleFilter={handleFilter} />
         <CardsList>
-          {
-            MOCK_HABIT.map((habit, index) => <HabitCard habit={habit} key={index} />)
-          }
+          {habits.length > 0 && !allHabits
+            ? myHabits.map((habit) => (
+                <HabitCard habit={habit} key={habit.id} />
+              ))
+            : habits.length > 0 && allHabits
+            ? habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
+            : MOCK_HABIT.map((habit, index) => (
+                <HabitCard habit={habit} key={index} />
+              ))}
         </CardsList>
       </DashboardContainer>
     </>
