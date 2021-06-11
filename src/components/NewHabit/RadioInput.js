@@ -1,80 +1,6 @@
-import React from "react";
-
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
 
 import { CardCategory, CardFrequency } from "./styles";
-
-const { useState } = React;
-
-const RadioInput = () => {
-  const [select, setSelect] = useState("optionA");
-
-  const handleSelectChange = (event) => {
-    const value = event.target.value;
-    setSelect(value);
-  };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-
-  const handleForm = (res) => console.log(res);
-
-  return (
-    <form onSubmit={handleSubmit(handleForm)}>
-      <Wrapper>
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <p>oládasdasdmundo</p>
-          <RadioButton
-            type="radio"
-            name="radio"
-            value="optionA"
-            checked={select === "optionA"}
-            {...register("optionA")}
-          />
-          <RadioButtonLabel />
-        </Item>
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <p>olá mundo</p>
-          <RadioButton
-            type="radio"
-            value="optionB"
-            checked={select === "optionB"}
-            {...register("optionA")}
-          />
-          <RadioButtonLabel />
-        </Item>
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <RadioButton
-            type="radio"
-            value="optionBs"
-            checked={select === "optionBs"}
-            {...register("optionA")}
-          />
-          <RadioButtonLabel />
-        </Item>
-
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <RadioButton
-            type="radio"
-            value="optionBA"
-            checked={select === "optionBA"}
-            {...register("optionA")}
-          />
-
-          <RadioButtonLabel />
-        </Item>
-      </Wrapper>
-      <button label="button" type="submit">
-        sdasasdasdasd
-      </button>
-    </form>
-  );
-};
 
 export const Wrapper = styled.div`
   height: auto;
@@ -87,56 +13,47 @@ export const Item = styled.div`
   align-items: center;
   height: 48px;
   position: relative;
-  justify-content: center;
-  p {
-    color: var(--white);
-    z-index: 20;
-    position: absolute;
-    margin: 0;
-    font-size: 10px;
-    text-align: center;
-    font-weight: 500;
-    max-width: 100px;
+  justify-content: space-between;
+  width: 50%;
+
+  @media (min-width: 480px) {
+    width: 33%;
   }
 `;
 
-const RadioButtonLabel = styled.label`
-  background: blue;
-
-  justify-content: center;
-  min-width: 80px;
-  cursor: pointer;
-  display: flex;
+export const CustomText = styled.p`
+  color: ${(props) => props.color};
+  z-index: 20;
   position: absolute;
-  z-index: 0;
-  height: 30px;
-  margin: 4px;
-  border-radius: 30px;
-  padding: 2px 0;
-  filter: brightness(1);
+  margin: 0;
+  font-size: 10px;
+  text-align: center;
+  font-weight: 500;
 `;
+
 export const RadioButton = styled.input`
   position: relative;
   opacity: 0;
   z-index: 205;
   cursor: pointer;
-  min-width: 90px;
-  width: 46%;
+
+  width: 100%;
   height: 25px;
-  margin-right: 10px;
 
   &:hover ~ ${CardCategory} {
-    background: #ccc;
+    filter: brightness(0.85);
   }
   &:checked + ${CardCategory} {
-    background: black;
+    background: ${(props) => props.color};
+
+    p {
+      color: var(--white);
+    }
   }
 
-  &:hover ~ ${CardFrequency} {
-    background: #ccc;
-  }
-  &:checked + ${CardFrequency} {
-    background: black;
+  @media (min-width: 460px) {
+    width: 100%;
+    max-width: 198px;
   }
 `;
 export const RadioButtonFrequency = styled.input`
@@ -144,10 +61,52 @@ export const RadioButtonFrequency = styled.input`
   opacity: 0;
   z-index: 205;
   cursor: pointer;
-  min-width: 90px;
-  width: 46%;
+
+  width: 100%;
   height: 25px;
-  margin-right: 10px;
+
+  &:hover ~ ${CardFrequency} {
+    background: #ccc;
+  }
+  &:checked + ${CardFrequency} {
+    background: var(--purple);
+
+    p {
+      color: var(--white);
+    }
+  }
+`;
+
+export const DificultyItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 48px;
+  position: relative;
+  justify-content: flex-start;
+
+  p {
+    position: relative;
+    top: 20px;
+  }
+
+  @media (min-width: 440px) {
+    p {
+      position: relative;
+      top: 30px;
+    }
+  }
+`;
+
+export const RadioButtonDificulty = styled.input`
+  position: relative;
+  opacity: 0;
+  z-index: 205;
+  cursor: pointer;
+  min-width: 50px;
+
+  height: 50px;
+  margin-right: 20px;
 
   &:hover ~ ${CardFrequency} {
     background: #ccc;
@@ -156,5 +115,3 @@ export const RadioButtonFrequency = styled.input`
     background: black;
   }
 `;
-
-export default RadioInput;
