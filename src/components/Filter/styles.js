@@ -22,9 +22,18 @@ export const IconContainer = styled.div`
   svg {
     width: 100%;
     height: 100%;
+    stroke: ${(props) =>
+      props.filterSelect ? "rgba(0,0,0,0.7)" : "transparent"};
+    stroke-width: ${(props) => (props.filterSelect ? "35" : "0")};
+    padding-bottom: 4px;
+    border-bottom: 2px solid
+      ${(props) => (props.filterSelect ? "rgba(0,0,0,0.4)" : "transparent")};
+
     path {
       color: ${(props) =>
-        props.color === "spirit"
+        props.color === "displayAll"
+          ? "rgba(0,0,0,0.5)"
+          : props.color === "spirit"
           ? "var(--colorSpirit)"
           : props.color === "fit"
           ? "var(--colorFit)"
@@ -38,7 +47,9 @@ export const IconContainer = styled.div`
 
       :hover {
         color: ${(props) =>
-          props.color === "spirit"
+          props.color === "displayAll"
+            ? "#6E7A87"
+            : props.color === "spirit"
             ? "var(--colorSpirit-hover)"
             : props.color === "fit"
             ? "var(--colorFit-hover)"

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   FaRegListAlt,
   FaHands,
@@ -10,32 +11,62 @@ import {
 import { Container, FiltersContent, IconContainer } from "./styles";
 
 const FilterCategory = ({ handleFilter }) => {
+  const [filterSelect, setFilterSelect] = useState("displayAll");
   const handleClick = (category) => {
+    setFilterSelect(category);
     handleFilter(category);
   };
   return (
     <Container>
       <span>Filtrar categorias</span>
       <FiltersContent>
-        <IconContainer color="spirit" onClick={() => handleClick("displayAll")}>
+        <IconContainer
+          color="displayAll"
+          onClick={() => handleClick("displayAll")}
+          filterSelect={filterSelect === "displayAll" ? true : false}
+        >
           <FaRegListAlt />
         </IconContainer>
-        <IconContainer color="spirit" onClick={() => handleClick("spirit")}>
+        <IconContainer
+          color="spirit"
+          filterSelect={filterSelect === "spirit" ? true : false}
+          onClick={() => handleClick("spirit")}
+        >
           <FaHands />
         </IconContainer>
-        <IconContainer color="fit" onClick={() => handleClick("fit")}>
+        <IconContainer
+          color="fit"
+          filterSelect={filterSelect === "fit" ? true : false}
+          onClick={() => handleClick("fit")}
+        >
           <FaSeedling />
         </IconContainer>
-        <IconContainer color="focus" onClick={() => handleClick("focus")}>
+        <IconContainer
+          color="focus"
+          filterSelect={filterSelect === "focus" ? true : false}
+          onClick={() => handleClick("focus")}
+        >
           <FaCompressArrowsAlt />
         </IconContainer>
-        <IconContainer color="money" onClick={() => handleClick("money")}>
+        <IconContainer
+          color="money"
+          filterSelect={filterSelect === "money" ? true : false}
+          onClick={() => handleClick("money")}
+        >
           <FaMoneyBillWave />
         </IconContainer>
-        <IconContainer color="house" onClick={() => handleClick("house")}>
+        <IconContainer
+          color="house"
+          filterSelect={filterSelect === "house" ? true : false}
+          onClick={() => handleClick("house")}
+        >
           <FaHome />
         </IconContainer>
-        <IconContainer color="night" onClick={() => handleClick("night")}>
+        <IconContainer
+          color="night"
+          filterSelect={filterSelect === "night" ? true : false}
+          onClick={() => handleClick("night")}
+        >
           <FaMoon />
         </IconContainer>
       </FiltersContent>
