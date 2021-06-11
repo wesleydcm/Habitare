@@ -7,27 +7,30 @@ import Signup from "../pages/Signup";
 import Achievements from "../pages/Achievements";
 import Groups from "../pages/Groups";
 import NotFound from "../pages/NotFound";
+import { useContext } from "react";
+import { UserContext } from "../providers/User";
 
 const Routes = () => {
+  const { authenticated } = useContext(UserContext);
   return (
     <Switch>
       <Route exact path="/">
-        <Home />
+        <Home authenticated={authenticated} />
       </Route>
       <Route path="/login">
-        <Login></Login>
+        <Login authenticated={authenticated}></Login>
       </Route>
       <Route path="/signup">
-        <Signup />
+        <Signup authenticated={authenticated} />
       </Route>
       <Route path="/dashboard">
-        <Dashboard />
+        <Dashboard authenticated={authenticated} />
       </Route>
       <Route path="/achievements">
-        <Achievements />
+        <Achievements authenticated={authenticated} />
       </Route>
       <Route path="/groups">
-        <Groups />
+        <Groups authenticated={authenticated} />
       </Route>
       <Route>
         <NotFound />
