@@ -31,6 +31,7 @@ export const CustomModal = styled(Modal)`
 
   .ant-modal-body {
     background-color: var(--gray);
+    border-radius: 15px;
   }
 
   .ant-modal-footer {
@@ -42,32 +43,6 @@ export const CustomModal = styled(Modal)`
     width: 100%;
     display: flex;
     justify-content: center;
-  }
-
-  .ant-btn {
-    width: 100px;
-    border-radius: 20px;
-    background-color: var(--white);
-    border: 1px solid var(--purple);
-    margin: 0 auto;
-
-    &:hover {
-      filter: brightness(0.85);
-    }
-  }
-
-  .ant-btn:last-child {
-    background-color: var(--purple);
-  }
-
-  .ant-btn span {
-    color: var(--purple);
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  .ant-btn:last-child span {
-    color: var(--white);
   }
 
   @media (min-width: 430px) {
@@ -88,16 +63,8 @@ export const CustomModal = styled(Modal)`
       p {
         margin: 10px 8px;
       }
-
-      .ant-btn {
-        width: 150px;
-      }
     }
   }
-`;
-
-export const Container = styled.div`
-  max-width: 620px;
 `;
 
 export const InputModal = styled.input`
@@ -119,16 +86,19 @@ export const InputModal = styled.input`
 
 export const CardCategory = styled.label`
   background: ${(props) => props.color};
-  display: flex;
   justify-content: center;
-  align-items: center;
+  min-width: 90px;
   width: 46%;
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  z-index: 0;
   height: 30px;
   margin: 4px;
   border-radius: 30px;
   padding: 2px 0;
-  filter: brightness(0.7);
-  cursor: pointer;
+  filter: brightness(1);
+
   p {
     font-size: 10px;
     color: var(--white);
@@ -153,25 +123,28 @@ export const CardCategory = styled.label`
 export const CardContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 
   div:hover {
     filter: brightness(0.9);
   }
 `;
 
-export const CardFrequency = styled.div`
+export const CardFrequency = styled.label`
   cursor: pointer;
   background: var(--purple);
-  display: flex;
   justify-content: center;
-  align-items: center;
-  width: 25%;
+  min-width: 90px;
+  width: 46%;
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  z-index: 0;
   height: 30px;
   margin: 4px;
   border-radius: 30px;
   padding: 2px 0;
-  filter: brightness(0.7);
+  filter: brightness(1);
 
   &:hover {
     filter: brightness(0.9);
@@ -201,5 +174,33 @@ export const WrapStars = styled.div`
 
   img {
     cursor: pointer;
+  }
+`;
+
+export const ButtonForm = styled.button`
+  width: 100px;
+  border-radius: 20px;
+  background-color: var(--white);
+  border: 1px solid var(--purple);
+  margin: 40px auto;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
+
+  &:last-child {
+    background-color: var(--purple);
+  }
+
+  color: var(--purple);
+  font-weight: bold;
+  text-transform: uppercase;
+
+  &:last-child {
+    color: var(--white);
+  }
+
+  @media (min-width: 600px) {
+    width: 150px;
   }
 `;

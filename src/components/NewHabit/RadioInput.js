@@ -3,6 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
+import { CardCategory, CardFrequency } from "./styles";
+
 const { useState } = React;
 
 const RadioInput = () => {
@@ -74,13 +76,13 @@ const RadioInput = () => {
   );
 };
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   height: auto;
   display: flex;
   flex-flow: row wrap;
 `;
 
-const Item = styled.div`
+export const Item = styled.div`
   display: flex;
   align-items: center;
   height: 48px;
@@ -90,47 +92,68 @@ const Item = styled.div`
     color: var(--white);
     z-index: 20;
     position: absolute;
+    margin: 0;
+    font-size: 10px;
+    text-align: center;
+    font-weight: 500;
+    max-width: 100px;
   }
 `;
 
 const RadioButtonLabel = styled.label`
   background: blue;
-  display: flex;
+
   justify-content: center;
-  min-width: 200px;
+  min-width: 80px;
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  z-index: 0;
   height: 30px;
   margin: 4px;
   border-radius: 30px;
   padding: 2px 0;
   filter: brightness(1);
-  cursor: pointer;
-  position: absolute;
-  z-index: 0;
 `;
-const RadioButton = styled.input`
+export const RadioButton = styled.input`
   position: relative;
   opacity: 0;
   z-index: 205;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 90px;
+  width: 46%;
   height: 25px;
   margin-right: 10px;
 
-  &:hover ~ ${RadioButtonLabel} {
+  &:hover ~ ${CardCategory} {
     background: #ccc;
   }
-  &:checked + ${RadioButtonLabel} {
+  &:checked + ${CardCategory} {
     background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 46%;
-    height: 30px;
-    margin: 4px;
-    border-radius: 30px;
-    padding: 2px 0;
-    filter: brightness(0.7);
-    cursor: pointer;
+  }
+
+  &:hover ~ ${CardFrequency} {
+    background: #ccc;
+  }
+  &:checked + ${CardFrequency} {
+    background: black;
+  }
+`;
+export const RadioButtonFrequency = styled.input`
+  position: relative;
+  opacity: 0;
+  z-index: 205;
+  cursor: pointer;
+  min-width: 90px;
+  width: 46%;
+  height: 25px;
+  margin-right: 10px;
+
+  &:hover ~ ${CardFrequency} {
+    background: #ccc;
+  }
+  &:checked + ${CardFrequency} {
+    background: black;
   }
 `;
 
