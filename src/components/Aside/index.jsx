@@ -15,7 +15,7 @@ import Button from "../Button";
 import { UserContext } from "../../providers/User";
 
 const Aside = () => {
-  const {userLogoff} = useContext(UserContext);
+  const {userLogoff, user} = useContext(UserContext);
   const history = useHistory();
   const { pathname } = useLocation();
 
@@ -53,7 +53,7 @@ const Aside = () => {
     <AsideContainer>
       <ProfileWrapper>
         <img src={AvatarNotFound} alt="Avatar não encontrado" />
-        <h2>Nome de usuário</h2>
+        <h2>{user.username}</h2>
         <LevelInfo>
           <FaTrophy />
           <span>Level iniciante</span>
