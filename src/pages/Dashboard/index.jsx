@@ -124,7 +124,9 @@ const Dashboard = () => {
         </MainCard>
 
         <FiltersAndButtonsWrapper>
-          <FilterCategory handleFilter={handleFilter} />
+          <div>
+            <FilterCategory handleFilter={handleFilter} />
+          </div>
           <div>
             <NewHabit />
           </div>
