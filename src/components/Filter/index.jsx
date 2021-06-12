@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  FaIcons,
   FaHands,
   FaSeedling,
   FaCompressArrowsAlt,
@@ -8,7 +7,14 @@ import {
   FaHome,
   FaMoon,
 } from "react-icons/fa";
-import { Container, FiltersContent, IconContainer } from "./styles";
+
+import {
+  Container,
+  FiltersContent,
+  IconContainer,
+  IconDisplayAll,
+  SvgContent,
+} from "./styles";
 
 const FilterCategory = ({ handleFilter }) => {
   const [filterSelect, setFilterSelect] = useState("displayAll");
@@ -20,13 +26,35 @@ const FilterCategory = ({ handleFilter }) => {
     <Container>
       <span>Filtrar categorias</span>
       <FiltersContent>
-        <IconContainer
-          color="displayAll"
-          onClick={() => handleClick("displayAll")}
-          filterSelect={filterSelect === "displayAll" ? true : false}
-        >
-          <FaIcons />
-        </IconContainer>
+        <IconDisplayAll onClick={() => handleClick("displayAll")}>
+          <SvgContent
+            color="spirit"
+            filterSelect={filterSelect === "displayAll" ? true : false}
+          >
+            <FaHands />
+          </SvgContent>
+          <SvgContent
+            color="fit"
+            filterSelect={filterSelect === "displayAll" ? true : false}
+          >
+            <FaSeedling />
+          </SvgContent>
+
+          <SvgContent
+            color="focus"
+            filterSelect={filterSelect === "displayAll" ? true : false}
+          >
+            <FaCompressArrowsAlt />
+          </SvgContent>
+
+          <SvgContent
+            color="house"
+            filterSelect={filterSelect === "displayAll" ? true : false}
+          >
+            <FaHome />
+          </SvgContent>
+        </IconDisplayAll>
+
         <IconContainer
           color="spirit"
           filterSelect={filterSelect === "spirit" ? true : false}
