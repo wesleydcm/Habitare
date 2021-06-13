@@ -98,25 +98,25 @@ const CATEGORIES = {
 };
 
 const DIFFICULTIES = {
-  1: {
+  fácil: {
     icons: (
       <>
-        <FaRegStar />
-        <FaRegStar />
         <FaStar />
+        <FaRegStar />
+        <FaRegStar />
       </>
     ),
   },
-  2: {
+  médio: {
     icons: (
       <>
+        <FaStar />
+        <FaStar />
         <FaRegStar />
-        <FaStar />
-        <FaStar />
       </>
     ),
   },
-  3: {
+  difícil: {
     icons: (
       <>
         <FaStar />

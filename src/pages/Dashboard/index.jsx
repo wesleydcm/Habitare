@@ -1,5 +1,4 @@
-import NewHabit from "../../components/NewHabit";
-import Aside from "../../components/Aside";
+import NewHabit from "../../components/ModalNewHabit";
 import Lottie from "react-lottie";
 import animationData from "../../assets/lotties/main.json";
 import FilterCategory from "../../components/Filter";
@@ -12,64 +11,15 @@ import {
   FiltersAndButtonsWrapper,
   ImageMainCard,
   MainCard,
+  NewProfile,
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../providers/User";
 
-const MOCK_HABIT = [
-  {
-    title: "Desconecte-se do celular",
-    category: "night",
-    difficulty: "3",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 27,
-  },
-  {
-    title: "Beber 2l de água por dia",
-    category: "fit",
-    difficulty: "1",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 65,
-  },
-  {
-    title: "Aprender algo novo",
-    category: "focus",
-    difficulty: "2",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 42,
-  },
-  {
-    title: "Pagar contas",
-    category: "money",
-    difficulty: "2",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 45,
-  },
-  {
-    title: "Arrumar a cama",
-    category: "house",
-    difficulty: "1",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 85,
-  },
-  {
-    title: "Praticar a gratidão",
-    category: "spirit",
-    difficulty: "2",
-    frequency: "Diária",
-    achieved: false,
-    how_much_achieved: 15,
-  },
-];
 
 const Dashboard = () => {
-  const { authenticated } = useContext(UserContext);
+  const { authenticated, user } = useContext(UserContext);
 
   const lottieOptions = {
     loop: true,
@@ -112,11 +62,11 @@ const Dashboard = () => {
   }
   return (
     <>
-      <Aside />
+      {/* <Aside /> */}
 
       <DashboardContainer>
         <MainCard>
-          <h1>Olá, Kenzie Academy!</h1>
+          <h1>Olá, {user.username}!</h1>
           <h3>Qual hábito quer começar hoje?</h3>
           <ImageMainCard>
             <Lottie options={lottieOptions} />
@@ -133,15 +83,16 @@ const Dashboard = () => {
         </FiltersAndButtonsWrapper>
 
         <CardsList>
-          {habits.length > 0 && !allHabits
-            ? myHabits.map((habit) => (
-                <HabitCard habit={habit} key={habit.id} />
-              ))
-            : habits.length > 0 && allHabits
-            ? habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
-            : MOCK_HABIT.map((habit, index) => (
-                <HabitCard habit={habit} key={index} />
-              ))}
+          {habits.length > 0 && !allHabits ? (
+            myHabits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
+          ) : habits.length > 0 && allHabits ? (
+            habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
+          ) : (
+            <NewProfile>
+                <h1>Queremos te ajudar a praticar novos hábitos!</h1>
+                <h2> Comece agora clicando em NOVO HÁBITO</h2>
+            </NewProfile>
+          )}
         </CardsList>
       </DashboardContainer>
     </>

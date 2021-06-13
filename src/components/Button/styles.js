@@ -12,7 +12,8 @@ export const ButtonItem = styled.button`
   display: flex;
   align-items: center;
   font-weight: 600;
-
+  position: relative;
+  z-index: 600;
   svg {
     margin-left: 6px;
   }

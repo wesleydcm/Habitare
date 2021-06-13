@@ -13,6 +13,7 @@ export const CustomModal = styled(Modal)`
     margin: 5px 3px;
   }
 
+
   .ant-modal-header {
     background-color: var(--white);
     border-radius: 15px;
@@ -68,6 +69,60 @@ export const CustomModal = styled(Modal)`
         padding: 40px;
       }
     }
+  }
+`;
+
+export const SuggestionsModal = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 12px;
+  padding: 0 8px 0 0;
+  max-height: 57vh;
+  overflow-y: auto;
+
+  @media screen and (min-width: 540px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+export const SuggestionCardEmpty = styled.div`
+  width: 100%;
+  min-height: 100px;
+  background-color: #b0b8bf;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  padding: 12px 8px;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover .lottie {
+    opacity: 0.4;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    text-align: right;
+    margin-bottom: 8px;
+  }
+`;
+
+export const ImageContainer = styled.div`
+  position: absolute;
+  top: -5%;
+  left: -25px;
+  opacity: 0.3;
+  z-index: 300;
+  transition: opacity 300ms;
+
+  > div {
+    width: 150px !important;
+    height: 110px !important;
   }
 `;
 

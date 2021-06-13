@@ -4,7 +4,7 @@ import Lottie from "react-lottie";
 import { categoryFormat } from "../../utils/format";
 import { CardContainer, ImageContainer, SuggestionInfo } from "./styles";
 
-const SuggestionCard = ({ suggestion }) => {
+const SuggestionCard = ({ suggestion, onClickFunc }) => {
   const [suggestionFormatted, setSuggestionFormatted] = useState({});
   const [paused, setPaused] = useState(true);
 
@@ -18,7 +18,7 @@ const SuggestionCard = ({ suggestion }) => {
 
   return (
     <CardContainer
-      onClick={() => console.log(suggestionFormatted.id)}
+      onClick={() => onClickFunc(suggestionFormatted)}
       onMouseEnter={() => setPaused(false)}
       onMouseLeave={() => setPaused(true)}
       categoryColor={suggestionFormatted.categoryFormatted?.color}

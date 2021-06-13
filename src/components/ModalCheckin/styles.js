@@ -4,7 +4,12 @@ import styled from "styled-components";
 export const WrapStars = styled.div`
   display: flex;
   color: var(--yellow);
-  font-size: 50px;
+  font-size: 34px;
+  margin-top: 8px;
+
+  svg {
+    margin-left: 6px;
+  }
 `;
 
 export const CustomModal = styled(Modal)`
@@ -12,7 +17,8 @@ export const CustomModal = styled(Modal)`
   h3 {
     position: relative;
     font-size: 18px;
-    bottom: 10px;
+    font-weight: 500;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     color: ${(props) =>
@@ -50,6 +56,7 @@ export const CustomModal = styled(Modal)`
   .ant-modal-body {
     background-color: var(--gray);
     z-index: 1;
+    padding: 24px 24px 12px;
   }
 
   .ant-modal-footer {
@@ -118,8 +125,13 @@ export const BodyContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
+  position: relative;
+  z-index: 350;
+  min-height: 80px;
+
   > div {
-    z-index: 2;
+    position: relative;
+    z-index: 350;
   }
 `;
 
@@ -130,14 +142,16 @@ export const BarContainer = styled.div`
   border-right: none;
   height: 10px;
   position: absolute;
-  top: 3rem;
+  top: 55px;
   left: 0rem;
+  z-index: 350;
 `;
 export const BarFill = styled.div`
   background: var(--purple);
-  height: 10px;
+  height: 100%;
   position: absolute;
-  top: 3rem;
+  top: 0;
+  border-radius: 12px;
   left: 0rem;
   width: ${(props) => props.achievedPercentage || 0}%;
   max-width: 100%;
@@ -149,8 +163,20 @@ export const InfoContainer = styled.div`
   align-items: flex-end;
 `;
 
+export const FrequencyWrapper = styled.div`
+  background-color: var(--gray);
+  border: 2px solid var(--purple);
+  padding: 2px 12px;
+  border-radius: 26px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--purple);
+  text-transform: capitalize;
+`
+
 export const ImageContainer = styled.div`
   position: absolute;
+  z-index: 300;
   bottom: 1%;
   left: 0px;
   opacity: 0.5;
@@ -158,14 +184,14 @@ export const ImageContainer = styled.div`
     props.category === "fit"
       ? "scaleX(-1) translateX(0px)"
       : props.category === "spirit"
-      ? "translate(-8px, 5px)"
+      ? "translate(-20px, -5px)"
       : props.category === "focus"
-      ? "translate(-7px, -1px) scale(.9)"
+      ? "translate(30px, -1px) scale(1)"
       : props.category === "house"
-      ? "translate(1px, 0px)"
+      ? "translate(20px, 0px)"
       : props.category === "money"
       ? "translate(5px, 0px)"
-      : "scale(1)"};
+      : "translate(5px, 0px)"};
   transition: opacity 300ms;
 
   > div {
@@ -177,6 +203,6 @@ export const ImageContainer = styled.div`
         : props.category === "spirit"
         ? "240px !important"
         : "150px !important"};
-    height: 190px !important;
+    height: 180px !important;
   }
 `;

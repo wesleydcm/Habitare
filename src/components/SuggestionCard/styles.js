@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-     width: 100%;
-  min-height: 100px;
+  width: 100%;
+  height: 100px;
   background-color: ${(props) => props.categoryColor };
   border-radius: 24px;
   display: flex;
@@ -24,25 +24,26 @@ export const SuggestionInfo = styled.div`
   flex-direction: column;
   align-items: flex-end;
   width: 100%;
+  height: 100%;
   position: relative;
   z-index: 350;
+  justify-content: center;
 
   h2 {
     font-weight: 700;
     font-size: 18px;
     color: var(--white);
     text-align: right;
-    margin-bottom: 8px;
+    margin: 12px 0;
   }
 
   h3 {
-    font-weight: 400;
-    font-size: 18px;
+    font-weight: 400 !important; 
+    font-size: 18px  !important;
     color: var(--white);
     text-align: right;
     display: flex;
     align-items: center;
-    margin-bottom: 4px;
 
     svg {
       width: 18px;

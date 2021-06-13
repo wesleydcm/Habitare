@@ -110,17 +110,17 @@ export const suggestions = [
         category: "house"
     },
     {
-        id: "22",
+        id: "23",
         title: "Varrer o chão",
         category: "house"
     },
     {
-        id: "22",
+        id: "24",
         title: "Lavar os pratos",
         category: "house"
     },
     {
-        id: "22",
+        id: "25",
         title: "Ligar para os pais",
         category: "house"
     }
