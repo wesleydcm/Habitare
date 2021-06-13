@@ -11,6 +11,8 @@ import { UserContext } from "../../providers/User";
 import { useContext, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { CSSPlugin } from "gsap/CSSPlugin";
+import { notification } from "antd";
+import { FaGrinAlt, FaTimes } from "react-icons/fa";
 
 function Login() {
   const { userLogin, authenticated } = useContext(UserContext);
@@ -39,7 +41,19 @@ function Login() {
 
         return history.push("/dashboard");
       })
-      .catch((err) => console.log(JSON.stringify(err)));
+      .catch((_) =>
+        notification.open({
+          message: "NOUP",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Erro ao fazer login, usuário ou senha não reconhecidos",
+          icon: <FaGrinAlt style={{ color: "var(--purple)" }} />,
+        })
+      );
   };
 
   const rigthSVG = useRef(null);
