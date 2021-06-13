@@ -20,6 +20,9 @@ export const UserProvider = ({ children }) => {
 
   const userLogoff = () => {
     localStorage.removeItem(`@Habitare:Token`);
+    localStorage.removeItem(`@Habitare:dashboardLastCategory`);
+    localStorage.removeItem(`@Habitare:achievementsLastCategory`);
+    localStorage.removeItem(`@Habitare:groupsLastCategory`);
     setUser([]);
     setAuthenticated(false);
   };

@@ -16,40 +16,49 @@ import {
   SvgContent,
 } from "./styles";
 
-const FilterCategory = ({ handleFilter }) => {
-  const [filterSelect, setFilterSelect] = useState("displayAll");
+const FilterCategory = ({ handleFilter, page }) => {
+  const lastCategory =
+    JSON.parse(localStorage.getItem(`@Habitare:${page}LastCategory`)) ||
+    "displayAll";
+  const [, setFilterSelect] = useState(lastCategory);
   const handleClick = (category) => {
-    setFilterSelect(category);
+    setFilterSelect(
+      localStorage.setItem(
+        `@Habitare:${page}LastCategory`,
+        JSON.stringify(category)
+      )
+    );
     handleFilter(category);
   };
   return (
     <Container>
+      {console.log(lastCategory, "filter")}
       <span>Filtrar categorias</span>
       <FiltersContent>
         <IconDisplayAll onClick={() => handleClick("displayAll")}>
           <SvgContent
             color="spirit"
-            filterSelect={filterSelect === "displayAll" ? true : false}
+            filterSelect={lastCategory === "displayAll" ? true : false}
           >
             <FaHands />
           </SvgContent>
           <SvgContent
             color="fit"
-            filterSelect={filterSelect === "displayAll" ? true : false}
+            filterSelect={lastCategory === "displayAll" ? true : false}
           >
             <FaSeedling />
           </SvgContent>
 
           <SvgContent
             color="focus"
-            filterSelect={filterSelect === "displayAll" ? true : false}
+            filterSelect={lastCategory === "displayAll" ? true : false}
           >
             <FaCompressArrowsAlt />
           </SvgContent>
 
           <SvgContent
             color="house"
-            filterSelect={filterSelect === "displayAll" ? true : false}
+            filterSelect={lastCategory === "displayAll" ? true : false}
           >
             <FaHome />
           </SvgContent>
@@ -57,42 +66,42 @@ const FilterCategory = ({ handleFilter }) => {
 
         <IconContainer
           color="spirit"
-          filterSelect={filterSelect === "spirit" ? true : false}
+          filterSelect={lastCategory === "spirit" ? true : false}
           onClick={() => handleClick("spirit")}
         >
           <FaHands />
         </IconContainer>
         <IconContainer
           color="fit"
-          filterSelect={filterSelect === "fit" ? true : false}
+          filterSelect={lastCategory === "fit" ? true : false}
           onClick={() => handleClick("fit")}
         >
           <FaSeedling />
         </IconContainer>
         <IconContainer
           color="focus"
-          filterSelect={filterSelect === "focus" ? true : false}
+          filterSelect={lastCategory === "focus" ? true : false}
           onClick={() => handleClick("focus")}
         >
           <FaCompressArrowsAlt />
         </IconContainer>
         <IconContainer
           color="money"
-          filterSelect={filterSelect === "money" ? true : false}
+          filterSelect={lastCategory === "money" ? true : false}
           onClick={() => handleClick("money")}
         >
           <FaMoneyBillWave />
         </IconContainer>
         <IconContainer
           color="house"
-          filterSelect={filterSelect === "house" ? true : false}
+          filterSelect={lastCategory === "house" ? true : false}
           onClick={() => handleClick("house")}
         >
           <FaHome />
         </IconContainer>
         <IconContainer
           color="night"
-          filterSelect={filterSelect === "night" ? true : false}
+          filterSelect={lastCategory === "night" ? true : false}
           onClick={() => handleClick("night")}
         >
           <FaMoon />
