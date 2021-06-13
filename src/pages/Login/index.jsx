@@ -13,7 +13,7 @@ import gsap from "gsap";
 import { CSSPlugin } from "gsap/CSSPlugin";
 
 function Login() {
-  const { userLogin, authenticated, setUserInfo } = useContext(UserContext);
+  const { userLogin, authenticated } = useContext(UserContext);
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório!"),
     password: yup.string().required("Campo obrigatório!"),
@@ -30,12 +30,12 @@ function Login() {
   const history = useHistory();
 
   const onSubmitFunction = (data) => {
-    const {username} = data
+    const { username } = data;
     api
       .post("sessions/", data)
       .then((response) => {
         const { access } = response.data;
-        userLogin(access, {username});
+        userLogin(access, { username });
 
         return history.push("/dashboard");
       })
