@@ -29,7 +29,7 @@ const Dashboard = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-  const { updateGoal } = useGoal();
+
   const { habits, loadHabits } = useHabit();
   const [myHabits, setMyHabits] = useState(habits);
   const [allHabits, setAllHabits] = useState(
@@ -40,11 +40,6 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
-    updateGoal(1613, {
-      how_much_achieved: 10,
-      achieved: false,
-      title: "Nenhuma falta na academia ",
-    });
     loadHabits();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
