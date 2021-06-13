@@ -59,7 +59,7 @@ export const HabitProvider = ({ children }) => {
       })
       .catch((err) => {
         notification.open({
-          message: "ERRO AO CRIAR",
+          message: "ERRO AO CRIAR HÁBITO",
           closeIcon: <FaTimes />,
           style: {
             fontFamily: "Raleway",
