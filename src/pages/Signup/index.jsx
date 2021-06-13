@@ -10,24 +10,29 @@ import { useContext, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { CSSPlugin } from "gsap/CSSPlugin";
 import { UserContext } from "../../providers/User";
+import { notification } from "antd";
+import { FaGrinAlt, FaTimes } from "react-icons/fa";
 
 const Signup = () => {
   const { authenticated } = useContext(UserContext);
   const schema = yup.object().shape({
-    username: yup.string().required("Campo obrigatório!"),
-    email: yup.string().email("E-mail inválido").required("Campo obrigatório!"),
+    username: yup.string().required("Todos os campos são obrigatórios!"),
+    email: yup
+      .string()
+      .email("E-mail inválido")
+      .required("Todos os campos são obrigatórios!"),
     confirmEmail: yup
       .string()
       .oneOf([yup.ref("email")], "E-mails diferentes")
-      .required("Campo obrigatório!"),
+      .required("Todos os campos são obrigatórios!"),
     password: yup
       .string()
       .min(8, "Mínimo de 8 digitos")
-      .required("Campo obrigatório!"),
+      .required("Todos os campos são obrigatórios!"),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password")], "Senhas diferentes")
-      .required("Campo obrigatório!"),
+      .required("Todos os campos são obrigatórios!"),
   });
 
   const {
@@ -44,8 +49,34 @@ const Signup = () => {
     const user = { username, password, email };
     api
       .post("users/", user)
-      .then((_) => history.push("/login"))
-      .catch((err) => console.log(err));
+      .then((_) => {
+        history.push("/login");
+        notification.open({
+          message: "PARABÉNS",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Você está quase lá, usuário criado com sucesso!",
+          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+        });
+      })
+      .catch((_) =>
+        notification.open({
+          message: "NOUP",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description:
+            "Erro ao realizar cadastro, todos os campos são obrigatórios.",
+          icon: <FaGrinAlt style={{ color: "var(--purple)" }} />,
+        })
+      );
   };
 
   const rigthSVG = useRef(null);
