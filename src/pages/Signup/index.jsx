@@ -20,7 +20,10 @@ const Signup = () => {
       .string()
       .oneOf([yup.ref("email")], "E-mails diferentes")
       .required("Campo obrigatório!"),
-    password: yup.string().min(8).required("Campo obrigatório!"),
+    password: yup
+      .string()
+      .min(8, "Mínimo de 8 digitos")
+      .required("Campo obrigatório!"),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password")], "Senhas diferentes")

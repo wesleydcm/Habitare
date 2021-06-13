@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const InputItem = styled.input`
   border-radius: 26px;
@@ -20,4 +20,21 @@ export const InputItem = styled.input`
     width: 100%;
     padding: 8px 16px;
   }
+`;
+
+const opacityAppear = keyframes`
+from{
+    opacity: 0;
+}
+
+to{
+    opacity: 1;
+}`;
+
+export const ErrorSpan = styled.span`
+  position: absolute;
+  top: -1.2rem;
+  font-size: 14px;
+  color: var(--colorFocus-hover);
+  animation: ${opacityAppear} 0.5s;
 `;
