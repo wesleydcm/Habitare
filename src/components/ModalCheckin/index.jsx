@@ -9,6 +9,7 @@ import {
   CustomModal,
   InfoContainer,
   ImageContainer,
+  FrequencyWrapper,
 } from "./styles";
 import { FaTimes } from "react-icons/fa";
 import { categoryFormat, difficultyFormat } from "../../utils/format";
@@ -40,9 +41,9 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   };
 
   useEffect(() => {
-    const difficultyFormatted = difficultyFormat(parseInt(habit.difficulty));
+    const difficultyFormatted = difficultyFormat(habit.difficulty);
     const categoryFormatted = categoryFormat(habit.category);
-
+    console.log(difficultyFormatted);
     const habit_formatted = {
       ...habit,
       difficultyFormatted,
@@ -69,8 +70,9 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
         </Button>,
       ]}
     >
-      <BarContainer></BarContainer>
-      <BarFill achievedPercentage={achievedPercentage}></BarFill>
+      <BarContainer>
+        <BarFill achievedPercentage={achievedPercentage}></BarFill>
+      </BarContainer>
       <ImageContainer category={habitFormatted.category} className="lottie">
         {habitFormatted.categoryFormatted && (
           <Lottie
@@ -85,7 +87,7 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
           {habitFormatted.categoryFormatted?.title}
         </h3>
         <InfoContainer>
-          <Button whiteScheme>{habitFormatted.frequency}</Button>
+          <FrequencyWrapper>{habitFormatted.frequency}</FrequencyWrapper>
           <WrapStars>{habitFormatted.difficultyFormatted?.icons}</WrapStars>
         </InfoContainer>
       </BodyContainer>

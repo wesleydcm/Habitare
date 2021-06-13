@@ -53,7 +53,7 @@ export const MainCard = styled.div`
     height: 230px;
 
     h1 {
-      font-size: clamp(28px, 8px + 2.5vw ,48px);
+      font-size: clamp(28px, 8px + 2.5vw, 48px);
     }
 
     h3 {
@@ -119,11 +119,11 @@ export const FiltersAndButtonsWrapper = styled.div`
   > div {
     margin-bottom: 18px;
 
-    &:first-child{
+    &:first-child {
       margin-bottom: 0;
     }
   }
-`
+`;
 
 export const CardsList = styled.div`
   width: 100%;
@@ -132,6 +132,7 @@ export const CardsList = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 18px;
   margin: 32px auto;
+  position: relative;
 
   @media screen and (min-width: 980px) {
     grid-template-columns: repeat(2, 1fr);
@@ -139,5 +140,28 @@ export const CardsList = styled.div`
 
   @media screen and (min-width: 1600px) {
     grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+export const NewProfile = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 300;
+    text-align: center;
   }
 `;
