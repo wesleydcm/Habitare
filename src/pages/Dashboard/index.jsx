@@ -17,7 +17,6 @@ import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../providers/User";
 
-
 const Dashboard = () => {
   const { authenticated, user } = useContext(UserContext);
 
@@ -32,7 +31,12 @@ const Dashboard = () => {
 
   const { habits, loadHabits } = useHabit();
   const [myHabits, setMyHabits] = useState(habits);
-  const [allHabits, setAllHabits] = useState(true);
+  const [allHabits, setAllHabits] = useState(
+    JSON.parse(localStorage.getItem(`@Habitare:dashboardLastCategor`)) ===
+      "displayAll"
+      ? true
+      : false
+  );
 
   useEffect(() => {
     loadHabits();
@@ -41,7 +45,13 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    setMyHabits(habits);
+    const lastCategory = JSON.parse(
+      localStorage.getItem(`@Habitare:dashboardLastCategory`)
+    );
+    console.log(lastCategory, "123");
+    lastCategory === "displayAll"
+      ? setMyHabits(habits)
+      : setMyHabits(habits.filter((habit) => habit.category === lastCategory));
   }, [habits]);
 
   const handleFilter = (category) => {
@@ -75,7 +85,7 @@ const Dashboard = () => {
 
         <FiltersAndButtonsWrapper>
           <div>
-            <FilterCategory handleFilter={handleFilter} />
+            <FilterCategory handleFilter={handleFilter} page="dashboard" />
           </div>
           <div>
             <NewHabit />
@@ -89,8 +99,8 @@ const Dashboard = () => {
             habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
           ) : (
             <NewProfile>
-                <h1>Queremos te ajudar a praticar novos hábitos!</h1>
-                <h2> Comece agora clicando em NOVO HÁBITO</h2>
+              <h1>Queremos te ajudar a praticar novos hábitos!</h1>
+              <h2> Comece agora clicando em NOVO HÁBITO</h2>
             </NewProfile>
           )}
         </CardsList>
