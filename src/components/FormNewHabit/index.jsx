@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { notification } from 'antd';
-import {FaFrown, FaTimes, FaGrinAlt} from 'react-icons/fa'
-import {useHabit} from '../../providers/Habit'
+import { notification } from "antd";
+import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
+import { useHabit } from "../../providers/Habit";
 import {
   InputModal,
   CardCategory,
@@ -53,7 +53,7 @@ const FormNewHabit = ({ habit, closeModal }) => {
     title: yup.string().required("Todos os campos são obrigatórios"),
     category: yup.string().required("Todos os campos são obrigatórios"),
     frequency: yup.string().required("Todos os campos são obrigatórios"),
-    difficulty: yup.string().required("Todos os campos são obrigatórios")
+    difficulty: yup.string().required("Todos os campos são obrigatórios"),
   });
 
   const {
@@ -62,273 +62,272 @@ const FormNewHabit = ({ habit, closeModal }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const {createHabit} = useHabit()
+  const { createHabit } = useHabit();
 
   const handleForm = async (data) => {
-    if(errors.title) {
+    if (errors.title) {
       notification.open({
-        message: 'ERRO AO CRIAR',
+        message: "ERRO AO CRIAR",
         closeIcon: <FaTimes />,
-        style: {fontFamily: "Raleway", backgroundColor: "var(--gray)", WebkitBorderRadius: 14},
+        style: {
+          fontFamily: "Raleway",
+          backgroundColor: "var(--gray)",
+          WebkitBorderRadius: 14,
+        },
         description:
-          'Erro ao tentar criar novo hábito, por favor rever se todos os campos estão preenchidos!',
-        icon: <FaGrinAlt style={{ color: 'var(--purple)' }} />,
+          "Erro ao tentar criar novo hábito, por favor rever se todos os campos estão preenchidos!",
+        icon: <FaGrinAlt style={{ color: "var(--purple)" }} />,
       });
 
-      return
+      return;
     }
 
-    await createHabit(data)
-    closeModal()
+    await createHabit(data);
+    closeModal();
   };
 
   return (
-  <>
-    <form onSubmit={handleSubmit(handleForm)}>
-      <InputModal>
-        <input
-          type="text"
-          placeholder="Qual seu novo hábito?"
-          {...register("title", {value: inputValue})}
-          required
-        />
-      </InputModal>
-
-      <p>Em qual categoria seu hábito se encaixa?</p>
-      <CardContainer>
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <RadioButton
-            type="radio"
-            name="radio"
-            value="spirit"
-            checked={select === "spirit"}
-            {...register("category")}
-            color="var(--colorSpirit)"
-          required
-
+    <>
+      <form onSubmit={handleSubmit(handleForm)}>
+        <InputModal>
+          <input
+            type="text"
+            placeholder="Qual seu novo hábito?"
+            {...register("title", { value: inputValue })}
+            required
           />
-          <CardCategory color="var(--colorSpirit)">
-            <CustomText color="var(--colorSpirit)">
-              Corpo e mente saudáveis
-            </CustomText>
-          </CardCategory>
-        </Item>
+        </InputModal>
 
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <RadioButton
-            type="radio"
-            name="radio"
-            value="fit"
-            checked={select === "fit"}
-            {...register("category")}
-            color="var(--colorFit)"
-          required
+        <p>Em qual categoria seu hábito se encaixa?</p>
+        <CardContainer>
+          <Item onChange={(event) => handleSelectChange(event)}>
+            <RadioButton
+              type="radio"
+              name="radio"
+              value="spirit"
+              checked={select === "spirit"}
+              {...register("category")}
+              color="var(--colorSpirit)"
+              required
+            />
+            <CardCategory color="var(--colorSpirit)">
+              <CustomText color="var(--colorSpirit)">
+                Corpo e mente saudáveis
+              </CustomText>
+            </CardCategory>
+          </Item>
 
-          />
-          <CardCategory color="var(--colorFit)">
-            <CustomText color="var(--colorFit)">Ficando em forma</CustomText>
-          </CardCategory>
-        </Item>
+          <Item onChange={(event) => handleSelectChange(event)}>
+            <RadioButton
+              type="radio"
+              name="radio"
+              value="fit"
+              checked={select === "fit"}
+              {...register("category")}
+              color="var(--colorFit)"
+              required
+            />
+            <CardCategory color="var(--colorFit)">
+              <CustomText color="var(--colorFit)">Ficando em forma</CustomText>
+            </CardCategory>
+          </Item>
 
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <RadioButton
-            type="radio"
-            name="radio"
-            value="focus"
-            checked={select === "focus"}
-            {...register("category")}
-            color="var(--colorFocus)"
-          required
+          <Item onChange={(event) => handleSelectChange(event)}>
+            <RadioButton
+              type="radio"
+              name="radio"
+              value="focus"
+              checked={select === "focus"}
+              {...register("category")}
+              color="var(--colorFocus)"
+              required
+            />
+            <CardCategory color="var(--colorFocus)">
+              <CustomText color="var(--colorFocus)">
+                Foco, força e fé
+              </CustomText>
+            </CardCategory>
+          </Item>
 
-          />
-          <CardCategory color="var(--colorFocus)">
-            <CustomText color="var(--colorFocus)">Foco, força e fé</CustomText>
-          </CardCategory>
-        </Item>
+          <Item onChange={(event) => handleSelectChange(event)}>
+            <RadioButton
+              type="radio"
+              name="radio"
+              value="money"
+              checked={select === "money"}
+              {...register("category")}
+              color="var(--colorMoney)"
+              required
+            />
+            <CardCategory color="var(--colorMoney)">
+              <CustomText color="var(--colorMoney)">Me poupe</CustomText>
+            </CardCategory>
+          </Item>
 
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <RadioButton
-            type="radio"
-            name="radio"
-            value="money"
-            checked={select === "money"}
-            {...register("category")}
-            color="var(--colorMoney)"
-          required
+          <Item onChange={(event) => handleSelectChange(event)}>
+            <RadioButton
+              type="radio"
+              name="radio"
+              value="house"
+              checked={select === "house"}
+              {...register("category")}
+              color="var(--colorHouse)"
+              required
+            />
+            <CardCategory color="var(--colorHouse)">
+              <CustomText color="var(--colorHouse)">Lar doce lar</CustomText>
+            </CardCategory>
+          </Item>
 
-          />
-          <CardCategory color="var(--colorMoney)">
-            <CustomText color="var(--colorMoney)">Me poupe</CustomText>
-          </CardCategory>
-        </Item>
+          <Item onChange={(event) => handleSelectChange(event)}>
+            <RadioButton
+              type="radio"
+              name="radio"
+              value="night"
+              checked={select === "night"}
+              {...register("category")}
+              color="var(--colorNight)"
+              required
+            />
+            <CardCategory color="var(--colorNight)">
+              <CustomText color="var(--colorNight)">Boa noite</CustomText>
+            </CardCategory>
+          </Item>
+        </CardContainer>
 
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <RadioButton
-            type="radio"
-            name="radio"
-            value="house"
-            checked={select === "house"}
-            {...register("category")}
-            color="var(--colorHouse)"
-          required
+        <p>Com qual frequência?</p>
+        <div className="wrap">
+          <Item onClick={(event) => handleSelectFrequencyChange(event)}>
+            <RadioButtonFrequency
+              type="radio"
+              name="radio"
+              value="diário"
+              checked={selectFrequency === "diário"}
+              {...register("frequency")}
+              required
+            />
+            <CardFrequency>
+              <CustomText>Diário</CustomText>
+            </CardFrequency>
+          </Item>
 
-          />
-          <CardCategory color="var(--colorHouse)">
-            <CustomText color="var(--colorHouse)">Lar doce lar</CustomText>
-          </CardCategory>
-        </Item>
+          <Item onChange={(event) => handleSelectFrequencyChange(event)}>
+            <RadioButtonFrequency
+              type="radio"
+              name="radio"
+              value="semanal"
+              checked={selectFrequency === "semanal"}
+              {...register("frequency")}
+              required
+            />
+            <CardFrequency>
+              <CustomText>Semanal</CustomText>
+            </CardFrequency>
+          </Item>
+          <Item onChange={(event) => handleSelectFrequencyChange(event)}>
+            <RadioButtonFrequency
+              type="radio"
+              name="radio"
+              value="quinzenal"
+              checked={selectFrequency === "quinzenal"}
+              {...register("frequency")}
+              required
+            />
+            <CardFrequency>
+              <CustomText>Quinzenal</CustomText>
+            </CardFrequency>
+          </Item>
+          <Item onChange={(event) => handleSelectFrequencyChange(event)}>
+            <RadioButtonFrequency
+              type="radio"
+              name="radio"
+              value="mensal"
+              checked={selectFrequency === "mensal"}
+              {...register("frequency")}
+              required
+            />
+            <CardFrequency>
+              <CustomText>Mensal</CustomText>
+            </CardFrequency>
+          </Item>
+        </div>
+        <p>O quanto é difícil para você manter esse hábito?</p>
+        <WrapStars>
+          <DificultyItem
+            onChange={(event) => handleSelectDificultyChange(event)}
+          >
+            <RadioButtonDificulty
+              type="radio"
+              name="radio"
+              value="1"
+              checked={selectDificulty === "1"}
+              {...register("difficulty")}
+              required
+            />
 
-        <Item onChange={(event) => handleSelectChange(event)}>
-          <RadioButton
-            type="radio"
-            name="radio"
-            value="night"
-            checked={select === "night"}
-            {...register("category")}
-            color="var(--colorNight)"
-          required
+            {selectDificulty === "1" && (
+              <StartsInput src={selectedStar} alt="filled star" />
+            )}
+            {selectDificulty === "2" && (
+              <StartsInput src={filledStar} alt="filled star" />
+            )}
+            {selectDificulty === "3" && (
+              <StartsInput src={filledStar} alt="filled star" />
+            )}
+            {selectDificulty === "1" && <p>Fácil</p>}
+          </DificultyItem>
 
-          />
-          <CardCategory color="var(--colorNight)">
-            <CustomText color="var(--colorNight)">Boa noite</CustomText>
-          </CardCategory>
-        </Item>
-      </CardContainer>
+          <DificultyItem
+            onChange={(event) => handleSelectDificultyChange(event)}
+          >
+            <RadioButtonDificulty
+              type="radio"
+              name="radio"
+              value="2"
+              checked={selectDificulty === "2"}
+              {...register("difficulty")}
+              required
+            />
+            {selectDificulty === "1" && (
+              <StartsInput src={emptyStar} alt="filled star" />
+            )}
+            {selectDificulty === "2" && (
+              <StartsInput src={selectedStar} alt="filled star" />
+            )}
+            {selectDificulty === "3" && (
+              <StartsInput src={filledStar} alt="filled star" />
+            )}
+            {selectDificulty === "2" && <p className="medio">Médio</p>}
+          </DificultyItem>
 
-      <p>Com qual frequência?</p>
-      <div className="wrap">
-        <Item onClick={(event) => handleSelectFrequencyChange(event)}>
-          <RadioButtonFrequency
-            type="radio"
-            name="radio"
-            value="diário"
-            checked={selectFrequency === "diário"}
-            {...register("frequency")}
-          required
-
-          />
-          <CardFrequency>
-            <CustomText>Diário</CustomText>
-          </CardFrequency>
-        </Item>
-
-        <Item onChange={(event) => handleSelectFrequencyChange(event)}>
-          <RadioButtonFrequency
-            type="radio"
-            name="radio"
-            value="semanal"
-            checked={selectFrequency === "semanal"}
-            {...register("frequency")}
-          required
-
-          />
-          <CardFrequency>
-            <CustomText>Semanal</CustomText>
-          </CardFrequency>
-        </Item>
-        <Item onChange={(event) => handleSelectFrequencyChange(event)}>
-          <RadioButtonFrequency
-            type="radio"
-            name="radio"
-            value="quinzenal"
-            checked={selectFrequency === "quinzenal"}
-            {...register("frequency")}
-          required
-
-          />
-          <CardFrequency>
-            <CustomText>Quinzenal</CustomText>
-          </CardFrequency>
-        </Item>
-        <Item onChange={(event) => handleSelectFrequencyChange(event)}>
-          <RadioButtonFrequency
-            type="radio"
-            name="radio"
-            value="mensal"
-            checked={selectFrequency === "mensal"}
-            {...register("frequency")}
-          required
-
-          />
-          <CardFrequency>
-            <CustomText>Mensal</CustomText>
-          </CardFrequency>
-        </Item>
-      </div>
-      <p>O quanto é difícil para você manter esse hábito?</p>
-      <WrapStars>
-        <DificultyItem onChange={(event) => handleSelectDificultyChange(event)}>
-          <RadioButtonDificulty
-            type="radio"
-            name="radio"
-            value="fácil"
-            checked={selectDificulty === "fácil"}
-            {...register("difficulty")}
-          required
-
-          />
-
-          {selectDificulty === "fácil" && (
-            <StartsInput src={selectedStar} alt="filled star" />
-          )}
-          {selectDificulty === "médio" && (
-            <StartsInput src={filledStar} alt="filled star" />
-          )}
-          {selectDificulty === "difícil" && (
-            <StartsInput src={filledStar} alt="filled star" />
-          )}
-          {selectDificulty === "fácil" && <p>Fácil</p>}
-        </DificultyItem>
-
-        <DificultyItem onChange={(event) => handleSelectDificultyChange(event)}>
-          <RadioButtonDificulty
-            type="radio"
-            name="radio"
-            value="médio"
-            checked={selectDificulty === "médio"}
-            {...register("difficulty")}
-          required
-
-          />
-          {selectDificulty === "fácil" && (
-            <StartsInput src={emptyStar} alt="filled star" />
-          )}
-          {selectDificulty === "médio" && (
-            <StartsInput src={selectedStar} alt="filled star" />
-          )}
-          {selectDificulty === "difícil" && (
-            <StartsInput src={filledStar} alt="filled star" />
-          )}
-          {selectDificulty === "médio" && <p className="medio">Médio</p>}
-        </DificultyItem>
-
-        <DificultyItem onChange={(event) => handleSelectDificultyChange(event)}>
-          <RadioButtonDificulty
-            type="radio"
-            name="radio"
-            value="difícil"
-            checked={selectDificulty === "difícil"}
-            {...register("difficulty")}
-          required
-
-          />
-          {selectDificulty === "fácil" && (
-            <StartsInput src={emptyStar} alt="filled star" />
-          )}
-          {selectDificulty === "médio" && (
-            <StartsInput src={emptyStar} alt="filled star" />
-          )}
-          {selectDificulty === "difícil" && (
-            <StartsInput src={selectedStar} alt="filled star" />
-          )}
-          {selectDificulty === "difícil" && <p>Difícil</p>}
-        </DificultyItem>
-      </WrapStars>
-      <ButtonWrap>
-        <ButtonForm>Criar</ButtonForm>
-      </ButtonWrap>
-    </form>
-</>
+          <DificultyItem
+            onChange={(event) => handleSelectDificultyChange(event)}
+          >
+            <RadioButtonDificulty
+              type="radio"
+              name="radio"
+              value="3"
+              checked={selectDificulty === "3"}
+              {...register("difficulty")}
+              required
+            />
+            {selectDificulty === "1" && (
+              <StartsInput src={emptyStar} alt="filled star" />
+            )}
+            {selectDificulty === "2" && (
+              <StartsInput src={emptyStar} alt="filled star" />
+            )}
+            {selectDificulty === "3" && (
+              <StartsInput src={selectedStar} alt="filled star" />
+            )}
+            {selectDificulty === "3" && <p>Difícil</p>}
+          </DificultyItem>
+        </WrapStars>
+        <ButtonWrap>
+          <ButtonForm>Criar</ButtonForm>
+        </ButtonWrap>
+      </form>
+    </>
   );
 };
 
