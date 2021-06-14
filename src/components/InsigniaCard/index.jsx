@@ -4,7 +4,10 @@ const InsigniaCard = ({ achieved = false, image, description, title }) => {
   return (
     <Container achieved={achieved}>
       {achieved ? (
-        <Image src={image} alt="achievement-img"></Image>
+        <Image
+          src={`../assets/images/insignias/${image}`}
+          alt="achievement-img"
+        ></Image>
       ) : (
         <Elipse></Elipse>
       )}
