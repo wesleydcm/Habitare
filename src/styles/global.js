@@ -6,6 +6,7 @@ export const GlobalStyles = createGlobalStyle`
         --white: #ffffff;
         --gray: #F4F5F6;
         --black: #010B14;
+        --light-purple: #BCACF6;
         --purple: #7A5AED;
         --purple-hover: #4318DC;
         --yellow: #FBD437;
