@@ -98,7 +98,7 @@ const CATEGORIES = {
 };
 
 const DIFFICULTIES = {
-  fácil: {
+  1: {
     icons: (
       <>
         <FaStar />
@@ -107,7 +107,7 @@ const DIFFICULTIES = {
       </>
     ),
   },
-  médio: {
+  2: {
     icons: (
       <>
         <FaStar />
@@ -116,7 +116,7 @@ const DIFFICULTIES = {
       </>
     ),
   },
-  difícil: {
+  3: {
     icons: (
       <>
         <FaStar />
