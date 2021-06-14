@@ -4,7 +4,7 @@ export const Container = styled.div`
   background-color: ${(props) =>
     !!props.achieved ? "var(--purple)" : "var(--light-purple)"};
 
-  width: 300px;
+  width: 100%;
   border-radius: 18px;
   height: 80px;
 
