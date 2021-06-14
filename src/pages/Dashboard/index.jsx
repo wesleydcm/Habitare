@@ -82,13 +82,6 @@ const Dashboard = () => {
             <Lottie options={lottieOptions} />
           </ImageMainCard>
         </MainCard>
-
-        <InsigniaCard
-          title="Jardineiro iniciante"
-          description="Plante duas plantas"
-          achieved={true}
-          image="https://i.imgur.com/mgQt3So.png"
-        ></InsigniaCard>
         <FiltersAndButtonsWrapper>
           <div>
             <FilterCategory handleFilter={handleFilter} page="dashboard" />
