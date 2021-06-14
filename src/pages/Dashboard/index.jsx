@@ -16,6 +16,7 @@ import {
 import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../providers/User";
+import { useGoal } from "../../providers/GroupGoal";
 
 const Dashboard = () => {
   const { authenticated, user } = useContext(UserContext);
@@ -40,7 +41,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadHabits();
-    console.log(myHabits);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
