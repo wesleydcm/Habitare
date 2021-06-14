@@ -5,37 +5,56 @@ import api from "../../services/api";
 import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
 
-export const HabitContext = createContext([]);
+export const GroupContext = createContext([]);
 
 export const GroupHabitProvider = ({ children }) => {
   const [groupHabits, setGroupHabits] = useState([]);
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
   const [specifcGroup, setSpecifcGroup] = useState([]);
-  const loadGroupHabits = () => {
+
+  const getGlobalGroupsHabits = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
-      .get("groups/", {
+      .get("groups/?category=%40Habitare%2F", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setGroupHabits(response.data.results);
+        let data = response.data;
+
+        data.results = data.results.map(group => {
+          const categoryFormatted = group.category.replace("@Habitare/", "");
+
+          const output = {
+            ...group,
+            category: categoryFormatted
+          }
+
+          return output
+        })
+
+        setGlobalGroupsHabits(data);
       });
   };
 
   const createGroupHabit = (data) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
+    const newGroup = {
+      ...data,
+      category: `@Habitare/${data.category}`
+    }
+
     api
-      .post("groups/", data, {
+      .post("groups/", newGroup, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        const habit = response.data;
-        setGroupHabits([...groupHabits, habit]);
+        const group = response.data;
+        setGroupHabits([...groupHabits, group]);
         console.log(response);
         notification.open({
           message: "PARABÉNS",
@@ -82,7 +101,7 @@ export const GroupHabitProvider = ({ children }) => {
       });
   };
 
-  const getGlobalGroupsHabits = () => {
+  const loadGroupHabits  = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("groups/subscriptions/", {
@@ -91,7 +110,20 @@ export const GroupHabitProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        setGlobalGroupsHabits(response.data);
+        let data = response.data;
+
+        data = data.map(group => {
+          const categoryFormatted = group.category.replace("@Habitare/", "");
+
+          const output = {
+            ...group,
+            category: categoryFormatted
+          }
+
+          return output
+        })
+
+        setGroupHabits(data);
       });
   };
 
@@ -147,7 +179,7 @@ export const GroupHabitProvider = ({ children }) => {
   };
 
   return (
-    <HabitContext.Provider
+    <GroupContext.Provider
       value={{
         groupHabits,
         globalGroupHabits,
@@ -161,8 +193,8 @@ export const GroupHabitProvider = ({ children }) => {
       }}
     >
       {children}
-    </HabitContext.Provider>
+    </GroupContext.Provider>
   );
 };
 
-export const useGroupHabit = () => useContext(HabitContext);
+export const useGroupHabit = () => useContext(GroupContext);

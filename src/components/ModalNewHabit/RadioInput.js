@@ -1,4 +1,44 @@
-import styled from "styled-components";
+export const CardCategory = styled.label`
+  background: var(--white);
+  border: 3px solid ${(props) => props.color};
+  justify-content: center;
+
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 0;
+
+  margin: 4px;
+  border-radius: 30px;
+  padding: 18px 0;
+  transition: all 300ms;
+
+  p {
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  @media (min-width: 430px) {
+    height: 40px;
+  }
+
+  @media (min-width: 460px) {
+    width: 100%;
+    max-width: 198px;
+
+    margin: 0;
+
+    @media (min-width: 630px) {
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+`;import styled from "styled-components";
 
 import { CardCategory, CardFrequency } from "./styles";
 
