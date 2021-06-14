@@ -65,7 +65,6 @@ const HabitCard = ({ habit }) => {
         habit={habit}
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
-        habitFormatted={habitFormatted}
       ></ModalCheckin>
     </>
   );
