@@ -109,7 +109,7 @@ export const ImageMainCard = styled.div`
 
 export const FiltersAndButtonsWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap-reverse;
   justify-content: space-between;
   width: 100%;
@@ -117,10 +117,14 @@ export const FiltersAndButtonsWrapper = styled.div`
   margin-top: 32px;
 
   > div {
-    margin-bottom: 18px;
-
-    &:first-child {
-      margin-bottom: 0;
+    @media screen and (min-width: 720px) {
+      margin-bottom: 18px;
+    }
+    @media (max-width: calc(218px + 295px + 24px)) {
+      margin-bottom: 18px;
+    }
+    button {
+      z-index: 0;
     }
   }
 `;
