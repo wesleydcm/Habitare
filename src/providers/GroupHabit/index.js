@@ -5,7 +5,7 @@ import api from "../../services/api";
 import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
 
-export const HabitContext = createContext([]);
+export const GroupContext = createContext([]);
 
 export const GroupHabitProvider = ({ children }) => {
   const [groupHabits, setGroupHabits] = useState([]);
@@ -147,7 +147,7 @@ export const GroupHabitProvider = ({ children }) => {
   };
 
   return (
-    <HabitContext.Provider
+    <GroupContext.Provider
       value={{
         groupHabits,
         globalGroupHabits,
@@ -161,8 +161,8 @@ export const GroupHabitProvider = ({ children }) => {
       }}
     >
       {children}
-    </HabitContext.Provider>
+    </GroupContext.Provider>
   );
 };
 
-export const useGroupHabit = () => useContext(HabitContext);
+export const useGroupHabit = () => useContext(GroupContext);

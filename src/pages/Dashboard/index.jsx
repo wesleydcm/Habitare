@@ -31,16 +31,15 @@ const Dashboard = () => {
 
   const { habits, loadHabits } = useHabit();
   const [myHabits, setMyHabits] = useState(habits);
+  const lastCategory = JSON.parse(
+    localStorage.getItem(`@Habitare:dashboardLastCategory`)
+  );
   const [allHabits, setAllHabits] = useState(
-    JSON.parse(localStorage.getItem(`@Habitare:dashboardLastCategor`)) ===
-      "displayAll"
-      ? true
-      : false
+    lastCategory === "displayAll" || lastCategory === null ? true : false
   );
 
   useEffect(() => {
     loadHabits();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -48,7 +47,7 @@ const Dashboard = () => {
     const lastCategory = JSON.parse(
       localStorage.getItem(`@Habitare:dashboardLastCategory`)
     );
-    console.log(lastCategory, "123");
+
     lastCategory === "displayAll"
       ? setMyHabits(habits)
       : setMyHabits(habits.filter((habit) => habit.category === lastCategory));
