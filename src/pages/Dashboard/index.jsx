@@ -16,6 +16,7 @@ import {
 import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../providers/User";
+import InsigniaCard from "../../components/InsigniaCard";
 
 const Dashboard = () => {
   const { authenticated, user } = useContext(UserContext);
@@ -73,7 +74,6 @@ const Dashboard = () => {
   return (
     <>
       {/* <Aside /> */}
-
       <DashboardContainer>
         <MainCard>
           <h1>Olá, {user.username}!</h1>
@@ -83,6 +83,12 @@ const Dashboard = () => {
           </ImageMainCard>
         </MainCard>
 
+        <InsigniaCard
+          title="Jardineiro iniciante"
+          description="Plante duas plantas"
+          achieved={true}
+          image="https://i.imgur.com/mgQt3So.png"
+        ></InsigniaCard>
         <FiltersAndButtonsWrapper>
           <div>
             <FilterCategory handleFilter={handleFilter} page="dashboard" />

@@ -4,7 +4,7 @@ export const Container = styled.div`
   background-color: ${(props) =>
     !!props.achieved ? "var(--purple)" : "var(--light-purple)"};
 
-  width: 100%;
+  width: 300px;
   border-radius: 18px;
   height: 80px;
 
@@ -23,21 +23,18 @@ export const Description = styled.span`
   font-size: 16px;
   opacity: 0.7;
   color: #dfdfdf;
-  @media (min-width: 800px) {
-    font-size: 20px;
-  }
 `;
 
 export const Title = styled.h4`
   font-size: 20px;
   color: ${(props) => (!!props.achieved ? "var(--white)" : "#dfdfdf")};
-  @media (min-width: 800px) {
-    font-size: 24px;
-  }
 `;
 
 export const Image = styled.img`
   width: 50px;
+  @media (min-width: 800px) {
+    width: 60px;
+  }
 `;
 
 export const Elipse = styled.div`
@@ -49,4 +46,6 @@ export const Elipse = styled.div`
 
 export const Info = styled.div`
   text-align: center;
+  margin-top: 1rem;
+  align-self: flex-start;
 `;
