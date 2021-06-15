@@ -17,7 +17,7 @@ export const AchievementProvider = ({ children }) => {
     const updateAchiviement = achievements.filter((achievement) => {
       return achievement.id === achievementId;
     });
-    if (!updateAchiviement.achieved) {
+    if (!updateAchiviement[0].achieved) {
       const data = {
         id: updateAchiviement[0].id,
         title: updateAchiviement[0].title,
