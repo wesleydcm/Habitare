@@ -12,6 +12,7 @@ import {
   ImageMainCard,
   MainCard,
   NewProfile,
+  ButtonsWrapper,
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
@@ -56,6 +57,12 @@ const Dashboard = () => {
     lastCategory === "displayAll"
       ? setMyHabits(habits)
       : setMyHabits(habits.filter((habit) => habit.category === lastCategory));
+
+    lastCategory === "displayAll"
+      ? setMyHabitsCompleted(habitsAchieved)
+      : setMyHabitsCompleted(
+          habitsAchieved.filter((habit) => habit.category === lastCategory)
+        );
   }, [habits, habitsAchieved]);
 
   const handleFilter = (category) => {
@@ -78,13 +85,12 @@ const Dashboard = () => {
           (habit) => habit.category === category
         );
         setMyHabitsCompleted(filteredHabitsCompleted);
-
-        setAllHabits(false);
       }
     }
   };
+
   const handleDisplayHabitsAchieved = () => {
-    setMyHabitsCompleted(habitsAchieved);
+    loadHabits();
     displayHabitsAchieved
       ? setDisplayHabitsAchieved(false)
       : setDisplayHabitsAchieved(true);
@@ -104,20 +110,18 @@ const Dashboard = () => {
           </ImageMainCard>
         </MainCard>
         <FiltersAndButtonsWrapper>
-          <div>
-            <FilterCategory handleFilter={handleFilter} page="dashboard" />
-          </div>
-          <div>
+          <FilterCategory handleFilter={handleFilter} page="dashboard" />
+          <ButtonsWrapper>
             <Button onClickFunc={handleDisplayHabitsAchieved} whiteSchema>
               {displayHabitsAchieved ? "Não Concluídos" : "Concluídos"}
             </Button>
             <NewHabit />
-          </div>
+          </ButtonsWrapper>
         </FiltersAndButtonsWrapper>
 
         <CardsList>
           {displayHabitsAchieved ? (
-            habitsAchieved.map((habit) => (
+            myHabitsCompleted.map((habit) => (
               <HabitCard habit={habit} key={habit.id} />
             ))
           ) : habits.length > 0 && !allHabits ? (

@@ -28,11 +28,12 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
     const how_much_update =
       parseFloat(habit.how_much_achieved) +
       120 / (parseInt(habit.difficulty) * 20);
-    parseFloat(how_much_update) >= 60 && setAchieved(true);
+    parseFloat(how_much_update) >= 120 && setAchieved(true);
+    console.log(how_much_update);
     setAchievedPercentage((parseInt(habit.how_much_achieved) / 120) * 100);
     const how_much_achieved = how_much_update;
     const data = { how_much_achieved, achieved };
-    how_much_update <= 120 && updateHabit(habit.id, data);
+    how_much_update <= 126 && updateHabit(habit.id, data);
 
     setIsModalVisible(false);
   };
