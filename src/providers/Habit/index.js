@@ -11,7 +11,6 @@ export const HabitProvider = ({ children }) => {
   const [habitsAchieved, setHabitsAchieved] = useState([]);
 
   const loadHabits = () => {
-    setHabits([]);
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("habits/personal/", {
@@ -27,8 +26,16 @@ export const HabitProvider = ({ children }) => {
           (habits) => habits.achieved === false
         );
 
-        setHabitsAchieved(filterHabitsAchieved);
-        setHabits(filterHabitsNotAchieved);
+        setHabitsAchieved(
+          filterHabitsAchieved.sort((a, b) => {
+            return a.id - b.id;
+          })
+        );
+        setHabits(
+          filterHabitsNotAchieved.sort((a, b) => {
+            return a.id - b.id;
+          })
+        );
       });
   };
 
