@@ -33,6 +33,7 @@ const Dashboard = () => {
 
   const { habits, habitsAchieved, loadHabits } = useHabit();
   const [myHabits, setMyHabits] = useState(habits);
+  const [myHabitsCompleted, setMyHabitsCompleted] = useState();
   const lastCategory = JSON.parse(
     localStorage.getItem(`@Habitare:dashboardLastCategory`)
   );
@@ -55,21 +56,35 @@ const Dashboard = () => {
     lastCategory === "displayAll"
       ? setMyHabits(habits)
       : setMyHabits(habits.filter((habit) => habit.category === lastCategory));
-  }, [habits]);
+  }, [habits, habitsAchieved]);
 
   const handleFilter = (category) => {
-    if (category === "displayAll") {
-      setAllHabits(true);
-    } else if (myHabits) {
-      const filteredHabits = habits.filter(
-        (habit) => habit.category === category
-      );
-      setMyHabits(filteredHabits);
+    if (!displayHabitsAchieved) {
+      if (category === "displayAll") {
+        setMyHabits(habits);
+      } else if (myHabits) {
+        const filteredHabits = habits.filter(
+          (habit) => habit.category === category
+        );
+        setMyHabits(filteredHabits);
 
-      setAllHabits(false);
+        setAllHabits(false);
+      }
+    } else {
+      if (category === "displayAll") {
+        setMyHabitsCompleted(habitsAchieved);
+      } else if (myHabitsCompleted) {
+        const filteredHabitsCompleted = habitsAchieved.filter(
+          (habit) => habit.category === category
+        );
+        setMyHabitsCompleted(filteredHabitsCompleted);
+
+        setAllHabits(false);
+      }
     }
   };
   const handleDisplayHabitsAchieved = () => {
+    setMyHabitsCompleted(habitsAchieved);
     displayHabitsAchieved
       ? setDisplayHabitsAchieved(false)
       : setDisplayHabitsAchieved(true);
