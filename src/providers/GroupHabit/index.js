@@ -4,13 +4,15 @@ import api from "../../services/api";
 
 import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
+import { categoryFormat } from "../../utils/format";
+import { useUser } from "../User";
 
 export const GroupContext = createContext([]);
 
 export const GroupHabitProvider = ({ children }) => {
   const [groupHabits, setGroupHabits] = useState([]);
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
-  const [specifcGroup, setSpecifcGroup] = useState([]);
+  const [specificGroup, setSpecificGroup] = useState({});
 
   const getGlobalGroupsHabits = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
@@ -23,16 +25,16 @@ export const GroupHabitProvider = ({ children }) => {
       .then((response) => {
         let data = response.data;
 
-        data.results = data.results.map(group => {
+        data.results = data.results.map((group) => {
           const categoryFormatted = group.category.replace("@Habitare/", "");
 
           const output = {
             ...group,
-            category: categoryFormatted
-          }
+            category: categoryFormatted,
+          };
 
-          return output
-        })
+          return output;
+        });
 
         setGlobalGroupsHabits(data);
       });
@@ -43,8 +45,8 @@ export const GroupHabitProvider = ({ children }) => {
 
     const newGroup = {
       ...data,
-      category: `@Habitare/${data.category}`
-    }
+      category: `@Habitare/${data.category}`,
+    };
 
     api
       .post("groups/", newGroup, {
@@ -101,7 +103,7 @@ export const GroupHabitProvider = ({ children }) => {
       });
   };
 
-  const loadGroupHabits  = () => {
+  const loadGroupHabits = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("groups/subscriptions/", {
@@ -112,16 +114,16 @@ export const GroupHabitProvider = ({ children }) => {
       .then((response) => {
         let data = response.data;
 
-        data = data.map(group => {
+        data = data.map((group) => {
           const categoryFormatted = group.category.replace("@Habitare/", "");
 
           const output = {
             ...group,
-            category: categoryFormatted
-          }
+            category: categoryFormatted,
+          };
 
-          return output
-        })
+          return output;
+        });
 
         setGroupHabits(data);
       });
@@ -131,7 +133,7 @@ export const GroupHabitProvider = ({ children }) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
     api
-      .post("groups/61/subscribe/", {
+      .post(`groups/${groupId}/subscribe/`, {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -166,6 +168,8 @@ export const GroupHabitProvider = ({ children }) => {
 
   const getSpecificGroup = (idGroup) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
+    const user = JSON.parse(localStorage.getItem("@Habitare:User")) || "";
+
     api
       .get(`groups/${idGroup}/`, {
         headers: {
@@ -173,8 +177,33 @@ export const GroupHabitProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        console.log(response.data);
-        setSpecifcGroup(response.data);
+        let group = response.data;
+
+        const category = group.category.replace("@Habitare/", "");
+        const categoryFormatted = categoryFormat(category);
+
+        let creator = false;
+        let onGroup = false;
+
+        if (user.id === group.creator.id) {
+          creator = true;
+        }
+
+        group.users_on_group.forEach((userOnGroup) => {
+          if (user.id === userOnGroup.id) {
+            onGroup = true;
+          }
+        });
+
+        const output = {
+          ...group,
+          category,
+          categoryFormatted,
+          creator,
+          onGroup,
+        };
+
+        setSpecificGroup(output);
       });
   };
 
@@ -183,13 +212,14 @@ export const GroupHabitProvider = ({ children }) => {
       value={{
         groupHabits,
         globalGroupHabits,
-        specifcGroup,
+        specificGroup,
         loadGroupHabits,
         createGroupHabit,
         updateGroupHabit,
         getGlobalGroupsHabits,
         subscribeGroupHabit,
         getSpecificGroup,
+        setSpecificGroup,
       }}
     >
       {children}
