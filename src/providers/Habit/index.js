@@ -57,7 +57,7 @@ export const HabitProvider = ({ children }) => {
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
       })
-      .catch((err) => {
+      .catch((_) => {
         notification.open({
           message: "ERRO AO CRIAR HÁBITO",
           closeIcon: <FaTimes />,
@@ -88,12 +88,75 @@ export const HabitProvider = ({ children }) => {
         });
         const updatedHabit = response.data;
         setHabits([...newHabits, updatedHabit]);
+        loadHabits();
+        notification.open({
+          message: "PARABÉNS POR ISSO",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description:
+            "Você é uma pessoa determinada em alcançar seus objetivos. Check-in realizado com sucesso!",
+          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+        });
+      })
+      .catch((_) =>
+        notification.open({
+          message: "Ops check-in não realizado",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Por favor verificar sua conexão e tente novamente",
+          icon: <FaFrown style={{ color: "var(--pink)" }} />,
+        })
+      );
+  };
+
+  const deleteHabit = (habitId) => {
+    const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
+    api
+      .delete(`habits/${habitId}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => {
+        loadHabits();
+        notification.open({
+          message: "VOCÊ ABANDONOU UM HÁBITO",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Foi uma decisão consciente? esperamos que sim =)",
+          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+        });
+      })
+      .catch((_) => {
+        notification.open({
+          message: "ERRO AO DELETAR HÁBITO",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Por favor verificar sua conexão e tente novamente",
+          icon: <FaFrown style={{ color: "var(--pink)" }} />,
+        });
       });
   };
 
   return (
     <HabitContext.Provider
-      value={{ habits, loadHabits, createHabit, updateHabit }}
+      value={{ habits, loadHabits, createHabit, updateHabit, deleteHabit }}
     >
       {children}
     </HabitContext.Provider>
