@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { notification } from "antd";
-import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
+import { FaTimes, FaGrinAlt } from "react-icons/fa";
 import { useHabit } from "../../providers/Habit";
 import {
   InputModal,

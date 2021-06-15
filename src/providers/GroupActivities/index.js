@@ -40,7 +40,7 @@ export const ActivitiesProvider = ({ children }) => {
       });
   };
 
-  const createAcitivity = (data) => {
+  const createActivity = (data) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
     api
@@ -130,7 +130,7 @@ export const ActivitiesProvider = ({ children }) => {
         oneActivity,
         loadActivities,
         getOneActivity,
-        createAcitivity,
+        createActivity,
         updateActivity,
       }}
     >
@@ -139,4 +139,4 @@ export const ActivitiesProvider = ({ children }) => {
   );
 };
 
-export const useActivies = () => useContext(ActivitiesContext);
+export const useActivities = () => useContext(ActivitiesContext);

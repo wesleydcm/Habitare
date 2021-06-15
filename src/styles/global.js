@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
         --purple-hover: #4318DC;
         --yellow: #FBD437;
         --pink: #C45FD3;
+        --load: #999;
 
         //category's colors:
         --colorSpirit: #36A7F9;
