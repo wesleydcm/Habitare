@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import { FaGrinAlt, FaPlus, FaTimes } from "react-icons/fa";
+import {
+  CustomModal,
+  Activity,
+  InfoModal,
+  ButtonWrap,
+  ButtonForm,
+  InputModal,
+  DateWrapper,
+} from "./styles";
+import { format, parseISO } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+import { notification } from "antd";
+import { FaGrinAlt, FaTimes, FaTrashAlt } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { DatePicker, notification } from "antd";
-
-import {
-  ButtonForm,
-  ButtonWrap,
-  CustomModal,
-  DateWrapper,
-  InputModal,
-} from "./styles";
 import { useActivities } from "../../providers/GroupActivities";
 
-const FormNewActivity = ({ closeModal, idGroup }) => {
-  const [date, setDate] = useState({})
+const FormEditActivity = ({ activity, date, closeModal, groupId }) => {
+  const [deleteScreenActivity, setDeleteScreenActivity] = useState(false);
+
   const schema = yup.object().shape({
     title: yup.string().required("Todos os campos são obrigatórios"),
   });
@@ -26,13 +30,9 @@ const FormNewActivity = ({ closeModal, idGroup }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const handleDate = (date, dateString) => {
-    setDate(date._d)
-  };
+  const { updateActivity, deleteActivity } = useActivities();
 
-  const {createActivity} = useActivities();
-
-  const submitForm = async (data) => {
+  const submitForm = async ({title}) => {
     if (errors.title) {
       notification.open({
         message: "ERRO AO CRIAR",
@@ -50,50 +50,50 @@ const FormNewActivity = ({ closeModal, idGroup }) => {
       return;
     }
 
-    await createActivity({ ...data, realization_time: date, group: idGroup });
-    closeModal();
+    await updateActivity(activity.id, {title}, groupId);
+    closeModal()
   };
 
+  const submitDelete = () => {
+    deleteActivity(activity.id, groupId);
+    closeModal()
+  }
+ 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       <InputModal>
         <input
           type="text"
           placeholder="Qual a atividade?"
-          {...register("title", { value: "" })}
+          {...register("title", { value: activity.title })}
           required
         />
       </InputModal>
       <DateWrapper>
-        <p>Qual a data limite para cumprir esta atividade?</p>
-        <DatePicker
-          onChange={handleDate}
-          format={"DD-MM-YYYY"}
-          size={"large"}
-          style={{
-            fontFamily: "Raleway",
-            backgroundColor: "var(--gray)",
-            WebkitBorderRadius: 14,
-            borderBlockColor: "var(--purple)",
-            borderColor: "var(--purple)",
-            borderWidth: 3,
-            borderLeftWidth: 3,
-            borderLeftColor: "var(--purple)",
-            borderRightColor: "var(--purple)",
-            boxShadow: 'none'
-          }}
-          placeholder="Cumprir até"
-        />
+        <p>
+          Cumprir até: <span>{date}</span>
+        </p>
       </DateWrapper>
       <ButtonWrap>
-        <ButtonForm type="submit">Criar</ButtonForm>
+        {deleteScreenActivity ? (
+          <>
+            <ButtonForm type="button" onClick={() => setDeleteScreenActivity(false)}>Voltar</ButtonForm>
+            <ButtonForm type="button" delete onClick={submitDelete}>Confirmar <FaTrashAlt /></ButtonForm>
+          </>
+        ) : (
+          <>
+            <ButtonForm type="button" onClick={() => setDeleteScreenActivity(true)} delete>Excluir</ButtonForm>
+            <ButtonForm type="submit">Salvar</ButtonForm>
+          </>
+        )}
       </ButtonWrap>
     </form>
   );
 };
 
-const ModalActivity = ({ idGroup }) => {
+const ModalActivity = ({ activity, groupId }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -101,33 +101,62 @@ const ModalActivity = ({ idGroup }) => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    setEdit(false)
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setEdit(false)
   };
+
+  const handleEdit = () => {
+    setEdit(true);
+  };
+
+  const timestamp = new Date(activity.realization_time).getTime();
+  const now = new Date().getTime();
+  const date = format(parseISO(activity.realization_time), "dd MMM yyyy", {
+    locale: ptBR,
+  });
 
   return (
     <>
-      <FaPlus onClick={showModal} />
+      <Activity
+        isActive={timestamp - now < 0 ? true : false}
+        onClick={showModal}
+      >
+        <h2>{activity.title}</h2>
+        <p>
+          Cumprir até: <span>{date}</span>
+        </p>
+      </Activity>
 
       <CustomModal
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={700}
-        title="Criar nova atividade"
+        width={500}
+        title={`${activity.title}`}
         okText="Criar"
         cancelText="Cancelar"
         closeIcon={<FaTimes />}
         footer={null}
       >
-        {isModalVisible && (
-          <FormNewActivity
-            closeModal={handleOk}
-            isModalVisible={isModalVisible}
-            idGroup={idGroup}
-          />
+        {isModalVisible && edit ? (
+          <FormEditActivity activity={activity} closeModal={handleOk} date={date} groupId={groupId}/>
+        ) : (
+          <InfoModal>
+            <h2>{activity.title}</h2>
+            <p>
+              Cumprir até: <span>{date}</span>
+            </p>
+
+            <ButtonWrap>
+              <ButtonForm type="button" onClick={handleEdit}>
+                Editar
+              </ButtonForm>
+            </ButtonWrap>
+          </InfoModal>
         )}
       </CustomModal>
     </>

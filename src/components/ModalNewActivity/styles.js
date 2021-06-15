@@ -8,6 +8,11 @@ export const CustomModal = styled(Modal)`
     bottom: 18px;
   }
 
+  p {
+    font-size: 13px;
+    margin: 5px 3px;
+  }
+
   .ant-modal-header {
     background-color: var(--white);
     border-radius: 15px;
@@ -40,92 +45,29 @@ export const CustomModal = styled(Modal)`
     justify-content: center;
   }
 
+  @media (min-width: 430px) {
+    p {
+      font-size: 18px;
+    }
+  }
+
   @media (min-width: 460px) {
     .ant-modal-title {
       font-size: 30px;
     }
+    p {
+      margin: 5px 8px;
+    }
 
     @media (min-width: 600px) {
+      p {
+        margin: 18px 8px 10px;
+      }
+
       .ant-modal-body {
-        padding: 28px;
+        padding: 28px 40px;
       }
     }
-  }
-`;
-
-export const Activity = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 6px 12px;
-  opacity: ${(props) => (props.isActive ? ".4" : "1")};
-  cursor: pointer;
-  transition: all 350ms;
-
-  h2 {
-    font-weight: 700;
-    font-size: 22px;
-  }
-
-  p {
-    font-size: 20px;
-  }
-
-  &:hover {
-    background-color: var(--gray);
-  }
-`;
-
-export const InfoModal = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  h2 {
-    font-weight: 700;
-    font-size: 22px;
-  }
-
-  p {
-    font-size: 20px;
-  }
-`;
-
-export const ButtonWrap = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-`;
-
-export const ButtonForm = styled.button`
-  border-radius: 20px;
-
-  margin: 20px 0 0;
-  margin-left: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    margin-left: 4px;
-  }
-
-  padding: 4px 0;
-  &:hover {
-    filter: brightness(0.92);
-  }
-
-  background-color: ${props => props.delete ? "var(--pink)" : "var(--purple)"};
-
-  color: var(--purple);
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 18px;
-  color: var(--white);
-
-  @media (min-width: 440px) {
-    width: 150px;
-    padding: 4px 0;
   }
 `;
 
@@ -153,13 +95,38 @@ export const InputModal = styled.div`
   }
 `;
 
-export const DateWrapper = styled.div`
-  .ant-picker-focused {
-    border-right-width: 3px !important;
+export const ButtonWrap = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+`;
+
+export const ButtonForm = styled.button`
+  width: 50%;
+  border-radius: 20px;
+
+  margin: 20px 0 0;
+  padding: 4px 0;
+  &:hover {
+    filter: brightness(0.92);
   }
 
-  p {
-    margin-top: 12px;
-    font-size: 20px;
+  background-color: var(--purple);
+
+  color: var(--purple);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 18px;
+  color: var(--white);
+
+  @media (min-width: 440px) {
+    width: 150px;
+    padding: 8px 0;
   }
+`;
+
+export const DateWrapper = styled.div`
+.ant-picker-focused {
+    border-right-width: 3px !important;
+}
 `;
