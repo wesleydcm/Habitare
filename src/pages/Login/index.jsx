@@ -13,9 +13,11 @@ import gsap from "gsap";
 import { CSSPlugin } from "gsap/CSSPlugin";
 import { notification } from "antd";
 import { FaGrinAlt, FaTimes } from "react-icons/fa";
+import { AchievementContext } from "../../providers/Achievement";
 
 function Login() {
   const { userLogin, authenticated } = useContext(UserContext);
+  const { completeAchievement } = useContext(AchievementContext);
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório!"),
     password: yup.string().required("Campo obrigatório!"),
@@ -38,7 +40,7 @@ function Login() {
       .then((response) => {
         const { access } = response.data;
         userLogin(access, { username });
-
+        completeAchievement("1");
         return history.push("/dashboard");
       })
       .catch((_) =>
