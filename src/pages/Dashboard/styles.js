@@ -115,16 +115,54 @@ export const FiltersAndButtonsWrapper = styled.div`
   width: 100%;
   max-width: 1280px;
   margin-top: 32px;
-
   > div {
-    @media screen and (min-width: 720px) {
-      margin-bottom: 18px;
+    margin-bottom: 18px;
+
+    &:first-child {
+      margin-bottom: 0;
     }
-    @media (max-width: calc(218px + 295px + 24px)) {
-      margin-bottom: 18px;
+  }
+
+  @media screen and (min-width: 1375px) {
+    > div {
+      margin-bottom: 0px;
     }
+  }
+  button {
+    z-index: 0;
+  }
+`;
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+
+  button {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  @media screen and (min-width: 540px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: auto;
+
     button {
-      z-index: 0;
+      font-size: 18px;
+
+      margin-right: 12px;
+      width: auto;
+      margin-right: 12px;
+      margin-bottom: 0px;
     }
   }
 `;

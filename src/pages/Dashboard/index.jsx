@@ -12,10 +12,12 @@ import {
   ImageMainCard,
   MainCard,
   NewProfile,
+  ButtonsWrapper,
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../providers/User";
+import Button from "../../components/Button";
 /* import InsigniaCard from "../../components/InsigniaCard"; */
 
 const Dashboard = () => {
@@ -30,14 +32,17 @@ const Dashboard = () => {
     },
   };
 
-  const { habits, loadHabits } = useHabit();
+  const { habits, habitsAchieved, loadHabits } = useHabit();
   const [myHabits, setMyHabits] = useState(habits);
+  const [myHabitsCompleted, setMyHabitsCompleted] = useState();
   const lastCategory = JSON.parse(
     localStorage.getItem(`@Habitare:dashboardLastCategory`)
   );
   const [allHabits, setAllHabits] = useState(
     lastCategory === "displayAll" || lastCategory === null ? true : false
   );
+
+  const [displayHabitsAchieved, setDisplayHabitsAchieved] = useState(false);
 
   useEffect(() => {
     loadHabits();
@@ -52,19 +57,43 @@ const Dashboard = () => {
     lastCategory === "displayAll"
       ? setMyHabits(habits)
       : setMyHabits(habits.filter((habit) => habit.category === lastCategory));
-  }, [habits]);
+
+    lastCategory === "displayAll"
+      ? setMyHabitsCompleted(habitsAchieved)
+      : setMyHabitsCompleted(
+          habitsAchieved.filter((habit) => habit.category === lastCategory)
+        );
+  }, [habits, habitsAchieved]);
 
   const handleFilter = (category) => {
-    console.log(category);
-    if (category === "displayAll") {
-      setAllHabits(true);
-    } else if (myHabits) {
-      const filteredHabits = habits.filter(
-        (habit) => habit.category === category
-      );
-      setMyHabits(filteredHabits);
-      setAllHabits(false);
+    if (!displayHabitsAchieved) {
+      if (category === "displayAll") {
+        setMyHabits(habits);
+      } else if (myHabits) {
+        const filteredHabits = habits.filter(
+          (habit) => habit.category === category
+        );
+        setMyHabits(filteredHabits);
+
+        setAllHabits(false);
+      }
+    } else {
+      if (category === "displayAll") {
+        setMyHabitsCompleted(habitsAchieved);
+      } else if (myHabitsCompleted) {
+        const filteredHabitsCompleted = habitsAchieved.filter(
+          (habit) => habit.category === category
+        );
+        setMyHabitsCompleted(filteredHabitsCompleted);
+      }
     }
+  };
+
+  const handleDisplayHabitsAchieved = () => {
+    loadHabits();
+    displayHabitsAchieved
+      ? setDisplayHabitsAchieved(false)
+      : setDisplayHabitsAchieved(true);
   };
 
   if (!authenticated) {
@@ -81,16 +110,21 @@ const Dashboard = () => {
           </ImageMainCard>
         </MainCard>
         <FiltersAndButtonsWrapper>
-          <div>
-            <FilterCategory handleFilter={handleFilter} page="dashboard" />
-          </div>
-          <div>
+          <FilterCategory handleFilter={handleFilter} page="dashboard" />
+          <ButtonsWrapper>
+            <Button onClickFunc={handleDisplayHabitsAchieved} whiteSchema>
+              {displayHabitsAchieved ? "Não Concluídos" : "Concluídos"}
+            </Button>
             <NewHabit />
-          </div>
+          </ButtonsWrapper>
         </FiltersAndButtonsWrapper>
 
         <CardsList>
-          {habits.length > 0 && !allHabits ? (
+          {displayHabitsAchieved ? (
+            myHabitsCompleted.map((habit) => (
+              <HabitCard habit={habit} key={habit.id} />
+            ))
+          ) : habits.length > 0 && !allHabits ? (
             myHabits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
           ) : habits.length > 0 && allHabits ? (
             habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)

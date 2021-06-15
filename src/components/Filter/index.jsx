@@ -32,7 +32,6 @@ const FilterCategory = ({ handleFilter, page }) => {
   };
   return (
     <Container>
-      {console.log(lastCategory, "filter")}
       <span>Filtrar categorias</span>
       <FiltersContent>
         <IconDisplayAll onClick={() => handleClick("displayAll")}>
