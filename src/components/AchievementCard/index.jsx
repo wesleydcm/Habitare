@@ -1,5 +1,5 @@
 import { AchievementBox, ImgBadge, TextBox } from "./styles";
-import Jardim from "../../assets/badges/morpheus.svg";
+import Jardim from "../../assets/images/insignias/morpheus.svg";
 const AchievementCard = () => {
   return (
     <AchievementBox>
