@@ -11,10 +11,8 @@ const mockHabits = {
   "Ler um capítulo de um livro": "25",
 };
 
-export const IsMockHabitComplete = (habitTitle, achievedPercentage) => {
+export const IsMockHabitComplete = (habitTitle) => {
   const { completeAchievement } = useContext(AchievementContext);
   const habitExist = mockHabits[habitTitle];
-  if (!!habitExist && achievedPercentage === 100) {
-    completeAchievement(habitExist);
-  }
+  !!habitExist && completeAchievement(habitExist);
 };
