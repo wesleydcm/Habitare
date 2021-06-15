@@ -91,12 +91,17 @@ export const HabitProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        const newHabits = habits.filter((habit) => {
+        let newHabits = habits.filter((habit) => {
           return habit.id !== habitId;
         });
         const updatedHabit = response.data;
-        setHabits([...newHabits, updatedHabit]);
-        loadHabits();
+        newHabits = [...newHabits, updatedHabit];
+
+        setHabits(
+          newHabits.sort((a, b) => {
+            return a.id - b.id;
+          })
+        );
         notification.open({
           message: "PARABÉNS POR ISSO",
           closeIcon: <FaTimes />,
