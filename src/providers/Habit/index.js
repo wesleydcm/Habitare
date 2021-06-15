@@ -88,6 +88,7 @@ export const HabitProvider = ({ children }) => {
         });
         const updatedHabit = response.data;
         setHabits([...newHabits, updatedHabit]);
+        loadHabits()
       });
   };
 

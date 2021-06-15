@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Lottie from "react-lottie";
 import { FaUsers, FaCheckDouble, FaTasks } from "react-icons/fa";
-import { format, parseISO } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
 
 import { useParams } from "react-router-dom";
 import { useGroupHabit } from "../../providers/GroupHabit";
@@ -20,8 +18,11 @@ import {
   Goal,
   InfoHowMuchAchieved,
 } from "./styles";
+
 import ModalNewGoal from "../../components/ModalNewGoal";
+import ModalNewActivity from "../../components/ModalNewActivity";
 import ModalActivity from "../../components/ModalActivity";
+import ModalGoals from "../../components/ModalGoals";
 
 const Group = () => {
   const [paused, setPaused] = useState(true);
@@ -30,7 +31,7 @@ const Group = () => {
     getSpecificGroup,
     specificGroup: group,
     setSpecificGroup,
-    subscribeGroupHabit
+    subscribeGroupHabit,
   } = useGroupHabit();
 
   let { id } = useParams();
@@ -45,8 +46,8 @@ const Group = () => {
   }, []);
 
   const handleSubcription = () => {
-    subscribeGroupHabit(id)
-  }
+    subscribeGroupHabit(id);
+  };
 
   return (
     <GroupContainer>
@@ -72,18 +73,13 @@ const Group = () => {
             ) : (
               <>
                 {group.goals?.map((goal) => {
-                  const difficulty = difficultyFormat(goal?.difficulty);
                   return (
-                    <Goal key={goal.id}>
-                      <h2>{goal.title}</h2>
-                      <span>{difficulty.icons}</span>
-                      <InfoHowMuchAchieved
-                        category={group.category}
-                        howMuchAchieved={goal.how_much_achieved}
-                      >
-                        <div></div>
-                      </InfoHowMuchAchieved>
-                    </Goal>
+                    <ModalGoals
+                      goal={goal}
+                      key={goal.id}
+                      groupId={id}
+                      category={group.category}
+                    />
                   );
                 })}
               </>
@@ -135,7 +131,7 @@ const Group = () => {
               <FaTasks />
               Atividades
             </h4>
-            {group.onGroup && <ModalActivity idGroup={id} />}
+            {group.onGroup && <ModalNewActivity idGroup={id} />}
           </HeaderCard>
           <div>
             <div>
@@ -144,22 +140,12 @@ const Group = () => {
               ) : (
                 <>
                   {group.activities?.map((activity) => {
-                    const timestamp = new Date(
-                      activity.realization_time
-                    ).getTime();
-                    const now = new Date().getTime();
-                    const date = format(
-                      parseISO(activity.realization_time),
-                      "dd MMM yyyy",
-                      { locale: ptBR }
-                    );
                     return (
-                      <Activity isActive={timestamp - now < 0 ? true : false}>
-                        <h2>{activity.title}</h2>
-                        <p>
-                          Cumprir até: <span>{date}</span>
-                        </p>
-                      </Activity>
+                      <ModalActivity
+                        activity={activity}
+                        groupId={id}
+                        key={activity.id}
+                      />
                     );
                   })}
                 </>

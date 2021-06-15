@@ -4,12 +4,15 @@ import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
 
 import api from "../../services/api";
+import { useGroupHabit } from "../GroupHabit";
 
 export const GoalContext = createContext([]);
 
 export const GoalProvider = ({ children }) => {
   const [goals, setGoals] = useState([]);
   const [oneGoal, setOneGoal] = useState([]);
+
+  const {getSpecificGroup} = useGroupHabit()
 
   const loadGoals = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
@@ -69,6 +72,8 @@ export const GoalProvider = ({ children }) => {
           description: "Nova meta criada com sucesso!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
+
+        getSpecificGroup(data.group)
       })
       .catch((err) => {
         notification.open({
@@ -83,9 +88,11 @@ export const GoalProvider = ({ children }) => {
           icon: <FaFrown style={{ color: "var(--pink)" }} />,
         });
       });
+
+     
   };
 
-  const updateGoal = (goalId, data) => {
+  const updateGoal = (goalId, data, groupId) => {
     // data =  "title", "achieved", "how_much_achieved" ...
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
@@ -113,6 +120,8 @@ export const GoalProvider = ({ children }) => {
           description: "Meta atualizada com sucesso!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
+        getSpecificGroup(groupId)
+
       })
       .catch((err) => {
         notification.open({
