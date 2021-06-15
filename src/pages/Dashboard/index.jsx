@@ -16,6 +16,7 @@ import {
 import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../providers/User";
+import Button from "../../components/Button";
 /* import InsigniaCard from "../../components/InsigniaCard"; */
 
 const Dashboard = () => {
@@ -30,7 +31,7 @@ const Dashboard = () => {
     },
   };
 
-  const { habits, loadHabits } = useHabit();
+  const { habits, habitsAchieved, loadHabits } = useHabit();
   const [myHabits, setMyHabits] = useState(habits);
   const lastCategory = JSON.parse(
     localStorage.getItem(`@Habitare:dashboardLastCategory`)
@@ -38,6 +39,8 @@ const Dashboard = () => {
   const [allHabits, setAllHabits] = useState(
     lastCategory === "displayAll" || lastCategory === null ? true : false
   );
+
+  const [displayHabitsAchieved, setDisplayHabitsAchieved] = useState(false);
 
   useEffect(() => {
     loadHabits();
@@ -55,7 +58,6 @@ const Dashboard = () => {
   }, [habits]);
 
   const handleFilter = (category) => {
-    console.log(category);
     if (category === "displayAll") {
       setAllHabits(true);
     } else if (myHabits) {
@@ -63,8 +65,14 @@ const Dashboard = () => {
         (habit) => habit.category === category
       );
       setMyHabits(filteredHabits);
+
       setAllHabits(false);
     }
+  };
+  const handleDisplayHabitsAchieved = () => {
+    displayHabitsAchieved
+      ? setDisplayHabitsAchieved(false)
+      : setDisplayHabitsAchieved(true);
   };
 
   if (!authenticated) {
@@ -85,12 +93,19 @@ const Dashboard = () => {
             <FilterCategory handleFilter={handleFilter} page="dashboard" />
           </div>
           <div>
+            <Button onClickFunc={handleDisplayHabitsAchieved} whiteSchema>
+              {displayHabitsAchieved ? "Não Concluídos" : "Concluídos"}
+            </Button>
             <NewHabit />
           </div>
         </FiltersAndButtonsWrapper>
 
         <CardsList>
-          {habits.length > 0 && !allHabits ? (
+          {displayHabitsAchieved ? (
+            habitsAchieved.map((habit) => (
+              <HabitCard habit={habit} key={habit.id} />
+            ))
+          ) : habits.length > 0 && !allHabits ? (
             myHabits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
           ) : habits.length > 0 && allHabits ? (
             habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)

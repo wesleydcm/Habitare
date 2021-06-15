@@ -48,7 +48,7 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   useEffect(() => {
     const difficultyFormatted = difficultyFormat(habit.difficulty);
     const categoryFormatted = categoryFormat(habit.category);
-    console.log(difficultyFormatted);
+
     const habit_formatted = {
       ...habit,
       difficultyFormatted,
