@@ -13,6 +13,8 @@ import {
   UsersGroupCard,
   ActivitiesCard,
   ImageContainer,
+  MobileView,
+  DesktopView,
 } from "./styles";
 
 import ModalNewGoal from "../../components/ModalNewGoal";
@@ -53,42 +55,44 @@ const Group = () => {
 
   return (
     <GroupContainer>
-      <div>
-        <InfoCard category={group.category}>
-          <HeaderCard category={group.category}>
-            <h4>Descrição</h4>
-          </HeaderCard>
-          <div>
-            <p>{group.description}</p>
-          </div>
-        </InfoCard>
-        <GoalsCard category={group.category}>
-          <HeaderCard category={group.category}>
-            <h4>
-              <FaCheckDouble /> Metas
-            </h4>
-            {group.onGroup && <ModalNewGoal idGroup={id} />}
-          </HeaderCard>
-          <div>
-            {group.goals?.length === 0 ? (
-              <span>Nenhuma meta cadastrada!</span>
-            ) : (
-              <>
-                {group.goals?.map((goal) => {
-                  return (
-                    <ModalGoals
-                      goal={goal}
-                      key={goal.id}
-                      groupId={id}
-                      category={group.category}
-                    />
-                  );
-                })}
-              </>
-            )}
-          </div>
-        </GoalsCard>
-      </div>
+      <DesktopView>
+        <div>
+          <InfoCard category={group.category}>
+            <HeaderCard category={group.category}>
+              <h4>Descrição</h4>
+            </HeaderCard>
+            <div>
+              <p>{group.description}</p>
+            </div>
+          </InfoCard>
+          <GoalsCard category={group.category}>
+            <HeaderCard category={group.category}>
+              <h4>
+                <FaCheckDouble /> Metas
+              </h4>
+              {group.onGroup && <ModalNewGoal idGroup={id} />}
+            </HeaderCard>
+            <div>
+              {group.goals?.length === 0 ? (
+                <span>Nenhuma meta cadastrada!</span>
+              ) : (
+                <>
+                  {group.goals?.map((goal) => {
+                    return (
+                      <ModalGoals
+                        goal={goal}
+                        key={goal.id}
+                        groupId={id}
+                        category={group.category}
+                      />
+                    );
+                  })}
+                </>
+              )}
+            </div>
+          </GoalsCard>
+        </div>
+      </DesktopView>
       <div>
         <GroupTitleCard
           category={group.category}
@@ -116,6 +120,43 @@ const Group = () => {
             )}
           </ImageContainer>
         </GroupTitleCard>
+        <MobileView>
+          <InfoCard category={group.category}>
+            <HeaderCard category={group.category}>
+              <h4>Descrição</h4>
+            </HeaderCard>
+            <div>
+              <p>{group.description}</p>
+            </div>
+          </InfoCard>
+          <GoalsCard category={group.category}>
+            <HeaderCard category={group.category}>
+              <h4>
+                <FaCheckDouble /> Metas
+              </h4>
+              {group.onGroup && <ModalNewGoal idGroup={id} />}
+            </HeaderCard>
+            <div>
+              {group.goals?.length === 0 ? (
+                <span>Nenhuma meta cadastrada!</span>
+              ) : (
+                <>
+                  {group.goals?.map((goal) => {
+                    return (
+                      <ModalGoals
+                        goal={goal}
+                        key={goal.id}
+                        groupId={id}
+                        category={group.category}
+                      />
+                    );
+                  })}
+                </>
+              )}
+            </div>
+          </GoalsCard>
+        </MobileView>
+
         <UsersGroupCard category={group.category}>
           <HeaderCard category={group.category}>
             <h4>

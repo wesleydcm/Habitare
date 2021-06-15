@@ -15,6 +15,24 @@ const ModalGoals = ({ goal, groupId, category }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [deleteScreenActivity, setDeleteScreenActivity] = useState(false);
   const [difficulty, setDifficulty] = useState({});
+  const [achievedPercentage, setAchievedPercentage] = useState(
+    (parseInt(goal.how_much_achieved) / 120) * 100
+  );
+
+  const {updateGoal} = useGoal();
+
+  const handleCheckin = () => {
+    const addPoints = 120 / (parseInt(goal.difficulty) * 20);
+    const how_much_update = parseInt(goal.how_much_achieved) + addPoints;
+    const achieved = how_much_update === 120;
+    const how_much_achieved = how_much_update;
+    const data = { how_much_achieved, achieved };
+    how_much_update <= 120 && updateGoal(goal.id, data, groupId);
+
+    setAchievedPercentage((parseInt(goal.how_much_achieved) / 120) * 100);
+    setIsModalVisible(false);
+  };
+
 
   const {deleteGoal} = useGoal();
 
@@ -102,7 +120,7 @@ const ModalGoals = ({ goal, groupId, category }) => {
                   >
                     Excluir
                   </ButtonForm>
-                  <ButtonForm type="button">Check-in</ButtonForm>
+                  <ButtonForm type="button" onClick={handleCheckin}>Check-in</ButtonForm>
                 </>
               )}
             </ButtonWrap>

@@ -4,11 +4,11 @@ export const GroupContainer = styled.main`
   max-width: 100%;
   padding-top: 140px;
   padding-bottom: 32px;
-  /* padding-right: 12px;
-  padding-left: 12px; */
+  padding-right: 12px;
+  padding-left: 12px;
 
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  display: flex;
+  flex-direction: column-reverse;
   justify-content: center;
   grid-gap: 24px;
   position: relative;
@@ -22,6 +22,11 @@ export const GroupContainer = styled.main`
   > div {
     display: flex;
     flex-direction: column;
+  }
+
+  @media screen and (min-width: 980px) {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
   }
 `;
 
@@ -114,7 +119,6 @@ export const GoalsCard = styled(CardsContainer)`
   }
 `;
 
-
 export const GroupTitleCard = styled.section`
   background-color: ${(props) =>
     props.category === "spirit"
@@ -139,6 +143,8 @@ export const GroupTitleCard = styled.section`
   transform: translateY(-32px);
   position: relative;
   overflow: hidden;
+  width: 87%;
+
   h1 {
     font-size: 24px;
     font-weight: 700;
@@ -183,6 +189,10 @@ export const GroupTitleCard = styled.section`
 
     font-weight: 700;
     border-radius: 24px;
+  }
+
+  @media screen and (min-width: 720px) {
+    width: 100%;
   }
 `;
 
@@ -255,3 +265,21 @@ export const ActivitiesCard = styled(CardsContainer)`
   }
 `;
 
+export const MobileView = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (min-width: 980px) {
+    display: none !important;
+  }
+`;
+
+export const DesktopView = styled.div`
+  display: none !important;
+  align-items: center;
+
+  @media screen and (min-width: 980px) {
+    display: flex !important;
+  }
+`;

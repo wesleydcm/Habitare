@@ -12,7 +12,7 @@ export const GoalProvider = ({ children }) => {
   const [goals, setGoals] = useState([]);
   const [oneGoal, setOneGoal] = useState([]);
 
-  const {getSpecificGroup} = useGroupHabit()
+  const { getSpecificGroup } = useGroupHabit();
 
   const loadGoals = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
@@ -73,7 +73,7 @@ export const GoalProvider = ({ children }) => {
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
 
-        getSpecificGroup(data.group)
+        getSpecificGroup(data.group);
       })
       .catch((err) => {
         notification.open({
@@ -88,8 +88,6 @@ export const GoalProvider = ({ children }) => {
           icon: <FaFrown style={{ color: "var(--pink)" }} />,
         });
       });
-
-     
   };
 
   const updateGoal = (goalId, data, groupId) => {
@@ -110,18 +108,18 @@ export const GoalProvider = ({ children }) => {
         setGoals([...newGoals, updatedGoals]);
 
         notification.open({
-          message: "META ATUALIZADA",
+          message: "PARABÉNS POR ISSO",
           closeIcon: <FaTimes />,
           style: {
             fontFamily: "Raleway",
             backgroundColor: "var(--gray)",
             WebkitBorderRadius: 14,
           },
-          description: "Meta atualizada com sucesso!",
+          description:
+            "Esse é um grupo determinado em alcançar seus objetivos. Check-in realizado com sucesso!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
-        getSpecificGroup(groupId)
-
+        getSpecificGroup(groupId);
       })
       .catch((err) => {
         notification.open({
@@ -162,7 +160,7 @@ export const GoalProvider = ({ children }) => {
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
 
-        getSpecificGroup(groupId)
+        getSpecificGroup(groupId);
       })
       .catch((_) => {
         notification.open({
@@ -179,10 +177,17 @@ export const GoalProvider = ({ children }) => {
       });
   };
 
-
   return (
     <GoalContext.Provider
-      value={{ goals, oneGoal, loadGoals, getOneGoal, createGoal, updateGoal, deleteGoal }}
+      value={{
+        goals,
+        oneGoal,
+        loadGoals,
+        getOneGoal,
+        createGoal,
+        updateGoal,
+        deleteGoal,
+      }}
     >
       {children}
     </GoalContext.Provider>
