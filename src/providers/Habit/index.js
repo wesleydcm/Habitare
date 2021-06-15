@@ -84,7 +84,6 @@ export const HabitProvider = ({ children }) => {
 
   const updateHabit = (habitId, data) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
-    console.log(data);
     api
       .patch(`habits/${habitId}/`, data, {
         headers: {

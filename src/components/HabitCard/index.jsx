@@ -12,6 +12,7 @@ import {
 const HabitCard = ({ habit }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [habitFormatted, setHabitFormatted] = useState({});
+  const achievedPercentage = (parseInt(habit.how_much_achieved) / 120) * 100;
   const [paused, setPaused] = useState(true);
 
   const showModal = () => {
@@ -46,9 +47,7 @@ const HabitCard = ({ habit }) => {
             {habitFormatted.categoryFormatted?.title}
           </h3>
           <span>{habitFormatted.difficultyFormatted?.icons}</span>
-          <InfoHowMuchAchieved
-            howMuchAchieved={habitFormatted.how_much_achieved}
-          >
+          <InfoHowMuchAchieved howMuchAchieved={achievedPercentage}>
             <div></div>
           </InfoHowMuchAchieved>
         </HabitInfo>
