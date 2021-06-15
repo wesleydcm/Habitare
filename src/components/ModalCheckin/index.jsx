@@ -23,7 +23,7 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   const [achievedPercentage, setAchievedPercentage] = useState(
     (parseInt(habit.how_much_achieved) / 120) * 100
   );
-  IsMockHabitComplete(habit.title, achievedPercentage);
+  achievedPercentage === 100 && IsMockHabitComplete(habit.title);
   const handleCheckin = () => {
     const addPoints = 120 / (parseInt(habit.difficulty) * 20);
     const how_much_update = parseInt(habit.how_much_achieved) + addPoints;
