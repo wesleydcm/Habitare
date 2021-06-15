@@ -90,8 +90,13 @@ export const GroupHabitProvider = ({ children }) => {
   const updateGroupHabit = (groupId, data) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
+    const editGroup = {
+      ...data,
+      category: `@Habitare/${data.category}`,
+    };
+
     api
-      .patch(`groups/${groupId}/`, data, {
+      .patch(`groups/${groupId}/`, editGroup, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
