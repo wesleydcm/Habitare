@@ -4,10 +4,12 @@ import { UserContext } from "../../providers/User";
 import { DashboardContainer, ImageMainCard } from "../Dashboard/styles";
 import { MainCardAchievements, AchievementsContainer } from "./styles";
 import trophy from "../../assets/images/trophy.svg";
-import AchievementCard from "../../components/AchievementCard";
+import InsigniaCard from "../../components/InsigniaCard";
+import { AchievementContext } from "../../providers/Achievement";
 
 const Achievements = () => {
   const { authenticated } = useContext(UserContext);
+  const { achievements } = useContext(AchievementContext);
 
   if (!authenticated) {
     return <Redirect to="/login" />;
@@ -23,15 +25,17 @@ const Achievements = () => {
       </MainCardAchievements>
 
       <AchievementsContainer>
-        <AchievementCard />
-        <AchievementCard />
-        <AchievementCard />
-        <AchievementCard />
-        <AchievementCard />
-        <AchievementCard />
-        <AchievementCard />
-        <AchievementCard />
-        <AchievementCard />
+        {achievements.map((achievement) => {
+          console.log(achievement);
+          return (
+            <InsigniaCard
+              title={achievement.title}
+              description={achievement.description}
+              image={achievement.image}
+              achieved={achievement.achieved}
+            ></InsigniaCard>
+          );
+        })}
       </AchievementsContainer>
     </DashboardContainer>
   );

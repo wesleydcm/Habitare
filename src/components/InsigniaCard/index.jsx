@@ -1,13 +1,9 @@
 import { Container, Image, Elipse, Title, Description, Info } from "./styles";
-
 const InsigniaCard = ({ achieved = false, image, description, title }) => {
   return (
     <Container achieved={achieved}>
       {achieved ? (
-        <Image
-          src={`../assets/images/insignias/${image}`}
-          alt="achievement-img"
-        ></Image>
+        <Image src={image} alt="achievement-img"></Image>
       ) : (
         <Elipse></Elipse>
       )}

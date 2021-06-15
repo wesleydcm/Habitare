@@ -1,3 +1,32 @@
+import Morpheus from "../assets/images/insignias/morpheus.svg";
+import FSociety from "../assets/images/insignias/fsociety-mask.svg";
+import Ticket from "../assets/images/insignias/ticket.png";
+import Yoda from "../assets/images/insignias/yoda.svg";
+import Virtue from "../assets/images/insignias/virtue.png";
+import Stress from "../assets/images/insignias/stress.png";
+import Neo from "../assets/images/insignias/neo.svg";
+import Peace from "../assets/images/insignias/peace-symbol.png";
+import Brain from "../assets/images/insignias/brain.png";
+import Freedy from "../assets/images/insignias/freddy-krueger.svg";
+import Dreaming from "../assets/images/insignias/dreaming-in-bed.png";
+import NoMobile from "../assets/images/insignias/no-mobile.png";
+import Egg from "../assets/images/insignias/egg.png";
+import Chicken from "../assets/images/insignias/chicken.png";
+import MoneyBox from "../assets/images/insignias/money-box.png";
+import MilkCarton from "../assets/images/insignias/milk-carton.png";
+import MoneyStack from "../assets/images/insignias/stack-of-money.png";
+import Home from "../assets/images/insignias/home.svg";
+import HomeAnimated from "../assets/images/insignias/home.gif";
+import Groot from "../assets/images/insignias/groot.svg";
+import Irrigation from "../assets/images/insignias/irrigation.png";
+import Broom from "../assets/images/insignias/broom.png";
+import Homer from "../assets/images/insignias/homer-simpson.svg";
+import LightSaber from "../assets/images/insignias/lightsaber.svg";
+import BookReading from "../assets/images/insignias/book-reading.png";
+import CookieMonster from "../assets/images/insignias/cookie-monster.svg";
+import WeCanDoIt from "../assets/images/insignias/we-can-do-it.png";
+import Muscle from "../assets/images/insignias/muscle.png";
+
 const initialAchievements = [
   {
     id: "1",
@@ -7,7 +36,7 @@ const initialAchievements = [
     description: "Conta criada",
     achieved: false,
     secret: false,
-    image: "morpheus.svg",
+    image: Morpheus,
   },
   {
     id: "2",
@@ -16,7 +45,7 @@ const initialAchievements = [
     description: "Acesse o DevTools de seu navegador.",
     achieved: false,
     secret: true,
-    image: "fsociety-mask.svg",
+    image: FSociety,
   },
   {
     id: "3",
@@ -25,7 +54,7 @@ const initialAchievements = [
     description: "Dê seu primeiro check-in",
     achieved: false,
     secret: false,
-    image: "ticket.png",
+    image: Ticket,
   },
   {
     id: "4",
@@ -34,7 +63,7 @@ const initialAchievements = [
     description: "Complete um hábito de cada categoria",
     achieved: false,
     secret: false,
-    image: "yoda.svg",
+    image: Yoda,
   },
   {
     id: "5",
@@ -43,7 +72,7 @@ const initialAchievements = [
     description: "Completou seu primeiro hábito",
     achieved: false,
     secret: false,
-    image: "virtue.png",
+    image: Virtue,
   },
   {
     id: "6",
@@ -53,7 +82,7 @@ const initialAchievements = [
     description: "Excluiu um hábito.",
     achieved: false,
     secret: true,
-    image: "stress.png",
+    image: Stress,
   },
   {
     id: "7",
@@ -62,7 +91,7 @@ const initialAchievements = [
     description: "Completou um hábito de Corpo e mente saudáveis.",
     achieved: false,
     secret: false,
-    image: "neo.svg",
+    image: Neo,
   },
   {
     id: "8",
@@ -71,7 +100,7 @@ const initialAchievements = [
     description: "Completou Praticar a gratidão",
     achieved: false,
     secret: true,
-    image: "peace-symbol.png",
+    image: Peace,
   },
   {
     id: "9",
@@ -80,7 +109,7 @@ const initialAchievements = [
     description: "Iniciou um hábito de Corpo e mente saudáveis.",
     achieved: false,
     secret: false,
-    image: "brain.png",
+    image: Brain,
   },
   {
     id: "10",
@@ -89,7 +118,7 @@ const initialAchievements = [
     description: "Iniciou um hábito de Boa noite.",
     achieved: false,
     secret: false,
-    image: "freedy-krueger.svg",
+    image: Freedy,
   },
   {
     id: "11",
@@ -98,7 +127,7 @@ const initialAchievements = [
     description: "Completou um hábito de Boa noite.",
     achieved: false,
     secret: false,
-    image: "dreaming-in-bed.png",
+    image: Dreaming,
   },
   {
     id: "12",
@@ -107,7 +136,7 @@ const initialAchievements = [
     description: "Completou Desconecte-se do celular.",
     achieved: false,
     secret: true,
-    image: "no-mobile.png",
+    image: NoMobile,
   },
   {
     id: "13",
@@ -116,7 +145,7 @@ const initialAchievements = [
     description: "Criou um hábito de Me poupe.",
     achieved: false,
     secret: false,
-    image: "egg.png",
+    image: Egg,
   },
   {
     id: "14",
@@ -125,7 +154,7 @@ const initialAchievements = [
     description: "Completou um hábito de Me poupe",
     achieved: false,
     secret: false,
-    image: "chicken.png",
+    image: Chicken,
   },
   {
     id: "15",
@@ -134,7 +163,7 @@ const initialAchievements = [
     description: "Completou Planejar gastos",
     achieved: false,
     secret: true,
-    image: "money-box.png",
+    image: MoneyBox,
   },
   {
     id: "16",
@@ -144,7 +173,7 @@ const initialAchievements = [
     description: "Completou Monitorar gastos",
     achieved: false,
     secret: true,
-    image: "milk-carton.png",
+    image: MilkCarton,
   },
   {
     id: "17",
@@ -153,7 +182,7 @@ const initialAchievements = [
     description: "Completou 5 hábitos de Me poupe.",
     achieved: false,
     secret: true,
-    image: "stack-of-money.png",
+    image: MoneyStack,
   },
   {
     id: "18",
@@ -162,7 +191,7 @@ const initialAchievements = [
     description: "Criou um hábito Lar doce lar",
     achieved: false,
     secret: false,
-    image: "home.svg",
+    image: Home,
   },
   {
     id: "19",
@@ -171,7 +200,7 @@ const initialAchievements = [
     description: "Completou um hábito Lar doce lar.",
     achieved: false,
     secret: false,
-    image: "home.gif",
+    image: HomeAnimated,
   },
   {
     id: "20",
@@ -180,7 +209,7 @@ const initialAchievements = [
     description: "Criou o hábito Regar as plantas",
     achieved: false,
     secret: true,
-    image: "groot.svg",
+    image: Groot,
   },
   {
     id: "21",
@@ -189,7 +218,7 @@ const initialAchievements = [
     description: "Completou o hábito Regar as plantas.",
     achieved: false,
     secret: true,
-    image: "irrigation.png",
+    image: Irrigation,
   },
   {
     id: "22",
@@ -198,7 +227,7 @@ const initialAchievements = [
     description: "Completou o hábito Varrer o chão",
     achieved: false,
     secret: true,
-    image: "broom.png",
+    image: Broom,
   },
   {
     id: "23",
@@ -207,7 +236,7 @@ const initialAchievements = [
     description: "Iniciou um hábito de Foco, Força e Fé",
     achieved: false,
     secret: false,
-    image: "homer-simpson.svg",
+    image: Homer,
   },
   {
     id: "24",
@@ -216,7 +245,7 @@ const initialAchievements = [
     description: "Completou um hábito de Foco, Força e Fé",
     achieved: false,
     secret: false,
-    image: "lightsaber.svg",
+    image: LightSaber,
   },
   {
     id: "25",
@@ -225,7 +254,7 @@ const initialAchievements = [
     description: "Completou Ler um capítulo de um livro",
     achieved: false,
     secret: true,
-    image: "book-reading.png",
+    image: BookReading,
   },
   {
     id: "26",
@@ -234,7 +263,7 @@ const initialAchievements = [
     description: "Iniciou um hábito de Ficando em forma",
     achieved: false,
     secret: false,
-    image: "cookie-monster.svg",
+    image: CookieMonster,
   },
   {
     id: "27",
@@ -243,7 +272,7 @@ const initialAchievements = [
     description: "Completou um hábito Ficando em forma.",
     achieved: false,
     secret: false,
-    image: "we-can-do-it.png",
+    image: WeCanDoIt,
   },
   {
     id: "28",
@@ -252,7 +281,7 @@ const initialAchievements = [
     description: "Primeiro check-in em Ficando em forma",
     achieved: false,
     secret: true,
-    image: "muscle.png",
+    image: Muscle,
   },
 ];
 

@@ -11,6 +11,7 @@ export const HabitProvider = ({ children }) => {
   const [habitsAchieved, setHabitsAchieved] = useState([]);
 
   const loadHabits = () => {
+    setHabits([]);
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("habits/personal/", {
@@ -83,7 +84,6 @@ export const HabitProvider = ({ children }) => {
 
   const updateHabit = (habitId, data) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
-    console.log(data);
 
     api
       .patch(`habits/${habitId}/`, data, {
