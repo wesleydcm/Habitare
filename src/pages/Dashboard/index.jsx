@@ -16,7 +16,7 @@ import {
 import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../providers/User";
-import InsigniaCard from "../../components/InsigniaCard";
+/* import InsigniaCard from "../../components/InsigniaCard"; */
 
 const Dashboard = () => {
   const { authenticated, user } = useContext(UserContext);
@@ -72,7 +72,6 @@ const Dashboard = () => {
   }
   return (
     <>
-      {/* <Aside /> */}
       <DashboardContainer>
         <MainCard>
           <h1>Olá, {user.username}!</h1>

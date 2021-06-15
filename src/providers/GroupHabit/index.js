@@ -5,7 +5,7 @@ import api from "../../services/api";
 import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
 import { categoryFormat } from "../../utils/format";
-import { useUser } from "../User";
+import { useHistory } from "react-router-dom";
 
 export const GroupContext = createContext([]);
 
@@ -13,6 +13,8 @@ export const GroupHabitProvider = ({ children }) => {
   const [groupHabits, setGroupHabits] = useState([]);
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
   const [specificGroup, setSpecificGroup] = useState({});
+
+  const history = useHistory()
 
   const getGlobalGroupsHabits = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
@@ -89,7 +91,7 @@ export const GroupHabitProvider = ({ children }) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
     api
-      .patch(`habits/${groupId}/`, data, {
+      .patch(`groups/${groupId}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -100,6 +102,32 @@ export const GroupHabitProvider = ({ children }) => {
         });
         const updatedGroupHabit = response.data;
         setGroupHabits([...newGroupHabit, updatedGroupHabit]);
+
+        notification.open({
+          message: "GRUPO ATUALIZADO",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Grupo atualizado com sucesso!",
+          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+        })
+        getSpecificGroup(groupId)
+      })
+      .catch((err) => {
+        notification.open({
+          message: "ERRO AO ATUALIZAR GRUPO",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Por favor verificar sua conexão e tente novamente",
+          icon: <FaFrown style={{ color: "var(--pink)" }} />,
+        });
       });
   };
 
@@ -150,10 +178,51 @@ export const GroupHabitProvider = ({ children }) => {
           description: "Você acaba de entrar em um novo grupo!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
+
+        getSpecificGroup(groupId);
       })
       .catch((err) => {
         notification.open({
           message: "ERRO AO ENTRAR NO GRUPO",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Por favor verificar sua conexão e tente novamente",
+          icon: <FaFrown style={{ color: "var(--pink)" }} />,
+        });
+      });
+  };
+
+  const unsubscribeGroupHabit = (groupId) => {
+    const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
+
+    api
+      .delete(`groups/${groupId}/unsubscribe/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        notification.open({
+          message: "VOCÊ SAIU",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Abandonou o barco. Espero que encontre a galera certa para você. =(",
+          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+        });
+
+        getSpecificGroup(groupId);
+      })
+      .catch((err) => {
+        notification.open({
+          message: "ERRO AO SAIR DO GRUPO",
           closeIcon: <FaTimes />,
           style: {
             fontFamily: "Raleway",
@@ -207,6 +276,45 @@ export const GroupHabitProvider = ({ children }) => {
       });
   };
 
+  const deleteGroup = (groupId) => {
+    const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
+
+    api
+      .delete(`groups/${groupId}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        notification.open({
+          message: "VOCÊ EXCLUIU UM GRUPO!",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Foi uma decisão consciente? esperamos que sim =)",
+          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+        });
+
+        history.push("/groups")
+      })
+      .catch((_) => {
+        notification.open({
+          message: "ERRO AO DELETAR GRUPO",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Por favor verificar sua conexão e tente novamente",
+          icon: <FaFrown style={{ color: "var(--pink)" }} />,
+        });
+      });
+  };
+
   return (
     <GroupContext.Provider
       value={{
@@ -219,7 +327,9 @@ export const GroupHabitProvider = ({ children }) => {
         getGlobalGroupsHabits,
         subscribeGroupHabit,
         getSpecificGroup,
+        deleteGroup,
         setSpecificGroup,
+        unsubscribeGroupHabit
       }}
     >
       {children}

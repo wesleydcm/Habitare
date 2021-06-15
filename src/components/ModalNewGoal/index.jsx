@@ -61,10 +61,7 @@ const FormNewGoal = ({ closeModal, idGroup }) => {
       return;
     }
 
-    console.log(data);
-
-    const submit = await createGoal({ ...data, group: idGroup });
-
+    await createGoal({ ...data, group: idGroup });
     closeModal();
   };
 

@@ -5,33 +5,50 @@ export const Container = styled.div`
     !!props.achieved ? "var(--purple)" : "var(--light-purple)"};
 
   width: 100%;
-  border-radius: 18px;
-  height: 80px;
 
+  height: 110px;
+  margin: 10px 0;
+  border-radius: 24px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 6%;
+  padding: 15px 10px;
+  min-width: 280px;
 
-  @media (min-width: 800px) {
-    border-radius: 26px;
-    height: 102px;
+  @media screen and (min-width: 530px) {
+    max-width: 49%;
+    /* margin: 10px 5px; */
+  }
+
+  @media screen and (min-width: 720px) {
+    max-width: 100%;
+  }
+
+  @media screen and (min-width: 860px) {
+    max-width: 31%;
   }
 `;
 
-export const Description = styled.span`
+export const Description = styled.p`
+  text-align: center;
   font-size: 16px;
   opacity: 0.7;
   color: #dfdfdf;
+  width: 200px;
 `;
 
 export const Title = styled.h4`
-  font-size: 20px;
+  font-size: 18px;
+  margin-bottom: 0.3rem;
   color: ${(props) => (!!props.achieved ? "var(--white)" : "#dfdfdf")};
+  max-width: 200px;
+  width: 100%;
 `;
 
 export const Image = styled.img`
+  min-width: 50px;
   width: 50px;
+
   @media (min-width: 800px) {
     width: 60px;
   }
@@ -40,12 +57,16 @@ export const Image = styled.img`
 export const Elipse = styled.div`
   border-radius: 50%;
   border: 4px dashed #dfdfdf;
-  width: 50px;
-  height: 50px;
+  min-width: 60px;
+  width: 60px;
+  height: 60px;
+  min-height: 60px;
 `;
 
 export const Info = styled.div`
   text-align: center;
-  margin-top: 1rem;
   align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

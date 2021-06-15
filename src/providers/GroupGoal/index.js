@@ -110,7 +110,7 @@ export const GoalProvider = ({ children }) => {
         setGoals([...newGoals, updatedGoals]);
 
         notification.open({
-          message: "ATUALIZADO",
+          message: "META ATUALIZADA",
           closeIcon: <FaTimes />,
           style: {
             fontFamily: "Raleway",
@@ -138,9 +138,51 @@ export const GoalProvider = ({ children }) => {
       });
   };
 
+  const deleteGoal = (goalId, groupId) => {
+    const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
+
+    api
+      .delete(`goals/${goalId}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setOneGoal(response.data);
+
+        notification.open({
+          message: "VOCÊ ABANDONOU UMA META",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Foi uma decisão consciente? esperamos que sim =)",
+          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+        });
+
+        getSpecificGroup(groupId)
+      })
+      .catch((_) => {
+        notification.open({
+          message: "ERRO AO DELETAR META",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Raleway",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 14,
+          },
+          description: "Por favor verificar sua conexão e tente novamente",
+          icon: <FaFrown style={{ color: "var(--pink)" }} />,
+        });
+      });
+  };
+
+
   return (
     <GoalContext.Provider
-      value={{ goals, oneGoal, loadGoals, getOneGoal, createGoal, updateGoal }}
+      value={{ goals, oneGoal, loadGoals, getOneGoal, createGoal, updateGoal, deleteGoal }}
     >
       {children}
     </GoalContext.Provider>

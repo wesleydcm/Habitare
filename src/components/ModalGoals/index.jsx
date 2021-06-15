@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { notification } from "antd";
 import { difficultyFormat } from "../../utils/format";
 import {
   ButtonForm,
@@ -10,11 +9,14 @@ import {
   InfoModal,
 } from "./styles";
 import { FaTimes, FaTrashAlt } from "react-icons/fa";
+import { useGoal } from "../../providers/GroupGoal";
 
 const ModalGoals = ({ goal, groupId, category }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [deleteScreenActivity, setDeleteScreenActivity] = useState(false);
   const [difficulty, setDifficulty] = useState({});
+
+  const {deleteGoal} = useGoal();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -22,10 +24,12 @@ const ModalGoals = ({ goal, groupId, category }) => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    setDeleteScreenActivity(false);
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setDeleteScreenActivity(false);
   };
 
   useEffect(() => {
@@ -34,6 +38,11 @@ const ModalGoals = ({ goal, groupId, category }) => {
 
     // eslint-disable-next-line
   }, []);
+
+  const submitDelete = () => {
+    deleteGoal(goal.id, groupId)
+    showModal()
+  }
 
   return (
     <>
@@ -80,7 +89,7 @@ const ModalGoals = ({ goal, groupId, category }) => {
                   >
                     Voltar
                   </ButtonForm>
-                  <ButtonForm type="button" delete>
+                  <ButtonForm type="button" delete onClick={submitDelete}>
                     Confirmar <FaTrashAlt />
                   </ButtonForm>
                 </>

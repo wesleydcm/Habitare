@@ -4,7 +4,6 @@ import { FaUsers, FaCheckDouble, FaTasks } from "react-icons/fa";
 
 import { useParams } from "react-router-dom";
 import { useGroupHabit } from "../../providers/GroupHabit";
-import { difficultyFormat } from "../../utils/format";
 import {
   GroupContainer,
   InfoCard,
@@ -13,16 +12,14 @@ import {
   GoalsCard,
   UsersGroupCard,
   ActivitiesCard,
-  Activity,
   ImageContainer,
-  Goal,
-  InfoHowMuchAchieved,
 } from "./styles";
 
 import ModalNewGoal from "../../components/ModalNewGoal";
 import ModalNewActivity from "../../components/ModalNewActivity";
 import ModalActivity from "../../components/ModalActivity";
 import ModalGoals from "../../components/ModalGoals";
+import ModalGroup from "../../components/ModalGroup";
 
 const Group = () => {
   const [paused, setPaused] = useState(true);
@@ -32,6 +29,7 @@ const Group = () => {
     specificGroup: group,
     setSpecificGroup,
     subscribeGroupHabit,
+    unsubscribeGroupHabit,
   } = useGroupHabit();
 
   let { id } = useParams();
@@ -47,6 +45,10 @@ const Group = () => {
 
   const handleSubcription = () => {
     subscribeGroupHabit(id);
+  };
+
+  const handleUnsubcription = () => {
+    unsubscribeGroupHabit(id);
   };
 
   return (
@@ -88,16 +90,20 @@ const Group = () => {
         </GoalsCard>
       </div>
       <div>
-        <GroupTitleCard category={group.category}>
+        <GroupTitleCard
+          category={group.category}
+          onMouseEnter={() => setPaused(false)}
+          onMouseLeave={() => setPaused(true)}
+        >
           <h1>{group.name}</h1>
           <h2>
             {group.categoryFormatted?.icon}
             {group.categoryFormatted?.title}
           </h2>
           {group.creator ? (
-            <button>Editar</button>
+            <ModalGroup group={group} />
           ) : group.onGroup ? (
-            <button>Sair</button>
+            <button onClick={handleUnsubcription}>Sair</button>
           ) : (
             <button onClick={handleSubcription}>Se inscrever</button>
           )}
