@@ -1,6 +1,6 @@
 import { Button } from "antd";
-import { useContext, useEffect, useState } from "react";
-import { HabitContext } from "../../providers/Habit";
+import { useEffect, useState } from "react";
+import { useHabit } from "../../providers/Habit";
 import {
   BarContainer,
   BarFill,
@@ -16,7 +16,7 @@ import { categoryFormat, difficultyFormat } from "../../utils/format";
 import Lottie from "react-lottie";
 
 const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
-  const { updateHabit } = useContext(HabitContext);
+  const { deleteHabit, updateHabit } = useHabit();
   const [habitFormatted, setHabitFormatted] = useState({});
   const [achieved, setAchieved] = useState(false);
   const [paused, setPaused] = useState(true);
@@ -33,6 +33,11 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
     const how_much_achieved = how_much_update;
     const data = { how_much_achieved, achieved };
     how_much_update <= 120 && updateHabit(habit.id, data);
+
+    setIsModalVisible(false);
+  };
+  const handleDeleteHabit = () => {
+    deleteHabit(habit.id);
     setIsModalVisible(false);
   };
 
@@ -65,6 +70,9 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
       onMouseEnter={() => setPaused(false)}
       onMouseLeave={() => setPaused(true)}
       footer={[
+        <Button onClick={handleDeleteHabit} type="submit">
+          Abandonar Hábito
+        </Button>,
         <Button onClick={handleCheckin} type="submit">
           CHECK-IN
         </Button>,
