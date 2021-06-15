@@ -60,13 +60,23 @@ export const AchievementsContainer = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
-  margin: 20px;
+  margin: auto;
   @media screen and (min-width: 510px) {
     flex-flow: row wrap;
     justify-content: space-between;
   }
+  @media screen and (min-width: 615px) {
+    width: 600px;
+  }
+  @media screen and (min-width: 720px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 925px) {
+    width: 600px;
+  }
 
-  @media screen and (min-width: 1600px) {
+  @media screen and (min-width: 1200px) {
+    width: 100%;
     grid-template-columns: repeat(3, 1fr);
   }
 `;
