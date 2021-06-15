@@ -31,11 +31,10 @@ export const CardContainer = styled.div`
 `;
 
 export const GroupInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap-reverse;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
   position: relative;
   z-index: 350;
@@ -44,12 +43,12 @@ export const GroupInfo = styled.div`
     font-weight: 700;
     font-size: 22px;
     color: var(--white);
-    text-align: center;
+    text-align: right;
     margin-bottom: 4px;
   }
 
   h3 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 20px;
     color: var(--white);
     text-align: center;
@@ -64,35 +63,22 @@ export const GroupInfo = styled.div`
       margin-right: 6px;
     }
   }
-
-
 
   @media screen and (min-width: 540px) {
     h2 {
-    font-weight: 700;
-    font-size: 24px;
-    color: var(--white);
-    text-align: right;
-    margin-bottom: 4px;
-    margin-left: 10%;
-  }
+      font-size: 24px;
+      margin-right: 10%;
+    }
 
-  h3 {
-    font-weight: 400;
-    font-size: 20px;
-    color: var(--white);
-    text-align: right;
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
-
-    svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--white);
-      margin-right: 6px;
+    h3 {
+      margin-left: 20%;
     }
   }
+
+  @media screen and (min-width: 1080px) {
+    h3 {
+      margin-left: 40%;
+    }
   }
 `;
 
@@ -104,11 +90,11 @@ export const ImageContainer = styled.div`
   z-index: 300;
   transform: ${(props) =>
     props.category === "fit"
-      ? "scaleX(-1) translateX(-20px)"
+      ? "scaleX(-1) translateX(10px)"
       : props.category === "spirit"
-      ? "translate(-30px, 5px)"
+      ? "translate(-10px, 1-5px) scale(1.1)"
       : props.category === "focus"
-      ? "translate(-17px, -1px) scale(.9)"
+      ? "translate(10px, -1px) scale(1)"
       : props.category === "house"
       ? "translate(-10px, 0px)"
       : props.category === "money"
@@ -124,6 +110,5 @@ export const ImageContainer = styled.div`
 
   @media screen and (min-width: 940px) {
     opacity: 0.3;
-
   }
 `;

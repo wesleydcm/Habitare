@@ -71,6 +71,8 @@ export const GroupHabitProvider = ({ children }) => {
           description: "Novo grupo criado com sucesso!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
+
+        getGlobalGroupsHabits()
       })
       .catch((err) => {
         notification.open({
@@ -255,6 +257,13 @@ export const GroupHabitProvider = ({ children }) => {
 
         const category = group.category.replace("@Habitare/", "");
         const categoryFormatted = categoryFormat(category);
+        
+        const activities = group.activities.sort((a, b) => {
+          const timeA = new Date(a.realization_time).getTime();
+          const timeB = new Date(b.realization_time).getTime();
+
+          return timeB - timeA
+        })
 
         let creator = false;
         let onGroup = false;
@@ -271,6 +280,7 @@ export const GroupHabitProvider = ({ children }) => {
 
         const output = {
           ...group,
+          activities,
           category,
           categoryFormatted,
           creator,
