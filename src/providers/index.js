@@ -1,4 +1,4 @@
-import { AchievementContext } from "./Achievement";
+import { AchievementProvider } from "./Achievement";
 import { ActivitiesProvider } from "./GroupActivities";
 import { GoalProvider } from "./GroupGoal";
 import { GroupHabitProvider } from "./GroupHabit";
@@ -8,13 +8,15 @@ import { UserProvider } from "./User";
 const Providers = ({ children }) => {
   return (
     <UserProvider>
-      <GroupHabitProvider>
-        <GoalProvider>
-          <ActivitiesProvider>
-            <HabitProvider>{children}</HabitProvider>
-          </ActivitiesProvider>
-        </GoalProvider>
-      </GroupHabitProvider>
+      <AchievementProvider>
+        <GroupHabitProvider>
+          <GoalProvider>
+            <ActivitiesProvider>
+              <HabitProvider>{children}</HabitProvider>
+            </ActivitiesProvider>
+          </GoalProvider>
+        </GroupHabitProvider>
+      </AchievementProvider>
     </UserProvider>
   );
 };
