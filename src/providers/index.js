@@ -11,9 +11,7 @@ const Providers = ({ children }) => {
       <GroupHabitProvider>
         <GoalProvider>
           <ActivitiesProvider>
-            <HabitProvider>
-              <AchievementContext>{children}</AchievementContext>
-            </HabitProvider>
+            <HabitProvider>{children}</HabitProvider>
           </ActivitiesProvider>
         </GoalProvider>
       </GroupHabitProvider>
