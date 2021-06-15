@@ -18,22 +18,20 @@ import Lottie from "react-lottie";
 const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   const { deleteHabit, updateHabit } = useHabit();
   const [habitFormatted, setHabitFormatted] = useState({});
-  const [achieved, setAchieved] = useState(false);
   const [paused, setPaused] = useState(true);
   const [achievedPercentage, setAchievedPercentage] = useState(
     (parseInt(habit.how_much_achieved) / 120) * 100
   );
 
   const handleCheckin = () => {
-    const how_much_update =
-      parseFloat(habit.how_much_achieved) +
-      120 / (parseInt(habit.difficulty) * 20);
-    parseFloat(how_much_update) >= 60 && setAchieved(true);
-    setAchievedPercentage((parseInt(habit.how_much_achieved) / 120) * 100);
+    const addPoints = 120 / (parseInt(habit.difficulty) * 20);
+    const how_much_update = parseInt(habit.how_much_achieved) + addPoints;
+    const achieved = how_much_update === 120;
     const how_much_achieved = how_much_update;
     const data = { how_much_achieved, achieved };
     how_much_update <= 120 && updateHabit(habit.id, data);
 
+    setAchievedPercentage((parseInt(habit.how_much_achieved) / 120) * 100);
     setIsModalVisible(false);
   };
   const handleDeleteHabit = () => {
@@ -48,7 +46,7 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   useEffect(() => {
     const difficultyFormatted = difficultyFormat(habit.difficulty);
     const categoryFormatted = categoryFormat(habit.category);
-    console.log(difficultyFormatted);
+
     const habit_formatted = {
       ...habit,
       difficultyFormatted,

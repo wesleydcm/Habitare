@@ -8,6 +8,7 @@ export const HabitContext = createContext([]);
 
 export const HabitProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
+  const [habitsAchieved, setHabitsAchieved] = useState([]);
 
   const loadHabits = () => {
     setHabits([]);
@@ -19,7 +20,15 @@ export const HabitProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        setHabits(response.data);
+        const filterHabitsAchieved = response.data.filter(
+          (habits) => habits.achieved === true
+        );
+        const filterHabitsNotAchieved = response.data.filter(
+          (habits) => habits.achieved === false
+        );
+
+        setHabitsAchieved(filterHabitsAchieved);
+        setHabits(filterHabitsNotAchieved);
       });
   };
 
@@ -75,7 +84,6 @@ export const HabitProvider = ({ children }) => {
 
   const updateHabit = (habitId, data) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
-
     api
       .patch(`habits/${habitId}/`, data, {
         headers: {
@@ -156,7 +164,14 @@ export const HabitProvider = ({ children }) => {
 
   return (
     <HabitContext.Provider
-      value={{ habits, loadHabits, createHabit, updateHabit, deleteHabit }}
+      value={{
+        habits,
+        habitsAchieved,
+        loadHabits,
+        createHabit,
+        updateHabit,
+        deleteHabit,
+      }}
     >
       {children}
     </HabitContext.Provider>

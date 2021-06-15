@@ -17,28 +17,32 @@ export const AchievementProvider = ({ children }) => {
     const updateAchiviement = achievements.filter((achievement) => {
       return achievement.id === achievementId;
     });
-    const data = {
-      id: updateAchiviement[0].id,
-      title: updateAchiviement[0].title,
-      notification: updateAchiviement[0].notification,
-      description: updateAchiviement[0].description,
-      achieved: true,
-      secret: false,
-      image: updateAchiviement[0].image,
-    };
-    setAchievements([...newAchievements, data]);
-    localStorage.setItem("@Habitare:Achievements", achievements);
-    notification.open({
-      message: "Insígnia desbloqueada!",
-      closeIcon: <FaTimes />,
-      style: {
-        fontFamily: "Raleway",
-        backgroundColor: "var(--gray)",
-        WebkitBorderRadius: 14,
-      },
-      description: data.notification,
-      icon: `../../assets/images/insignias/${data.icon}`,
-    });
+    if (!updateAchiviement.achieved) {
+      const data = {
+        id: updateAchiviement[0].id,
+        title: updateAchiviement[0].title,
+        notification: updateAchiviement[0].notification,
+        description: updateAchiviement[0].description,
+        achieved: true,
+        secret: false,
+        image: updateAchiviement[0].image,
+      };
+      setAchievements([...newAchievements, data]);
+      localStorage.setItem(
+        "@Habitare:Achievements",
+        JSON.stringify(achievements)
+      );
+      notification.open({
+        message: "Insígnia desbloqueada!",
+        closeIcon: <FaTimes />,
+        style: {
+          fontFamily: "Raleway",
+          backgroundColor: "var(--yellow)",
+          WebkitBorderRadius: 14,
+        },
+        description: data.notification,
+      });
+    }
   };
 
   return (
