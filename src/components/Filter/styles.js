@@ -66,7 +66,7 @@ export const IconContainer = styled.div`
   align-items: center;
   display: flex;
   height: 30px;
-  width: 30px;
+  width: 26px;
   cursor: pointer;
   outline: none;
   overflow: visible;
@@ -108,5 +108,9 @@ export const IconContainer = styled.div`
           ? "var(--colorNight)"
           : "var(--white)"};
     }
+  }
+
+  @media screen and (min-width: 300px) {
+    width: 30px;
   }
 `;
