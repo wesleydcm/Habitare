@@ -15,8 +15,8 @@ export const Container = styled.div`
   padding: 15px 10px;
   min-width: 280px;
 
-  @media screen and (min-width: 530px) {
-    max-width: 49%;
+  @media screen and (min-width: 600px) {
+    max-width: 35%;
     /* margin: 10px 5px; */
   }
 
@@ -24,7 +24,7 @@ export const Container = styled.div`
     max-width: 100%;
   }
 
-  @media screen and (min-width: 860px) {
+  @media screen and (min-width: 900px) {
     max-width: 31%;
   }
 `;
