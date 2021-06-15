@@ -28,17 +28,17 @@ export const AchievementProvider = ({ children }) => {
     };
     setAchievements([...newAchievements, data]);
     localStorage.setItem("@Habitare:Achievements", achievements);
-    notification.open({
-      message: "Insígnia desbloqueada!",
-      closeIcon: <FaTimes />,
-      style: {
-        fontFamily: "Raleway",
-        backgroundColor: "var(--gray)",
-        WebkitBorderRadius: 14,
-      },
-      description: data.notification,
-      icon: `../../assets/images/insignias/${data.icon}`,
-    });
+    // notification.open({
+    //   message: "Insígnia desbloqueada!",
+    //   closeIcon: <FaTimes />,
+    //   style: {
+    //     fontFamily: "Raleway",
+    //     backgroundColor: "var(--gray)",
+    //     WebkitBorderRadius: 14,
+    //   },
+    //   description: data.notification,
+    //   icon: `../../assets/images/insignias/${data.icon}`,
+    // });
   };
 
   return (

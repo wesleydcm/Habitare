@@ -46,20 +46,20 @@ const Groups = () => {
             onClickFunc={() => history.push("/groups")}
             whiteSchema={pathname === "/groups" ? true : false}
           >
-            Meus grupos
+            Seus grupos
           </Button>
           <Button
             onClickFunc={() => history.push("/groups/search")}
             whiteSchema={pathname === "/groups/search" ? true : false}
           >
-            Buscar grupos
+            Descobrir
           </Button>
           <NewGroup />
         </ButtonsWrapper>
       </FiltersAndButtonsWrapper>
       {pathname === "/groups" ? (
         <>
-          <h2>Meus grupos</h2>
+          <h2>Seus grupos</h2>
           {groupHabits.length === 0 ? (
             <h3>
               Você está perdendo a oportunidade de compartilhar metas com
