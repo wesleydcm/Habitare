@@ -24,7 +24,7 @@ export const CardContainer = styled.div`
   padding: 12px 8px;
   overflow: hidden;
   cursor: pointer;
-  
+
   &:hover .lottie {
     opacity: 0.4;
   }

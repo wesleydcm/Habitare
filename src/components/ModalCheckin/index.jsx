@@ -14,6 +14,7 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { categoryFormat, difficultyFormat } from "../../utils/format";
 import Lottie from "react-lottie";
+import { IsMockHabitComplete } from "../../utils/habitsAchievements";
 
 const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   const { deleteHabit, updateHabit } = useHabit();
@@ -22,7 +23,7 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   const [achievedPercentage, setAchievedPercentage] = useState(
     (parseInt(habit.how_much_achieved) / 120) * 100
   );
-
+  IsMockHabitComplete(habit.title, achievedPercentage);
   const handleCheckin = () => {
     const addPoints = 120 / (parseInt(habit.difficulty) * 20);
     const how_much_update = parseInt(habit.how_much_achieved) + addPoints;
@@ -31,7 +32,7 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
     const data = { how_much_achieved, achieved };
     how_much_update <= 120 && updateHabit(habit.id, data);
 
-    setAchievedPercentage((parseInt(habit.how_much_achieved) / 120) * 100);
+    setAchievedPercentage((parseInt(how_much_achieved) / 120) * 100);
     setIsModalVisible(false);
   };
   const handleDeleteHabit = () => {
