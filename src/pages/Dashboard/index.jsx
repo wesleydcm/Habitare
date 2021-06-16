@@ -54,11 +54,11 @@ const Dashboard = () => {
       localStorage.getItem(`@Habitare:dashboardLastCategory`)
     );
 
-    lastCategory === "displayAll"
+    lastCategory === "displayAll" || lastCategory === null
       ? setMyHabits(habits)
       : setMyHabits(habits.filter((habit) => habit.category === lastCategory));
 
-    lastCategory === "displayAll"
+    lastCategory === "displayAll" || lastCategory === null
       ? setMyHabitsCompleted(habitsAchieved)
       : setMyHabitsCompleted(
           habitsAchieved.filter((habit) => habit.category === lastCategory)
