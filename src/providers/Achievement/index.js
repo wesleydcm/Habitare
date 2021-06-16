@@ -30,6 +30,10 @@ export const AchievementProvider = ({ children }) => {
           image: updateAchiviement[0].image,
         };
         InitialState = [...newAchievements, data];
+        localStorage.setItem(
+          "@Habitare:Achievements",
+          JSON.stringify([...newAchievements, data])
+        );
         notification.open({
           message: "Insígnia desbloqueada!",
           closeIcon: <FaTimes />,
@@ -44,10 +48,6 @@ export const AchievementProvider = ({ children }) => {
       }
     });
     setAchievements(InitialState);
-    localStorage.setItem(
-      "@Habitare:Achievements",
-      JSON.stringify(InitialState)
-    );
   };
 
   return (

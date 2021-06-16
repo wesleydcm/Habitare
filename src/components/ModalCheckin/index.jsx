@@ -46,27 +46,29 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   );
   const [deleteScreenActivity, setDeleteScreenActivity] = useState(false);
   const handleCheckin = () => {
-    const arrayAchievements = ["3"];
+    let arrayAchievements = ["3"];
     const addPoints = 120 / (parseInt(habit.difficulty) * 20);
     const how_much_update = parseInt(habit.how_much_achieved) + addPoints;
     const achieved = how_much_update === 120;
     const how_much_achieved = how_much_update;
     const data = { how_much_achieved, achieved };
     how_much_update <= 120 && updateHabit(habit.id, data);
-    how_much_update === 120 && isAchievementComplete(habit.title);
-
     habit.category === "fit" && arrayAchievements.push("28");
-    completeAchievement(arrayAchievements);
+
+    how_much_update === 120
+      ? isAchievementComplete(arrayAchievements)
+      : completeAchievement(arrayAchievements);
     setAchievedPercentage((parseInt(how_much_achieved) / 120) * 100);
     setIsModalVisible(false);
   };
 
-  const isAchievementComplete = () => {
-    const arrayAchievements = ["5"];
+  const isAchievementComplete = (arrayAchievements) => {
+    arrayAchievements.push("5");
     const habitExist = mockHabits[habit.title];
     const categoyExist = categoriesAchievements[habit.category];
     !!habitExist && arrayAchievements.push(habitExist);
     !!categoyExist && arrayAchievements.push(categoyExist);
+    console.log(arrayAchievements);
     completeAchievement(arrayAchievements);
   };
 
