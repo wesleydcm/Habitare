@@ -8,7 +8,7 @@ export const HomeContainer = styled.main`
   justify-content: center;
   position: relative;
 
-  overflow-x: hidden;
+  overflow: hidden;
 `;
 
 export const FirstSection = styled.section`
@@ -25,7 +25,7 @@ export const PresentationWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  height: calc(100vh - 90px);
+  height: calc(98vh - 90px);
   min-height: 300px;
   padding: 0 12px;
 
@@ -140,8 +140,8 @@ export const SVGHomeTop = styled.div`
 
 export const SVGHomeBottom = styled.div`
   position: absolute;
-  bottom: -20px;
-  left: -200px;
+  bottom: 0px;
+  left: 0px;
   right: 0;
   width: 100%;
 
@@ -152,21 +152,24 @@ export const SVGHomeBottom = styled.div`
     object-fit: fill;
   }
 
-  @media screen and (min-width: 350px) {
-    bottom: -6px;
+  .custom-shape-divider-bottom-1623850126 {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
   }
 
-  @media screen and (min-width: 520px) {
-    bottom: -50px;
+  .custom-shape-divider-bottom-1623850126 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 75px;
   }
 
-  @media screen and (min-width: 520px) and (min-height: 700px) {
-    bottom: -10px;
-  }
-
-  @media screen and (min-width: 780px) {
-    bottom: -55px;
-    left: -50px;
+  .custom-shape-divider-bottom-1623850126 .shape-fill {
+    fill: #c45fd3;
   }
 `;
 
@@ -186,7 +189,7 @@ export const HowItWorksWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   min-height: calc(85vh - 90px);
-  padding: 0 18px;
+  padding: 42px 18px 12px;
 
   width: 95vw;
   max-width: 1280px;
@@ -277,7 +280,7 @@ export const ThirtySection = styled.section`
 
 export const CategoryContainer = styled.div`
   width: 100%;
-  min-height: 80vh;
+  min-height: 75vh;
   background-color: ${(props) => props.categoryColor};
   display: flex;
   align-items: center;
@@ -289,7 +292,7 @@ export const CategoryContent = styled.div`
   max-width: 1280px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 32px 0;
 
   div.infos-category {
@@ -299,6 +302,7 @@ export const CategoryContent = styled.div`
     h1 {
       display: flex;
       align-items: center;
+
       color: var(--white);
       font-weight: 800;
       font-size: 36px;
@@ -312,15 +316,19 @@ export const CategoryContent = styled.div`
     p {
       color: var(--white);
       font-weight: 400;
-      font-size: 24px;
-      line-height: 34px;
+      font-size: 22px;
+      line-height: 32px;
     }
   }
 
   div.image-category {
     display: none;
-    width: 50% !important;
-
+    width: ${(props) =>
+      props.category === "night"
+        ? "40% !important"
+        : props.category === "focus" || props.category === "fit"
+        ? "45% !important"
+        : "50% !important"};
   }
 
   @media screen and (min-width: 760px) {
@@ -330,6 +338,256 @@ export const CategoryContent = styled.div`
 
     div.image-category {
       display: flex;
+    }
+  }
+`;
+
+export const SVGBottomCategory = styled.div`
+  position: absolute;
+  bottom: 1px;
+  left: 0px;
+  right: 0;
+  width: 100%;
+
+  .custom-shape-divider-top-1623850440 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .custom-shape-divider-top-1623850440 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 104px;
+  }
+
+  .custom-shape-divider-top-1623850440 .shape-fill {
+    fill: #6c5fd3;
+  }
+`;
+
+export const FourthSection = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
+
+export const DifficultyWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 42px 18px 12px;
+  position: relative;
+  width: 95vw;
+  max-width: 1280px;
+
+  h1 {
+    font-size: 34px;
+    font-weight: 800;
+    width: 95vw;
+    max-width: 700px;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 18px;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    justify-content: space-around;
+    min-height: 35vh;
+    width: 100%;
+
+    div.image {
+      position: relative;
+      width: 60%;
+      min-height: 230px;
+    }
+
+    div.content {
+      margin: 18px;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        text-align: center;
+        margin-bottom: 18px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 780px) {
+    h1 {
+      font-size: 38px;
+    }
+
+    > div {
+      flex-direction: row;
+
+      div.content {
+        width: 40%;
+      }
+
+      div.image {
+        min-height: 300px;
+      }
+    }
+
+    div {
+      p {
+        font-size: 24px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1080px) {
+    > div {
+      height: 58vh;
+      min-height: 500px;
+    }
+  }
+`;
+
+export const SVGDifficultyWrapṕer = styled.div`
+  position: absolute;
+  bottom: -15px;
+  left: 5px;
+  width: 100%;
+  min-width: 350px;
+  max-width: 454px;
+
+  @media screen and (min-width: 1080px) {
+    max-width: 724px;
+  }
+`;
+
+export const FifthSection = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: var(--pink);
+  border-top: 4px solid black;
+`;
+
+export const WhoDoesWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - 90px);
+  padding: 42px 18px 12px;
+  position: relative;
+  width: 95vw;
+  max-width: 1280px;
+
+  h1 {
+    font-size: 34px;
+    font-weight: 800;
+    width: 95vw;
+    max-width: 600px;
+    text-align: center;
+    margin: 24px 0;
+    color: var(--white);
+  }
+
+  p {
+    font-size: 22px;
+    color: var(--white);
+    max-width: 900px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  @media screen and (min-width: 780px) {
+    h1 {
+      font-size: 38px;
+    }
+  }
+`;
+
+export const WhoDoesCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 32px 0 24px;
+
+  @media screen and (min-width: 540px) {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 920px) {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 52px 0 24px;
+  }
+`;
+
+export const WhoDoesCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    filter: grayscale(100) brightness(1.2) opacity(0.8);
+    transition: all 300ms;
+  }
+
+  &:hover img {
+    filter: grayscale(0) brightness(1.2) opacity(0.8);
+  }
+
+  > div:first-child {
+    width: 143px;
+    height: 143px;
+    border: 5px solid var(--purple);
+    border-radius: 50%;
+  }
+
+  h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gray);
+    margin: 8px 0;
+  }
+
+  > div div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 32px;
+
+    a {
+      color: var(--black);
+      transition: all 350ms;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
 `;

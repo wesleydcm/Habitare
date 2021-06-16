@@ -1,4 +1,5 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+
 import { Redirect, useHistory, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 import FilterCategory from "../../components/Filter";
@@ -20,10 +21,23 @@ const Groups = () => {
     loadGroupHabits,
     getGlobalGroupsHabits,
     globalGroupHabits,
+    render,
+    setRender,
+    id,
   } = useGroupHabit();
 
   const { pathname } = useLocation();
   const history = useHistory();
+
+  const [myGroups, setMyGroups] = useState(groupHabits);
+
+  const lastCategory = JSON.parse(
+    localStorage.getItem(`@Habitare:groupsLastCategory`)
+  );
+
+  const [allGroups, setAllGroups] = useState(
+    lastCategory === "displayAll" || lastCategory === null ? true : false
+  );
 
   useEffect(() => {
     if (pathname === "/groups") {
@@ -34,13 +48,51 @@ const Groups = () => {
     // eslint-disable-next-line
   }, [pathname]);
 
+  useEffect(() => {
+    if (render) {
+      loadGroupHabits();
+      getGlobalGroupsHabits();
+      setRender(!render);
+      history.push(`/groups/${id}`);
+    }
+    // eslint-disable-next-line
+  }, [render]);
+
+  useEffect(() => {
+    const lastCategory = JSON.parse(
+      localStorage.getItem(`@Habitare:groupsLastCategory`)
+    );
+
+    lastCategory === "displayAll"
+      ? setMyGroups(groupHabits)
+      : setMyGroups(
+          groupHabits.filter((habit) => habit.category === lastCategory)
+        );
+  }, [groupHabits]);
+
+  const handleFilter = (category) => {
+    if (category === "displayAll") {
+      setMyGroups(groupHabits);
+      setAllGroups(true);
+    } else {
+      const filteredHabits = groupHabits.filter(
+        (group) => group.category === category
+      );
+      setMyGroups(filteredHabits);
+      setAllGroups(false);
+    }
+  };
+
   if (!authenticated) {
     return <Redirect to="/login" />;
   }
   return (
     <GroupsContainer>
       <FiltersAndButtonsWrapper>
-        <FilterCategory></FilterCategory>
+        <FilterCategory
+          handleFilter={handleFilter}
+          page="groups"
+        ></FilterCategory>
         <ButtonsWrapper>
           <Button
             onClickFunc={() => history.push("/groups")}
@@ -69,9 +121,13 @@ const Groups = () => {
             </h3>
           ) : (
             <GroupsList>
-              {groupHabits.map((group) => {
-                return <GroupCard group={group} key={group.id} />;
-              })}
+              {allGroups
+                ? groupHabits.map((group) => {
+                    return <GroupCard group={group} key={group.id} />;
+                  })
+                : myGroups.map((group) => {
+                    return <GroupCard group={group} key={group.id} />;
+                  })}
             </GroupsList>
           )}
         </>

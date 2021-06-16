@@ -15,6 +15,8 @@ export const GroupHabitProvider = ({ children }) => {
   const [specificGroup, setSpecificGroup] = useState({});
 
   const history = useHistory();
+  const [render, setRender] = useState(false);
+  const [id, setId] = useState(false);
 
   const getGlobalGroupsHabits = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
@@ -58,8 +60,9 @@ export const GroupHabitProvider = ({ children }) => {
       })
       .then((response) => {
         const group = response.data;
+        setId(response.data.id);
         setGroupHabits([...groupHabits, group]);
-        console.log(response);
+
         notification.open({
           message: "PARABÉNS",
           closeIcon: <FaTimes />,
@@ -71,6 +74,7 @@ export const GroupHabitProvider = ({ children }) => {
           description: "Novo grupo criado com sucesso!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
+        setRender(!render);
       })
       .catch((err) => {
         notification.open({
@@ -90,8 +94,13 @@ export const GroupHabitProvider = ({ children }) => {
   const updateGroupHabit = (groupId, data) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
+    const editGroup = {
+      ...data,
+      category: `@Habitare/${data.category}`,
+    };
+
     api
-      .patch(`groups/${groupId}/`, data, {
+      .patch(`groups/${groupId}/`, editGroup, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -256,6 +265,13 @@ export const GroupHabitProvider = ({ children }) => {
         const category = group.category.replace("@Habitare/", "");
         const categoryFormatted = categoryFormat(category);
 
+        const activities = group.activities.sort((a, b) => {
+          const timeA = new Date(a.realization_time).getTime();
+          const timeB = new Date(b.realization_time).getTime();
+
+          return timeB - timeA;
+        });
+
         let creator = false;
         let onGroup = false;
 
@@ -271,6 +287,7 @@ export const GroupHabitProvider = ({ children }) => {
 
         const output = {
           ...group,
+          activities,
           category,
           categoryFormatted,
           creator,
@@ -300,12 +317,13 @@ export const GroupHabitProvider = ({ children }) => {
             WebkitBorderRadius: 14,
           },
           description: "Foi uma decisão consciente? esperamos que sim =)",
-          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+          icon: <FaFrown style={{ color: "var(--pink)" }} />,
         });
 
         history.push("/groups");
       })
-      .catch((_) => {
+      .catch((err) => {
+        console.log("erro", err);
         notification.open({
           message: "ERRO AO DELETAR GRUPO",
           closeIcon: <FaTimes />,
@@ -335,6 +353,9 @@ export const GroupHabitProvider = ({ children }) => {
         deleteGroup,
         setSpecificGroup,
         unsubscribeGroupHabit,
+        render,
+        setRender,
+        id,
       }}
     >
       {children}

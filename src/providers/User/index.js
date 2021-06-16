@@ -17,8 +17,27 @@ export const UserProvider = ({ children }) => {
     const userId = jwt_decode(userToken).user_id;
 
     api.get(`users/${userId}/`).then((response) => {
-      setUser(response.data);
-      localStorage.setItem(`@Habitare:User`, JSON.stringify(response.data));
+
+      let userLogged = response.data
+
+      if(localStorage.getItem(`Habitare:User${userId}`) === undefined) {
+
+        userLogged = {
+          ...userLogged,
+          avatar: 0
+        }
+
+        localStorage.setItem(`@Habitare:User${userId}`, JSON.stringify(userLogged));
+        localStorage.setItem(`@Habitare:User`, JSON.stringify(userLogged));
+      } else {
+
+        userLogged = JSON.parse(localStorage.getItem(`@Habitare:User${userLogged.id}`))
+
+      }
+      
+      localStorage.setItem(`@Habitare:User`, JSON.stringify(userLogged));
+      setUser(userLogged);
+
     });
     setAuthenticated(true);
   };
@@ -28,15 +47,32 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem(`@Habitare:dashboardLastCategory`);
     localStorage.removeItem(`@Habitare:achievementsLastCategory`);
     localStorage.removeItem(`@Habitare:groupsLastCategory`);
-    setUser([]);
     localStorage.removeItem(`@Habitare:User`);
+
+    setUser([]);
     setUser({});
     setAuthenticated(false);
   };
 
+  const setAvatarUser = (key) => {
+    const avatar = key
+    const newAvatar = {
+      ...user,
+      avatar
+    }
+    
+
+    localStorage.setItem(`@Habitare:User${user.id}`, JSON.stringify(newAvatar))
+    localStorage.setItem(`@Habitare:User`, JSON.stringify(newAvatar))
+
+    setUser({
+      ...newAvatar
+    })
+  }
+ 
   return (
     <UserContext.Provider
-      value={{ user, authenticated, userLogin, userLogoff }}
+      value={{ user, authenticated, userLogin, userLogoff, setAvatarUser }}
     >
       {children}
     </UserContext.Provider>

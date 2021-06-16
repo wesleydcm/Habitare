@@ -11,7 +11,6 @@ export const HabitProvider = ({ children }) => {
   const [habitsAchieved, setHabitsAchieved] = useState([]);
 
   const loadHabits = () => {
-    setHabits([]);
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("habits/personal/", {
@@ -27,8 +26,16 @@ export const HabitProvider = ({ children }) => {
           (habits) => habits.achieved === false
         );
 
-        setHabitsAchieved(filterHabitsAchieved);
-        setHabits(filterHabitsNotAchieved);
+        setHabitsAchieved(
+          filterHabitsAchieved.sort((a, b) => {
+            return a.id - b.id;
+          })
+        );
+        setHabits(
+          filterHabitsNotAchieved.sort((a, b) => {
+            return a.id - b.id;
+          })
+        );
       });
   };
 
@@ -97,13 +104,15 @@ export const HabitProvider = ({ children }) => {
         const updatedHabit = response.data;
         newHabits = [...newHabits, updatedHabit];
 
+        response.data.achieved && loadHabits();
+
         setHabits(
           newHabits.sort((a, b) => {
             return a.id - b.id;
           })
         );
         notification.open({
-          message: "PARABÉNS POR ISSO",
+          message: "PARABÉNS",
           closeIcon: <FaTimes />,
           style: {
             fontFamily: "Raleway",
