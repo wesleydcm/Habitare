@@ -1,19 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Header from "./components/Header";
 import Routes from "./routes";
 import { GlobalStyles } from "./styles/global";
-import {UserContext} from './providers/User'
+import { UserContext } from "./providers/User";
 import Aside from "./components/Aside";
 
 function App() {
-  const {authenticated} = useContext(UserContext);
-  
+  const { authenticated } = useContext(UserContext);
   return (
     <>
       <Header />
-      {
-        authenticated && <Aside />
-      }
+      {authenticated && <Aside />}
       <Routes />
       <GlobalStyles />
     </>
