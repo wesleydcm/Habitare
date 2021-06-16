@@ -22,13 +22,6 @@ import emptyStar from "../../assets/svg/emptyStar.svg";
 import selectedStar from "../../assets/svg/selectedStar.svg";
 import { useGoal } from "../../providers/GroupGoal";
 
-// const FormNewGoal = ({ closeModal, idGroup }) => {
-
-//   return (
-
-//   );
-// };
-
 const ModalNewGoal = ({ idGroup }) => {
   const schema = yup.object().shape({
     title: yup.string().required("Todos os campos são obrigatórios"),
