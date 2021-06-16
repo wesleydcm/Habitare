@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+
 import { Redirect, useHistory, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 import FilterCategory from "../../components/Filter";
@@ -20,6 +21,9 @@ const Groups = () => {
     loadGroupHabits,
     getGlobalGroupsHabits,
     globalGroupHabits,
+    render,
+    setRender,
+    id,
   } = useGroupHabit();
 
   const { pathname } = useLocation();
@@ -33,6 +37,16 @@ const Groups = () => {
     }
     // eslint-disable-next-line
   }, [pathname]);
+
+  useEffect(() => {
+    if (render) {
+      loadGroupHabits();
+      getGlobalGroupsHabits();
+      setRender(!render);
+      history.push(`/groups/${id}`);
+    }
+    // eslint-disable-next-line
+  }, [render]);
 
   if (!authenticated) {
     return <Redirect to="/login" />;

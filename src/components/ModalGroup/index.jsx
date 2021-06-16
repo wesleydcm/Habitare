@@ -19,6 +19,7 @@ import {
   RadioButton,
   TextAreaModal,
 } from "./styles";
+import { useHistory } from "react-router";
 
 const ModalGroup = ({ group }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -61,6 +62,8 @@ const ModalGroup = ({ group }) => {
 
   const { updateGroupHabit, deleteGroup } = useGroupHabit();
 
+  const history = useHistory();
+
   const submitForm = async (data) => {
     if (errors.title) {
       notification.open({
@@ -86,6 +89,7 @@ const ModalGroup = ({ group }) => {
   const submitDelete = async () => {
     await deleteGroup(group.id);
     handleOk();
+    history.push("/groups");
   };
 
   return (

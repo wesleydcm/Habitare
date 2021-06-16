@@ -5,7 +5,6 @@ import api from "../../services/api";
 import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
 import { categoryFormat } from "../../utils/format";
-import { useHistory } from "react-router-dom";
 
 export const GroupContext = createContext([]);
 
@@ -13,8 +12,8 @@ export const GroupHabitProvider = ({ children }) => {
   const [groupHabits, setGroupHabits] = useState([]);
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
   const [specificGroup, setSpecificGroup] = useState({});
-
-  const history = useHistory()
+  const [render, setRender] = useState(false);
+  const [id, setId] = useState(false);
 
   const getGlobalGroupsHabits = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
@@ -58,8 +57,9 @@ export const GroupHabitProvider = ({ children }) => {
       })
       .then((response) => {
         const group = response.data;
+        setId(response.data.id);
         setGroupHabits([...groupHabits, group]);
-        console.log(response);
+
         notification.open({
           message: "PARABÉNS",
           closeIcon: <FaTimes />,
@@ -71,8 +71,7 @@ export const GroupHabitProvider = ({ children }) => {
           description: "Novo grupo criado com sucesso!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
-
-        getGlobalGroupsHabits()
+        setRender(!render);
       })
       .catch((err) => {
         notification.open({
@@ -120,8 +119,8 @@ export const GroupHabitProvider = ({ children }) => {
           },
           description: "Grupo atualizado com sucesso!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
-        })
-        getSpecificGroup(groupId)
+        });
+        getSpecificGroup(groupId);
       })
       .catch((err) => {
         notification.open({
@@ -168,11 +167,15 @@ export const GroupHabitProvider = ({ children }) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
     api
-      .post(`groups/${groupId}/subscribe/`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        `groups/${groupId}/subscribe/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         notification.open({
           message: "PARABÉNS",
@@ -221,7 +224,8 @@ export const GroupHabitProvider = ({ children }) => {
             backgroundColor: "var(--gray)",
             WebkitBorderRadius: 14,
           },
-          description: "Abandonou o barco. Espero que encontre a galera certa para você. =(",
+          description:
+            "Abandonou o barco. Espero que encontre a galera certa para você. =(",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
 
@@ -257,13 +261,13 @@ export const GroupHabitProvider = ({ children }) => {
 
         const category = group.category.replace("@Habitare/", "");
         const categoryFormatted = categoryFormat(category);
-        
+
         const activities = group.activities.sort((a, b) => {
           const timeA = new Date(a.realization_time).getTime();
           const timeB = new Date(b.realization_time).getTime();
 
-          return timeB - timeA
-        })
+          return timeB - timeA;
+        });
 
         let creator = false;
         let onGroup = false;
@@ -312,10 +316,9 @@ export const GroupHabitProvider = ({ children }) => {
           description: "Foi uma decisão consciente? esperamos que sim =)",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
-
-        history.push("/groups")
       })
-      .catch((_) => {
+      .catch((err) => {
+        console.log("erro", err);
         notification.open({
           message: "ERRO AO DELETAR GRUPO",
           closeIcon: <FaTimes />,
@@ -344,7 +347,10 @@ export const GroupHabitProvider = ({ children }) => {
         getSpecificGroup,
         deleteGroup,
         setSpecificGroup,
-        unsubscribeGroupHabit
+        unsubscribeGroupHabit,
+        render,
+        setRender,
+        id,
       }}
     >
       {children}

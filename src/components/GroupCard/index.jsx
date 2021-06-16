@@ -7,22 +7,26 @@ import { categoryFormat } from "../../utils/format";
 import { CardContainer, GroupInfo, ImageContainer } from "./styles";
 
 const GroupCard = ({ group }) => {
-  const {user: {id}} = useUser();
+  const {
+    user: { id },
+  } = useUser();
 
   const [groupFormatted, setGroupFormatted] = useState({});
   const [paused, setPaused] = useState(true);
 
   useEffect(() => {
     const categoryFormatted = categoryFormat(group.category);
-    let onGroup = false
-    group.users_on_group.forEach(user => {
+    let onGroup = false;
+    group.users_on_group.forEach((user) => {
       if (user.id === id) {
-        onGroup = true }})
+        onGroup = true;
+      }
+    });
 
     const group_formatted = {
       ...group,
       categoryFormatted,
-      onGroup
+      onGroup,
     };
 
     setGroupFormatted(group_formatted);
@@ -32,8 +36,8 @@ const GroupCard = ({ group }) => {
   const history = useHistory();
 
   const openGroup = (id) => {
-    history.push(`/groups/${id}`)
-  }
+    history.push(`/groups/${id}`);
+  };
 
   return (
     <CardContainer
@@ -48,8 +52,6 @@ const GroupCard = ({ group }) => {
           {groupFormatted.categoryFormatted?.title}
         </h3>
         <h2>{groupFormatted.name}</h2>
-
-
       </GroupInfo>
       <ImageContainer category={groupFormatted.category} className="lottie">
         {groupFormatted.categoryFormatted && (
