@@ -15,6 +15,8 @@ import { FaTimes } from "react-icons/fa";
 import { categoryFormat, difficultyFormat } from "../../utils/format";
 import Lottie from "react-lottie";
 import { IsMockHabitComplete } from "../../utils/habitsAchievements";
+import { ButtonWrap, ButtonForm } from "../ModalGroup/styles";
+import { FaTrashAlt } from "react-icons/fa";
 
 const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   const { deleteHabit, updateHabit } = useHabit();
@@ -23,6 +25,7 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   const [achievedPercentage, setAchievedPercentage] = useState(
     (parseInt(habit.how_much_achieved) / 120) * 100
   );
+  const [deleteScreenActivity, setDeleteScreenActivity] = useState(false);
   achievedPercentage === 100 && IsMockHabitComplete(habit.title);
   const handleCheckin = () => {
     const addPoints = 120 / (parseInt(habit.difficulty) * 20);
@@ -41,7 +44,16 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   };
 
   const handleCancel = () => {
+    setDeleteScreenActivity(false);
+  };
+
+  const handleCloseModal = () => {
     setIsModalVisible(false);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(true);
+    setDeleteScreenActivity(true);
   };
 
   useEffect(() => {
@@ -63,18 +75,70 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
       visible={isModalVisible}
       width={500}
       title={habitFormatted.title}
-      onCancel={handleCancel}
+      onCancel={handleCloseModal}
       closeIcon={<FaTimes />}
       category={habitFormatted.category}
       onMouseEnter={() => setPaused(false)}
       onMouseLeave={() => setPaused(true)}
       footer={[
-        <Button onClick={handleDeleteHabit} type="submit">
-          Abandonar Hábito
-        </Button>,
-        <Button onClick={handleCheckin} type="submit">
-          CHECK-IN
-        </Button>,
+        <ButtonWrap>
+          {deleteScreenActivity ? (
+            <>
+              <ButtonForm
+                onClick={handleCancel}
+                type="submit"
+                style={{
+                  fontSize: 15,
+                  position: "relative",
+                  zIndex: "2000",
+                  minWidth: 110,
+                }}
+              >
+                VOLTAR
+              </ButtonForm>
+              <ButtonForm
+                delete
+                onClick={() => handleDeleteHabit(true)}
+                type="submit"
+                style={{
+                  fontSize: 15,
+                  position: "relative",
+                  zIndex: "2000",
+                  minWidth: 120,
+                }}
+              >
+                Confirmar <FaTrashAlt />
+              </ButtonForm>
+            </>
+          ) : (
+            <>
+              <ButtonForm
+                style={{
+                  fontSize: 15,
+                  position: "relative",
+                  zIndex: "2000",
+                  minWidth: 130,
+                }}
+                onClick={() => handleOk(true)}
+                delete
+              >
+                Deletar Hábito
+              </ButtonForm>
+              <ButtonForm
+                type="submit"
+                onClick={handleCheckin}
+                style={{
+                  fontSize: 15,
+                  position: "relative",
+                  zIndex: "2000",
+                  minWidth: 90,
+                }}
+              >
+                CHECK-IN
+              </ButtonForm>
+            </>
+          )}
+        </ButtonWrap>,
       ]}
     >
       <BarContainer>
