@@ -49,10 +49,12 @@ const FormNewHabit = ({ habit, closeModal }) => {
   const { completeAchievement } = useContext(AchievementContext);
 
   const isCreatedHabitAchievement = (data) => {
+    let achievementArray = [];
     const categoryExist = categoriesAchievements[data.category];
     const isEspecific = especificAchievements[data.title];
-    !!categoryExist && completeAchievement(categoryExist);
-    !!isEspecific && completeAchievement(isEspecific);
+    !!categoryExist && achievementArray.push(categoryExist);
+    !!isEspecific && achievementArray.push(isEspecific);
+    achievementArray.length && completeAchievement(achievementArray);
   };
 
   const handleSelectChange = (event) => {
@@ -103,7 +105,7 @@ const FormNewHabit = ({ habit, closeModal }) => {
     }
 
     await createHabit(data);
-    await isCreatedHabitAchievement(data);
+    isCreatedHabitAchievement(data);
     closeModal();
   };
 
