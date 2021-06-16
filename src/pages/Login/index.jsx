@@ -34,12 +34,11 @@ function Login() {
   const history = useHistory();
 
   const onSubmitFunction = (data) => {
-    const { username } = data;
     api
       .post("sessions/", data)
       .then((response) => {
         const { access } = response.data;
-        userLogin(access, { username });
+        userLogin(access);
         completeAchievement(["1"]);
         return history.push("/dashboard");
       })
