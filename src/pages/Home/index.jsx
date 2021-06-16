@@ -510,7 +510,7 @@ const Home = () => {
           <WhoDoesCards>
             <WhoDoesCard>
               <div>
-                <img src={BrunoImage} alt="" />
+                <img src={BrunoImage} alt="Foto de Bruno Belarmino" />
               </div>
               <div>
                 <h4>Bruno Belarmino</h4>
@@ -529,7 +529,7 @@ const Home = () => {
             </WhoDoesCard>
             <WhoDoesCard>
               <div>
-                <img src={GuilhermeImage} alt="" />
+                <img src={GuilhermeImage} alt="Foto de Guilherme Lemes" />
               </div>
               <div>
                 <h4>Guilherme Lemes</h4>
@@ -548,7 +548,7 @@ const Home = () => {
             </WhoDoesCard>
             <WhoDoesCard>
               <div>
-                <img src={LeomarImage} alt="" />
+                <img src={LeomarImage} alt="Foto de Leomar Romanzini" />
               </div>
               <div>
                 <h4>Leomar Romanzini</h4>
@@ -567,18 +567,18 @@ const Home = () => {
             </WhoDoesCard>
             <WhoDoesCard>
               <div>
-                <img src={WesleyImage} alt="" />
+                <img src={WesleyImage} alt="Wesley da Costa" />
               </div>
               <div>
-                <h4>Wesley Costa</h4>
+                <h4>Wesley da Costa</h4>
                 <div>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/wesley-da-costa-matos-731243b2/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedinIn />
                   </a>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/wesleydcm" target="_blank" rel="noopener noreferrer">
                     <FaGithub />
                   </a>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://gitlab.com/wesleydcm" target="_blank" rel="noopener noreferrer">
                     <FaGitlab />
                   </a>
                 </div>
