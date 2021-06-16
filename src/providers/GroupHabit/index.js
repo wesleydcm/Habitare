@@ -5,6 +5,7 @@ import api from "../../services/api";
 import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
 import { categoryFormat } from "../../utils/format";
+import { useHistory } from "react-router-dom";
 
 export const GroupContext = createContext([]);
 
@@ -12,6 +13,8 @@ export const GroupHabitProvider = ({ children }) => {
   const [groupHabits, setGroupHabits] = useState([]);
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
   const [specificGroup, setSpecificGroup] = useState({});
+
+  const history = useHistory();
   const [render, setRender] = useState(false);
   const [id, setId] = useState(false);
 
@@ -292,7 +295,7 @@ export const GroupHabitProvider = ({ children }) => {
         };
 
         setSpecificGroup(output);
-      });
+      })
   };
 
   const deleteGroup = (groupId) => {
@@ -316,6 +319,8 @@ export const GroupHabitProvider = ({ children }) => {
           description: "Foi uma decisão consciente? esperamos que sim =)",
           icon: <FaFrown style={{ color: "var(--pink)" }} />,
         });
+
+        history.push("/groups");
       })
       .catch((err) => {
         console.log("erro", err);

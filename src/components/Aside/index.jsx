@@ -10,17 +10,37 @@ import {
   ProfileWrapper,
 } from "./styles";
 
-import AvatarNotFound from "../../assets/images/avatar.svg";
 import Button from "../Button";
 import { UserContext } from "../../providers/User";
 
+import Avatar1 from "../../assets/images/avatar/avatar1.png";
+import Avatar2 from "../../assets/images/avatar/avatar2.png";
+import Avatar3 from "../../assets/images/avatar/avatar3.png";
+import Avatar4 from "../../assets/images/avatar/avatar4.png";
+import Avatar5 from "../../assets/images/avatar/avatar5.png";
+import Avatar6 from "../../assets/images/avatar/avatar6.png";
+import Avatar7 from "../../assets/images/avatar/avatar7.png";
+import Avatar8 from "../../assets/images/avatar/avatar8.png";
+
+const AVATARS = [
+  Avatar1,
+  Avatar2,
+  Avatar3,
+  Avatar4,
+  Avatar5,
+  Avatar6,
+  Avatar7,
+  Avatar8,
+];
+
 const Aside = () => {
-  const {userLogoff, user} = useContext(UserContext);
+  const { userLogoff, user, setAvatarUser } = useContext(UserContext);
   const history = useHistory();
   const { pathname } = useLocation();
 
   const [topIndicator, setTopIndicator] = useState(0);
   const [leftIndicator, setLeftIndicator] = useState(0);
+  const [avatar, setAvatar] = useState({path: AVATARS[user.avatar], position: user.avatar});
 
   const indicator = useRef(null);
   const navLinks = useRef([]);
@@ -38,21 +58,40 @@ const Aside = () => {
 
   useEffect(() => {
     getDimensions();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  useEffect(() => {
+    setAvatar({path: AVATARS[user.avatar], position: user.avatar})
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+  
   window.onresize = () => {
     getDimensions();
   };
 
   const logOff = () => {
-    userLogoff()
-    history.push("/")
+    userLogoff();
+    history.push("/");
+  };
+
+  const handleAvatar = () => {
+
+    let nextAvatar
+    avatar.position < 7 ? nextAvatar = avatar.position + 1 : nextAvatar = 0;
+    
+    setAvatar({ path: AVATARS[nextAvatar], position: nextAvatar })
+    setAvatarUser(nextAvatar)
   };
 
   return (
     <AsideContainer>
-      <ProfileWrapper>
-        <img src={AvatarNotFound} alt="Avatar não encontrado" />
+      <ProfileWrapper avatar={avatar.path}>
+        {/* <img src={AvatarNotFound} alt="Avatar não encontrado" />*/}
+
+        <div className="avatar" onClick={handleAvatar}></div>
         <h2>{user.username}</h2>
         <LevelInfo>
           <FaTrophy />
@@ -61,7 +100,9 @@ const Aside = () => {
       </ProfileWrapper>
       <div>
         <ButtonLogoffWrapper>
-          <Button whiteSchema onClickFunc={logOff}>Sair</Button>
+          <Button whiteSchema onClickFunc={logOff}>
+            Sair
+          </Button>
         </ButtonLogoffWrapper>
         <MenuWrapper topIndicator={topIndicator} leftIndicator={leftIndicator}>
           <NavLink

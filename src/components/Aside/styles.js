@@ -17,7 +17,8 @@ export const AsideContainer = styled.aside`
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: var(--purple);
-
+  z-index: 500;
+  
   @media screen and (min-width: 720px) {
     min-height: 100vh;
     width: 275px;
@@ -73,6 +74,42 @@ export const ProfileWrapper = styled.div`
       margin-bottom: 22px;
     }
 
+    div.avatar {
+      width: 135px;
+      height: 135px;
+      border-radius: 50%;
+      border: 3px solid var(--white);
+      background: url(${props => props.avatar});
+      background-color: var(--gray);
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin-bottom: 22px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "Trocar";
+        font-size: 14px;
+        line-height: 32px;
+        text-align: center;
+        color: var(--white);
+        width: 100%;
+        height: 30%;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0,0,0,0.4);
+        opacity: 0;
+        transition: 350ms;
+      }
+
+      &:hover::before {
+        opacity: 1;
+      }
+    }
+
     h2 {
       color: var(--white);
       font-weight: 700;
@@ -91,7 +128,7 @@ export const LevelInfo = styled.div`
   align-items: center;
   position: relative;
   z-index: 500;
-  
+
   span {
     text-transform: uppercase;
     color: var(--purple);

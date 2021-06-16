@@ -16,7 +16,7 @@ export const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 500;
+  z-index: 700;
 
   img {
     width: 110px;
@@ -32,7 +32,6 @@ export const HeaderContainer = styled.header`
     top: 0;
     left: 0;
     right: 0;
-    z-index: 500;
     display: flex;
 
     img {

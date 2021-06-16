@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
+
 export const GlobalStyles = createGlobalStyle`
     :root {
         //primary's colors:
@@ -26,6 +27,8 @@ export const GlobalStyles = createGlobalStyle`
         --colorFit-hover: #5cc9c7;
         --colorFocus: #F93676;
         --colorFocus-hover: #e23169;
+
+
     }
 
     html, body, div, span, applet, object, iframe,

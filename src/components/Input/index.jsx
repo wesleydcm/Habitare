@@ -9,6 +9,7 @@ const Input = ({ placeholder, error, register, name, ...rest }) => {
         isErrored={!!error}
         placeholder={placeholder}
         {...rest}
+        errored={!!error}
       ></InputItem>
     </>
   ) : (

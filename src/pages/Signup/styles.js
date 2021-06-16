@@ -38,7 +38,7 @@ export const Content = styled.section`
 
     > div > input {
       font-size: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
     > p {
       font-size: 16px;

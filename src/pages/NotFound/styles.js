@@ -4,6 +4,9 @@ export const Container = styled.main`
   width: 100%;
   height: calc(100vh - 90px);
   display: flex;
+  position: relative;
+  z-index: 550;
+  background-color: var(--gray);
 `;
 
 export const Content = styled.div`
@@ -140,6 +143,7 @@ export const Background = styled.div`
   opacity: .5;
   z-index: -1;
   transition: all 350ms;
+  z-index: 550;
 
   .back {
     position: absolute;

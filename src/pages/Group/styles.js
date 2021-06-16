@@ -22,6 +22,10 @@ export const GroupContainer = styled.main`
   > div {
     display: flex;
     flex-direction: column;
+
+    > div {
+      width: 100%;
+    }
   }
 
   @media screen and (min-width: 980px) {
