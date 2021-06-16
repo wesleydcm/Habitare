@@ -30,7 +30,7 @@ export const AchievementProvider = ({ children }) => {
       setAchievements([...newAchievements, data]);
       localStorage.setItem(
         "@Habitare:Achievements",
-        JSON.stringify(achievements)
+        JSON.stringify([...newAchievements, data])
       );
       notification.open({
         message: "Insígnia desbloqueada!",
@@ -41,6 +41,7 @@ export const AchievementProvider = ({ children }) => {
           WebkitBorderRadius: 14,
         },
         description: data.notification,
+        icon: <img style={{ width: "50px" }} src={data.image} alt=""></img>,
       });
     }
   };
