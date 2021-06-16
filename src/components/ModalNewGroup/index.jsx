@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import "antd/dist/antd.css";
-import {  FaTimes } from "react-icons/fa";
-import {
-  CustomModal,
-} from "./styles";
+import { FaTimes } from "react-icons/fa";
+import { CustomModal } from "./styles";
 import FormNewGroup from "../FormNewGroup";
-
 
 const NewGroup = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -22,7 +19,6 @@ const NewGroup = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
 
   return (
     <>
@@ -40,7 +36,9 @@ const NewGroup = () => {
         footer={null}
         bodyStyle={{ minHeight: 450 }}
       >
-       { isModalVisible && <FormNewGroup closeModal={handleOk} isModalVisible={isModalVisible}/> }
+        {isModalVisible && (
+          <FormNewGroup closeModal={handleOk} isModalVisible={isModalVisible} />
+        )}
       </CustomModal>
     </>
   );

@@ -112,7 +112,7 @@ export const HabitProvider = ({ children }) => {
           })
         );
         notification.open({
-          message: "PARABÉNS POR ISSO",
+          message: "PARABÉNS",
           closeIcon: <FaTimes />,
           style: {
             fontFamily: "Raleway",
