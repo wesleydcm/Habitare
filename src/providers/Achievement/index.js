@@ -43,7 +43,19 @@ export const AchievementProvider = ({ children }) => {
             WebkitBorderRadius: 14,
           },
           description: data.notification,
-          icon: <img style={{ width: "50px" }} src={data.image} alt=""></img>,
+          duration: 8,
+          icon: (
+            <img
+              style={{
+                width: "50px",
+
+                position: "relative",
+                right: "13px",
+              }}
+              src={data.image}
+              alt=""
+            ></img>
+          ),
         });
       }
     });
