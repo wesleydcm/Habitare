@@ -40,7 +40,7 @@ function Login() {
       .then((response) => {
         const { access } = response.data;
         userLogin(access, { username });
-        completeAchievement("1");
+        completeAchievement(["1"]);
         return history.push("/dashboard");
       })
       .catch((_) =>

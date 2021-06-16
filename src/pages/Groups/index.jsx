@@ -30,6 +30,7 @@ const Groups = () => {
   const history = useHistory();
 
   const [myGroups, setMyGroups] = useState(groupHabits);
+  const [globalGroups, setGlobalGroups] = useState(globalGroupHabits);
 
   const lastCategory = JSON.parse(
     localStorage.getItem(`@Habitare:groupsLastCategory`)
@@ -42,6 +43,7 @@ const Groups = () => {
   useEffect(() => {
     if (pathname === "/groups") {
       loadGroupHabits();
+      getGlobalGroupsHabits();
     } else if (pathname === "/groups/search") {
       getGlobalGroupsHabits();
     }
@@ -66,19 +68,33 @@ const Groups = () => {
     lastCategory === "displayAll"
       ? setMyGroups(groupHabits)
       : setMyGroups(
-          groupHabits.filter((habit) => habit.category === lastCategory)
+          groupHabits.filter((group) => group.category === lastCategory)
         );
-  }, [groupHabits]);
+
+    lastCategory === "displayAll"
+      ? setGlobalGroups(globalGroupHabits.results)
+      : setGlobalGroups(
+          globalGroupHabits.results?.filter(
+            (group) => group.category === lastCategory
+          )
+        );
+  }, [groupHabits, globalGroupHabits]);
 
   const handleFilter = (category) => {
     if (category === "displayAll") {
       setMyGroups(groupHabits);
+      setGlobalGroups(globalGroupHabits.results);
       setAllGroups(true);
     } else {
       const filteredHabits = groupHabits.filter(
         (group) => group.category === category
       );
+      const filteredGlobalGroupHabits = globalGroupHabits.results?.filter(
+        (group) => group.category === category
+      );
+
       setMyGroups(filteredHabits);
+      setGlobalGroups(filteredGlobalGroupHabits);
       setAllGroups(false);
     }
   };
@@ -134,11 +150,29 @@ const Groups = () => {
       ) : (
         pathname === "/groups/search" && (
           <>
-            <h2>Todos os grupos</h2>
+            <h2>
+              {allGroups
+                ? "Todos os grupos"
+                : lastCategory === "spirit"
+                ? `Corpo e mente saúdaveis`
+                : lastCategory === "fit"
+                ? `Ficando em forma`
+                : lastCategory === "focus"
+                ? `Foco, força e fé`
+                : lastCategory === "money"
+                ? `Me poupe`
+                : lastCategory === "house"
+                ? `Lar doce lar`
+                : "Boa noite"}
+            </h2>
             <GroupsList>
-              {globalGroupHabits.results?.map((group) => {
-                return <GroupCard group={group} key={group.id} />;
-              })}
+              {allGroups
+                ? globalGroupHabits.results?.map((group) => {
+                    return <GroupCard group={group} key={group.id} />;
+                  })
+                : globalGroups.map((group) => {
+                    return <GroupCard group={group} key={group.id} />;
+                  })}
             </GroupsList>
           </>
         )

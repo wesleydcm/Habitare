@@ -5,6 +5,8 @@ import * as yup from "yup";
 import { notification } from "antd";
 import { FaTimes, FaGrinAlt } from "react-icons/fa";
 import { useHabit } from "../../providers/Habit";
+import { useContext } from "react";
+import { AchievementContext } from "../../providers/Achievement";
 import {
   InputModal,
   CardCategory,
@@ -29,11 +31,31 @@ import filledStar from "../../assets/svg/filledStar.svg";
 import emptyStar from "../../assets/svg/emptyStar.svg";
 import selectedStar from "../../assets/svg/selectedStar.svg";
 
+const categoriesAchievements = {
+  spirit: "9",
+  night: "10",
+  money: "13",
+  house: "18",
+  focus: "23",
+  fit: "26",
+};
+const especificAchievements = { "Regar as plantas": "20" };
+
 const FormNewHabit = ({ habit, closeModal }) => {
   const [inputValue, setInputValue] = useState(habit.title || "");
   const [select, setSelect] = useState(habit.category || "");
   const [selectFrequency, setSelectFrequency] = useState("");
   const [selectDificulty, setSelectDificulty] = useState("");
+  const { completeAchievement } = useContext(AchievementContext);
+
+  const isCreatedHabitAchievement = (data) => {
+    let achievementArray = [];
+    const categoryExist = categoriesAchievements[data.category];
+    const isEspecific = especificAchievements[data.title];
+    !!categoryExist && achievementArray.push(categoryExist);
+    !!isEspecific && achievementArray.push(isEspecific);
+    achievementArray.length && completeAchievement(achievementArray);
+  };
 
   const handleSelectChange = (event) => {
     const value = event.target.value;
@@ -83,6 +105,7 @@ const FormNewHabit = ({ habit, closeModal }) => {
     }
 
     await createHabit(data);
+    isCreatedHabitAchievement(data);
     closeModal();
   };
 
