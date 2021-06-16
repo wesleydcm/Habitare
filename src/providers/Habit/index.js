@@ -104,6 +104,8 @@ export const HabitProvider = ({ children }) => {
         const updatedHabit = response.data;
         newHabits = [...newHabits, updatedHabit];
 
+        response.data.achieved && loadHabits();
+
         setHabits(
           newHabits.sort((a, b) => {
             return a.id - b.id;
