@@ -113,7 +113,7 @@ const Dashboard = () => {
           <FilterCategory handleFilter={handleFilter} page="dashboard" />
           <ButtonsWrapper>
             <Button onClickFunc={handleDisplayHabitsAchieved} whiteSchema>
-              {displayHabitsAchieved ? "Não Concluídos" : "Concluídos"}
+              {displayHabitsAchieved ? "Em andamento" : "Concluídos"}
             </Button>
             <NewHabit />
           </ButtonsWrapper>
