@@ -37,7 +37,7 @@ const categoriesAchievements = {
 };
 
 const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
-  const { deleteHabit, updateHabit } = useHabit();
+  const { deleteHabit, updateHabit, habitsAchieved } = useHabit();
   const { completeAchievement } = useContext(AchievementContext);
   const [habitFormatted, setHabitFormatted] = useState({});
   const [paused, setPaused] = useState(true);
@@ -62,6 +62,42 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
     setIsModalVisible(false);
   };
 
+  const AchievementMultipleHabits = (arrayAchievements) => {
+    const habitsMoneyQuantity =
+      habitsAchieved.filter((habit) => {
+        return habit.category === "money";
+      }) || [];
+    const habitsFitQuantity =
+      habitsAchieved.filter((habit) => {
+        return habit.category === "fit";
+      }) || [];
+    const habitsNightQuantity =
+      habitsAchieved.filter((habit) => {
+        return habit.category === "night";
+      }) || [];
+    const habitsFocusQuantity =
+      habitsAchieved.filter((habit) => {
+        return habit.category === "focus";
+      }) || [];
+    const habitsSpiritQuantity =
+      habitsAchieved.filter((habit) => {
+        return habit.category === "spirit";
+      }) || [];
+    const habitsHouseQuantity =
+      habitsAchieved.filter((habit) => {
+        return habit.category === "house";
+      }) || [];
+    habitsMoneyQuantity.length >= 4 && arrayAchievements.push("17");
+    habitsMoneyQuantity.length >= 1 &&
+      habitsFitQuantity.length >= 1 &&
+      habitsNightQuantity.length >= 1 &&
+      habitsFocusQuantity.length >= 1 &&
+      habitsSpiritQuantity.length >= 1 &&
+      habitsHouseQuantity.length >= 1 &&
+      arrayAchievements.push("4");
+    completeAchievement(arrayAchievements);
+  };
+
   const isAchievementComplete = (arrayAchievements) => {
     arrayAchievements.push("5");
     const habitExist = mockHabits[habit.title];
@@ -69,7 +105,7 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
     !!habitExist && arrayAchievements.push(habitExist);
     !!categoyExist && arrayAchievements.push(categoyExist);
     console.log(arrayAchievements);
-    completeAchievement(arrayAchievements);
+    AchievementMultipleHabits(arrayAchievements);
   };
 
   const handleDeleteHabit = () => {
