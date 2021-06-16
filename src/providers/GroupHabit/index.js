@@ -14,7 +14,7 @@ export const GroupHabitProvider = ({ children }) => {
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
   const [specificGroup, setSpecificGroup] = useState({});
 
-  const history = useHistory()
+  const history = useHistory();
 
   const getGlobalGroupsHabits = () => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
@@ -113,8 +113,8 @@ export const GroupHabitProvider = ({ children }) => {
           },
           description: "Grupo atualizado com sucesso!",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
-        })
-        getSpecificGroup(groupId)
+        });
+        getSpecificGroup(groupId);
       })
       .catch((err) => {
         notification.open({
@@ -161,11 +161,15 @@ export const GroupHabitProvider = ({ children }) => {
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
 
     api
-      .post(`groups/${groupId}/subscribe/`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        `groups/${groupId}/subscribe/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         notification.open({
           message: "PARABÉNS",
@@ -214,7 +218,8 @@ export const GroupHabitProvider = ({ children }) => {
             backgroundColor: "var(--gray)",
             WebkitBorderRadius: 14,
           },
-          description: "Abandonou o barco. Espero que encontre a galera certa para você. =(",
+          description:
+            "Abandonou o barco. Espero que encontre a galera certa para você. =(",
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
 
@@ -273,7 +278,7 @@ export const GroupHabitProvider = ({ children }) => {
         };
 
         setSpecificGroup(output);
-      });
+      })
   };
 
   const deleteGroup = (groupId) => {
@@ -298,7 +303,7 @@ export const GroupHabitProvider = ({ children }) => {
           icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
         });
 
-        history.push("/groups")
+        history.push("/groups");
       })
       .catch((_) => {
         notification.open({
@@ -329,7 +334,7 @@ export const GroupHabitProvider = ({ children }) => {
         getSpecificGroup,
         deleteGroup,
         setSpecificGroup,
-        unsubscribeGroupHabit
+        unsubscribeGroupHabit,
       }}
     >
       {children}

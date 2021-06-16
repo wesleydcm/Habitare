@@ -17,7 +17,8 @@ export const AsideContainer = styled.aside`
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: var(--purple);
-
+  z-index: 500;
+  
   @media screen and (min-width: 720px) {
     min-height: 100vh;
     width: 275px;
@@ -91,7 +92,7 @@ export const LevelInfo = styled.div`
   align-items: center;
   position: relative;
   z-index: 500;
-  
+
   span {
     text-transform: uppercase;
     color: var(--purple);

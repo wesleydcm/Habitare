@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { UserContext } from "../../providers/User";
 
 const Header = () => {
-  const { userLogoff } = useContext(UserContext);
+  const { userLogoff, authenticated } = useContext(UserContext);
   const { pathname } = useLocation();
   const history = useHistory();
 
@@ -30,7 +30,7 @@ const Header = () => {
         <img src={Logo} alt="Habitare" />
       </Link>
       <ButtonsWrapper location={pathname}>
-        {pathname === "/" || pathname === "/login" || pathname === "/signup" ? (
+        {!authenticated ? (
           <>
             <Button
               whiteSchema={pathname === "/login" ? true : false}
