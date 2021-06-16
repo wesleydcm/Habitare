@@ -24,7 +24,6 @@ export const CardContainer = styled.div`
   padding: 12px 8px;
   overflow: hidden;
   cursor: pointer;
-  
   &:hover .lottie {
     opacity: 0.4;
   }
@@ -87,6 +86,7 @@ export const InfoHowMuchAchieved = styled.div`
     top: 0;
     left: 0;
     width: ${(props) => props.howMuchAchieved}%;
+    max-width: 100%;
     height: 100%;
     border-radius: 32px;
     background-color: var(--white);

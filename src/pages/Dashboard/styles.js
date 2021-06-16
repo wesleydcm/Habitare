@@ -19,7 +19,7 @@ export const DashboardContainer = styled.main`
 
 export const MainCard = styled.div`
   width: 100%;
-  max-width: 980px;
+  max-width: 1280px;
   height: 200px;
   background: linear-gradient(84.94deg, #a331b4 -21.8%, #7a5aed 98.1%);
   border-radius: 30px;
@@ -53,7 +53,7 @@ export const MainCard = styled.div`
     height: 230px;
 
     h1 {
-      font-size: clamp(28px, 8px + 2.5vw ,48px);
+      font-size: clamp(28px, 8px + 2.5vw, 48px);
     }
 
     h3 {
@@ -61,8 +61,6 @@ export const MainCard = styled.div`
     }
   }
   @media screen and (min-width: 1140px) {
-    height: 230px;
-
     h1 {
       font-size: 42px;
     }
@@ -109,15 +107,103 @@ export const ImageMainCard = styled.div`
   }
 `;
 
+export const FiltersAndButtonsWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1280px;
+  margin-top: 32px;
+  > div {
+    margin-bottom: 18px;
+
+    &:first-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @media screen and (min-width: 1375px) {
+    > div {
+      margin-bottom: 0px;
+    }
+  }
+  button {
+    z-index: 0;
+  }
+`;
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+
+  button {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  @media screen and (min-width: 540px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: auto;
+
+    button {
+      font-size: 18px;
+
+      margin-right: 12px;
+      width: auto;
+      margin-right: 12px;
+      margin-bottom: 0px;
+    }
+  }
+`;
+
 export const CardsList = styled.div`
   width: 100%;
-  max-width: 980px;
+  max-width: 1280px;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 18px;
   margin: 32px auto;
+  position: relative;
 
   @media screen and (min-width: 980px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1600px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+export const NewProfile = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 300;
+    text-align: center;
   }
 `;

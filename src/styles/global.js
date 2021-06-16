@@ -6,10 +6,12 @@ export const GlobalStyles = createGlobalStyle`
         --white: #ffffff;
         --gray: #F4F5F6;
         --black: #010B14;
+        --light-purple: #BCACF6;
         --purple: #7A5AED;
         --purple-hover: #4318DC;
         --yellow: #FBD437;
         --pink: #C45FD3;
+        --load: #ccc;
 
         //category's colors:
         --colorSpirit: #36A7F9;
@@ -24,6 +26,8 @@ export const GlobalStyles = createGlobalStyle`
         --colorFit-hover: #5cc9c7;
         --colorFocus: #F93676;
         --colorFocus-hover: #e23169;
+
+
     }
 
     html, body, div, span, applet, object, iframe,

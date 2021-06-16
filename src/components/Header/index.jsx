@@ -7,21 +7,21 @@ import { useContext } from "react";
 import { UserContext } from "../../providers/User";
 
 const Header = () => {
-  const {userLogoff} = useContext(UserContext)
-  const {pathname} = useLocation();
-  const history = useHistory()
+  const { userLogoff, authenticated } = useContext(UserContext);
+  const { pathname } = useLocation();
+  const history = useHistory();
 
   const handleLocation = (location) => {
     if (location === "login") {
-      history.push('/login');
+      history.push("/login");
     } else if (location === "signup") {
-      history.push('/signup');
+      history.push("/signup");
     }
   };
 
   const logOff = () => {
-    userLogoff()
-    history.push("/")
+    userLogoff();
+    history.push("/");
   };
 
   return (
@@ -30,9 +30,7 @@ const Header = () => {
         <img src={Logo} alt="Habitare" />
       </Link>
       <ButtonsWrapper location={pathname}>
-        {pathname === "/" ||
-        pathname === "/login" ||
-        pathname === "/signup" ? (
+        {!authenticated ? (
           <>
             <Button
               whiteSchema={pathname === "/login" ? true : false}
