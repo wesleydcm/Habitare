@@ -21,11 +21,8 @@ import {
 
 const FormNewGroup = ({ isModalVisible, closeModal, setIsModalVisible }) => {
   const [select, setSelect] = useState("");
-  const [inputValue, setInputValue] = useState("");
 
-  useEffect(() => {
-    setInputValue("");
-  }, [isModalVisible]);
+
 
   const handleSelectChange = (event) => {
     const value = event.target.value;
@@ -41,8 +38,15 @@ const FormNewGroup = ({ isModalVisible, closeModal, setIsModalVisible }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+    
+  useEffect(() => {
+    setValue("name", "")
+
+  }, []);
 
   const { createGroupHabit } = useGroupHabit();
 
@@ -72,7 +76,7 @@ const FormNewGroup = ({ isModalVisible, closeModal, setIsModalVisible }) => {
         <input
           type="text"
           placeholder="Qual seu nome do grupo?"
-          {...register("name", { value: inputValue })}
+          {...register("name")}
           required
         />
       </InputModal>

@@ -11,16 +11,16 @@ export const UserProvider = ({ children }) => {
   );
   const [authenticated, setAuthenticated] = useState(authorized);
 
-  const userLogin = (userToken) => {
+  const userLogin = async (userToken) => {
     localStorage.setItem(`@Habitare:Token`, JSON.stringify(userToken));
 
-    const userId = jwt_decode(userToken).user_id;
+    const userId = await jwt_decode(userToken).user_id;
 
     api.get(`users/${userId}/`).then((response) => {
 
       let userLogged = response.data
 
-      if(localStorage.getItem(`Habitare:User${userId}`) === undefined) {
+      if(!localStorage.getItem(`Habitare:User${userId}`)) {
 
         userLogged = {
           ...userLogged,
