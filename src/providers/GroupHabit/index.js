@@ -14,7 +14,6 @@ export const GroupHabitProvider = ({ children }) => {
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
   const [specificGroup, setSpecificGroup] = useState({});
 
-  const history = useHistory();
   const [render, setRender] = useState(false);
   const [id, setId] = useState(false);
 
@@ -295,7 +294,7 @@ export const GroupHabitProvider = ({ children }) => {
         };
 
         setSpecificGroup(output);
-      })
+      });
   };
 
   const deleteGroup = (groupId) => {
@@ -319,8 +318,6 @@ export const GroupHabitProvider = ({ children }) => {
           description: "Foi uma decisão consciente? esperamos que sim =)",
           icon: <FaFrown style={{ color: "var(--pink)" }} />,
         });
-
-        history.push("/groups");
       })
       .catch((err) => {
         console.log("erro", err);
