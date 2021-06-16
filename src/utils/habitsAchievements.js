@@ -13,6 +13,10 @@ const mockHabits = {
 
 export const IsMockHabitComplete = (habitTitle) => {
   const { completeAchievement } = useContext(AchievementContext);
-  const habitExist = mockHabits[habitTitle];
-  !!habitExist && completeAchievement(habitExist);
+  try {
+    const habitExist = mockHabits[habitTitle];
+    !!habitExist && completeAchievement(habitExist);
+  } catch (e) {
+    console.log(e);
+  }
 };
