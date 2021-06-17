@@ -158,7 +158,7 @@ export const HabitProvider = ({ children }) => {
             WebkitBorderRadius: 14,
           },
           description: "Foi uma decisão consciente? esperamos que sim =)",
-          icon: <FaGrinAlt style={{ color: "var(--yellow)" }} />,
+          icon: <FaFrown style={{ color: "var(--pink)" }} />,
         });
       })
       .catch((_) => {
