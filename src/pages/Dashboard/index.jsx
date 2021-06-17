@@ -18,6 +18,7 @@ import HabitCard from "../../components/HabitCard";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../providers/User";
 import Button from "../../components/Button";
+import Loading from "../../components/Loading";
 /* import InsigniaCard from "../../components/InsigniaCard"; */
 
 const Dashboard = () => {
@@ -32,7 +33,7 @@ const Dashboard = () => {
     },
   };
 
-  const { habits, habitsAchieved, loadHabits } = useHabit();
+  const { habits, habitsAchieved, loadHabits, loading } = useHabit();
   const [myHabits, setMyHabits] = useState(habits);
   const [myHabitsCompleted, setMyHabitsCompleted] = useState();
   const lastCategory = JSON.parse(
@@ -118,23 +119,28 @@ const Dashboard = () => {
             <NewHabit />
           </ButtonsWrapper>
         </FiltersAndButtonsWrapper>
-
-        <CardsList>
-          {displayHabitsAchieved ? (
-            myHabitsCompleted.map((habit) => (
-              <HabitCard habit={habit} key={habit.id} />
-            ))
-          ) : habits.length > 0 && !allHabits ? (
-            myHabits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
-          ) : habits.length > 0 && allHabits ? (
-            habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
-          ) : (
-            <NewProfile>
-              <h1>Queremos te ajudar a praticar novos hábitos!</h1>
-              <h2> Comece agora clicando em NOVO HÁBITO</h2>
-            </NewProfile>
-          )}
-        </CardsList>
+        {loading ? (
+          <Loading />
+        ) : (
+          <CardsList>
+            {displayHabitsAchieved ? (
+              myHabitsCompleted.map((habit) => (
+                <HabitCard habit={habit} key={habit.id} />
+              ))
+            ) : habits.length > 0 && !allHabits ? (
+              myHabits.map((habit) => (
+                <HabitCard habit={habit} key={habit.id} />
+              ))
+            ) : habits.length > 0 && allHabits ? (
+              habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
+            ) : (
+              <NewProfile>
+                <h1>Queremos te ajudar a praticar novos hábitos!</h1>
+                <h2> Comece agora clicando em NOVO HÁBITO</h2>
+              </NewProfile>
+            )}
+          </CardsList>
+        )}
       </DashboardContainer>
     </>
   );

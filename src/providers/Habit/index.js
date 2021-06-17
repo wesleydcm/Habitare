@@ -9,8 +9,11 @@ export const HabitContext = createContext([]);
 export const HabitProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
   const [habitsAchieved, setHabitsAchieved] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   const loadHabits = () => {
+    setLoading(true)
+
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("habits/personal/", {
@@ -36,7 +39,10 @@ export const HabitProvider = ({ children }) => {
             return a.id - b.id;
           })
         );
-      });
+      })
+      .then((_) => {
+        setLoading(false);
+      })
   };
 
   const createHabit = (data) => {
@@ -185,6 +191,7 @@ export const HabitProvider = ({ children }) => {
         createHabit,
         updateHabit,
         deleteHabit,
+        loading
       }}
     >
       {children}

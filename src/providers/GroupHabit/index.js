@@ -13,11 +13,14 @@ export const GroupHabitProvider = ({ children }) => {
   const [groupHabits, setGroupHabits] = useState([]);
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
   const [specificGroup, setSpecificGroup] = useState({});
-
+  const [loadingGroup, setLoadingGroup] = useState(true);
+  const [loadingGroups, setLoadingGroups] = useState(true);
   const [render, setRender] = useState(false);
   const [id, setId] = useState(false);
 
   const getGlobalGroupsHabits = () => {
+    setLoadingGroups(true)
+
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("groups/?category=%40Habitare%2F", {
@@ -40,7 +43,10 @@ export const GroupHabitProvider = ({ children }) => {
         });
 
         setGlobalGroupsHabits(data);
-      });
+      })
+      .then((_) => {
+        setLoadingGroups(false)
+      })
   };
 
   const createGroupHabit = (data) => {
@@ -140,6 +146,8 @@ export const GroupHabitProvider = ({ children }) => {
   };
 
   const loadGroupHabits = () => {
+    setLoadingGroups(true)
+
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("groups/subscriptions/", {
@@ -162,7 +170,10 @@ export const GroupHabitProvider = ({ children }) => {
         });
 
         setGroupHabits(data);
-      });
+      })
+      .then((_) => {
+        setLoadingGroups(false);
+      })
   };
 
   const subscribeGroupHabit = (groupId) => {
@@ -249,6 +260,8 @@ export const GroupHabitProvider = ({ children }) => {
   };
 
   const getSpecificGroup = (idGroup) => {
+    setLoadingGroup(true)
+
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     const user = JSON.parse(localStorage.getItem("@Habitare:User")) || "";
 
@@ -294,7 +307,10 @@ export const GroupHabitProvider = ({ children }) => {
         };
 
         setSpecificGroup(output);
-      });
+      })
+      .then((_) => {
+        setLoadingGroup(false)
+      })
   };
 
   const deleteGroup = (groupId) => {
@@ -353,6 +369,8 @@ export const GroupHabitProvider = ({ children }) => {
         render,
         setRender,
         id,
+        loadingGroup,
+        loadingGroups
       }}
     >
       {children}
