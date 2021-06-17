@@ -30,7 +30,7 @@ const ModalNewActivity = ({ idGroup }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleDate = (date, dateString) => {
-    setDate(date._d);
+    setDate(date?._d);
   };
 
   const showModal = () => {
