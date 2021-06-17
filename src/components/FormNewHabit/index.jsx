@@ -71,6 +71,11 @@ const FormNewHabit = ({ habit, closeModal }) => {
     setSelectDificulty(value);
   };
 
+  const handleInputValue = (event) => {
+    const value = event.target.value;
+    setInputValue(value);
+  };
+
   const schema = yup.object().shape({
     title: yup.string().required("Todos os campos são obrigatórios"),
     category: yup.string().required("Todos os campos são obrigatórios"),
@@ -116,6 +121,9 @@ const FormNewHabit = ({ habit, closeModal }) => {
           <input
             type="text"
             placeholder="Qual seu novo hábito?"
+            onChange={(e) => {
+              handleInputValue(e);
+            }}
             {...register("title", { value: inputValue })}
             required
           />
