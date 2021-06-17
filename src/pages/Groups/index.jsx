@@ -4,6 +4,7 @@ import { Redirect, useHistory, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 import FilterCategory from "../../components/Filter";
 import GroupCard from "../../components/GroupCard";
+import Loading from "../../components/Loading";
 import NewGroup from "../../components/ModalNewGroup";
 import { useGroupHabit } from "../../providers/GroupHabit";
 import { UserContext } from "../../providers/User";
@@ -24,6 +25,7 @@ const Groups = () => {
     render,
     setRender,
     id,
+    loadingGroups,
   } = useGroupHabit();
 
   const { pathname } = useLocation();
@@ -128,23 +130,29 @@ const Groups = () => {
       {pathname === "/groups" ? (
         <>
           <h2>Seus grupos</h2>
-          {groupHabits.length === 0 ? (
-            <h3>
-              Você está perdendo a oportunidade de compartilhar metas com
-              pessoas que estão no mesmo objetivo que o seu! <br />
-              Junte-se agora em um grupo, selecionando o que mais combina com
-              você em <strong>BUSCAR GRUPOS</strong> ou crie um novo.
-            </h3>
+          {loadingGroups ? (
+            <Loading />
           ) : (
-            <GroupsList>
-              {allGroups
-                ? groupHabits.map((group) => {
-                    return <GroupCard group={group} key={group.id} />;
-                  })
-                : myGroups.map((group) => {
-                    return <GroupCard group={group} key={group.id} />;
-                  })}
-            </GroupsList>
+            <>
+              {groupHabits.length === 0 ? (
+                <h3>
+                  Você está perdendo a oportunidade de compartilhar metas com
+                  pessoas que estão no mesmo objetivo que o seu! <br />
+                  Junte-se agora em um grupo, selecionando o que mais combina
+                  com você em <strong>BUSCAR GRUPOS</strong> ou crie um novo.
+                </h3>
+              ) : (
+                <GroupsList>
+                  {allGroups
+                    ? groupHabits.map((group) => {
+                        return <GroupCard group={group} key={group.id} />;
+                      })
+                    : myGroups.map((group) => {
+                        return <GroupCard group={group} key={group.id} />;
+                      })}
+                </GroupsList>
+              )}
+            </>
           )}
         </>
       ) : (
@@ -165,15 +173,20 @@ const Groups = () => {
                 ? `Lar doce lar`
                 : "Boa noite"}
             </h2>
-            <GroupsList>
-              {allGroups
-                ? globalGroupHabits.results?.map((group) => {
-                    return <GroupCard group={group} key={group.id} />;
-                  })
-                : globalGroups.map((group) => {
-                    return <GroupCard group={group} key={group.id} />;
-                  })}
-            </GroupsList>
+
+            {loadingGroups ? (
+              <Loading />
+            ) : (
+              <GroupsList>
+                {allGroups
+                  ? globalGroupHabits.results?.map((group) => {
+                      return <GroupCard group={group} key={group.id} />;
+                    })
+                  : globalGroups.map((group) => {
+                      return <GroupCard group={group} key={group.id} />;
+                    })}
+              </GroupsList>
+            )}
           </>
         )
       )}
