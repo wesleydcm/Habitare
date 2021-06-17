@@ -15,14 +15,6 @@ export const AchievementProvider = ({ children }) => {
   );
 
   const completeAchievement = (achievementsId) => {
-    localStorage.setItem(
-      "@Habitare:Level",
-      JSON.stringify(level + achievementsId.length)
-    );
-
-    setLevel(level + achievementsId.length);
-    console.log("setLevel", level);
-    console.log("ach", achievementsId.length);
     let InitialState = achievements;
     achievementsId.forEach((achievementId) => {
       const newAchievements = InitialState.filter((achievement) => {
@@ -32,7 +24,13 @@ export const AchievementProvider = ({ children }) => {
         return achievement.id === achievementId;
       });
       if (!updateAchiviement[0].achieved) {
-        console.log("oi");
+        localStorage.setItem(
+          "@Habitare:Level",
+          JSON.stringify(level + achievementsId.length)
+        );
+
+        setLevel(level + achievementsId.length);
+
         const data = {
           id: updateAchiviement[0].id,
           title: updateAchiviement[0].title,
