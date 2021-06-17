@@ -26,6 +26,7 @@ import BookReading from "../assets/images/insignias/book-reading.png";
 import CookieMonster from "../assets/images/insignias/cookie-monster.svg";
 import WeCanDoIt from "../assets/images/insignias/we-can-do-it.png";
 import Muscle from "../assets/images/insignias/muscle.png";
+import Sun from "../assets/images/insignias/sun.png";
 
 const initialAchievements = [
   {
@@ -282,6 +283,15 @@ const initialAchievements = [
     achieved: false,
     secret: true,
     image: Muscle,
+  },
+  {
+    id: "29",
+    title: "Cooperação amigável",
+    notification: "Porque não tem companhia nessa jornada, não é mesmo?",
+    description: "Entrou para um grupo",
+    achieved: false,
+    secret: false,
+    image: Sun,
   },
 ];
 

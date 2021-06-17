@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Header from "./components/Header";
 import Routes from "./routes";
 import { GlobalStyles } from "./styles/global";
