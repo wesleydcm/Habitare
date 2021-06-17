@@ -26,6 +26,7 @@ import BookReading from "../assets/images/insignias/book-reading.png";
 import CookieMonster from "../assets/images/insignias/cookie-monster.svg";
 import WeCanDoIt from "../assets/images/insignias/we-can-do-it.png";
 import Muscle from "../assets/images/insignias/muscle.png";
+import Sun from "../assets/images/insignias/sun.png";
 
 const initialAchievements = [
   {
@@ -42,7 +43,7 @@ const initialAchievements = [
     id: "2",
     title: "Olá Mr. Robot!",
     notification: "Elliot Alderson, é você?",
-    description: "Acesse o DevTools de seu navegador.",
+    description: "Aperte f + 1 + 2 na página conquistas.",
     achieved: false,
     secret: true,
     image: FSociety,
@@ -282,6 +283,15 @@ const initialAchievements = [
     achieved: false,
     secret: true,
     image: Muscle,
+  },
+  {
+    id: "29",
+    title: "Cooperação amigável",
+    notification: "Porque não tem companhia nessa jornada, não é mesmo?",
+    description: "Entrou para um grupo",
+    achieved: false,
+    secret: false,
+    image: Sun,
   },
 ];
 
