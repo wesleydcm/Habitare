@@ -27,6 +27,8 @@ import CookieMonster from "../assets/images/insignias/cookie-monster.svg";
 import WeCanDoIt from "../assets/images/insignias/we-can-do-it.png";
 import Muscle from "../assets/images/insignias/muscle.png";
 import Sun from "../assets/images/insignias/sun.png";
+import Bonfire from "../assets/images/insignias/bonfire.png";
+import Rick from "../assets/images/insignias/rick.svg";
 
 const initialAchievements = [
   {
@@ -292,6 +294,24 @@ const initialAchievements = [
     achieved: false,
     secret: false,
     image: Sun,
+  },
+  {
+    id: "30",
+    title: "Most Valuable Player",
+    notification: "Eu gosto quando é dificil!",
+    description: "Completou 3 hábitos difíceis",
+    achieved: false,
+    secret: false,
+    image: Bonfire,
+  },
+  {
+    id: "31",
+    title: "Wubalubadubdub",
+    notification: "O ser mais inteligente do universo!",
+    description: "Complete 1 hábito difícil de Foco, Força é fé",
+    achieved: false,
+    secret: false,
+    image: Rick,
   },
 ];
 
