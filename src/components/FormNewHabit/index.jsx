@@ -30,6 +30,7 @@ import {
 import filledStar from "../../assets/svg/filledStar.svg";
 import emptyStar from "../../assets/svg/emptyStar.svg";
 import selectedStar from "../../assets/svg/selectedStar.svg";
+import Input from "../Input";
 
 const categoriesAchievements = {
   spirit: "9",
@@ -70,12 +71,6 @@ const FormNewHabit = ({ habit, closeModal }) => {
     const value = event.target.value;
     setSelectDificulty(value);
   };
-
-  const handleInputValue = (event) => {
-    const value = event.target.value;
-    setInputValue(value);
-  };
-
   const schema = yup.object().shape({
     title: yup.string().required("Todos os campos são obrigatórios"),
     category: yup.string().required("Todos os campos são obrigatórios"),
@@ -108,7 +103,6 @@ const FormNewHabit = ({ habit, closeModal }) => {
 
       return;
     }
-
     await createHabit(data);
     isCreatedHabitAchievement(data);
     closeModal();
@@ -118,15 +112,22 @@ const FormNewHabit = ({ habit, closeModal }) => {
     <>
       <form onSubmit={handleSubmit(handleForm)}>
         <InputModal>
-          <input
-            type="text"
-            placeholder="Qual seu novo hábito?"
-            onChange={(e) => {
-              handleInputValue(e);
-            }}
-            {...register("title", { value: inputValue })}
-            required
-          />
+          {!habit.title ? (
+            <Input
+              type="text"
+              placeholder="Qual seu novo hábito?"
+              name="title"
+              error={errors.title?.message}
+              register={register}
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Qual seu novo hábito?"
+              {...register("title", { value: inputValue })}
+              required
+            />
+          )}
         </InputModal>
 
         <p>Em qual categoria seu hábito se encaixa?</p>
