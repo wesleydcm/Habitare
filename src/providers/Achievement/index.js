@@ -16,6 +16,12 @@ export const AchievementProvider = ({ children }) => {
 
   const completeAchievement = (achievementsId) => {
     let InitialState = achievements;
+
+    for (let i = achievements.length; i < initialAchievements.length; i++) {
+      InitialState.push(initialAchievements[i]);
+      console.log(InitialState);
+    }
+
     achievementsId.forEach((achievementId) => {
       const newAchievements = InitialState.filter((achievement) => {
         return achievement.id !== achievementId;
