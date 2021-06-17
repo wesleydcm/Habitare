@@ -62,13 +62,10 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   };
 
   const AchievementMultipleHabits = (arrayAchievements) => {
-<<<<<<< HEAD
-=======
     const habitsHardQuantity =
       habitsAchieved.filter((habit) => {
         return habit.difficulty === "3";
       }) || [];
->>>>>>> release
     const habitsMoneyQuantity =
       habitsAchieved.filter((habit) => {
         return habit.category === "money";
@@ -101,11 +98,8 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
       habitsSpiritQuantity.length >= 1 &&
       habitsHouseQuantity.length >= 1 &&
       arrayAchievements.push("4");
-<<<<<<< HEAD
-=======
     console.log(habitsHardQuantity);
     habitsHardQuantity.length >= 2 && arrayAchievements.push("30");
->>>>>>> release
     completeAchievement(arrayAchievements);
   };
 

@@ -45,11 +45,8 @@ const Aside = () => {
     path: AVATARS[user.avatar],
     position: user.avatar,
   });
-<<<<<<< HEAD
-=======
 
   const { level } = useAchievement();
->>>>>>> develop
 
   const indicator = useRef(null);
   const navLinks = useRef([]);
