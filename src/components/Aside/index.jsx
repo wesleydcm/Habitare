@@ -21,6 +21,7 @@ import Avatar5 from "../../assets/images/avatar/avatar5.png";
 import Avatar6 from "../../assets/images/avatar/avatar6.png";
 import Avatar7 from "../../assets/images/avatar/avatar7.png";
 import Avatar8 from "../../assets/images/avatar/avatar8.png";
+import { useAchievement } from "../../providers/Achievement";
 
 const AVATARS = [
   Avatar1,
@@ -40,7 +41,12 @@ const Aside = () => {
 
   const [topIndicator, setTopIndicator] = useState(0);
   const [leftIndicator, setLeftIndicator] = useState(0);
-  const [avatar, setAvatar] = useState({path: AVATARS[user.avatar], position: user.avatar});
+  const [avatar, setAvatar] = useState({
+    path: AVATARS[user.avatar],
+    position: user.avatar,
+  });
+
+  const { level } = useAchievement();
 
   const indicator = useRef(null);
   const navLinks = useRef([]);
@@ -59,15 +65,15 @@ const Aside = () => {
   useEffect(() => {
     getDimensions();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
-    setAvatar({path: AVATARS[user.avatar], position: user.avatar})
+    setAvatar({ path: AVATARS[user.avatar], position: user.avatar });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
-  
+
   window.onresize = () => {
     getDimensions();
   };
@@ -78,12 +84,11 @@ const Aside = () => {
   };
 
   const handleAvatar = () => {
+    let nextAvatar;
+    avatar.position < 7 ? (nextAvatar = avatar.position + 1) : (nextAvatar = 0);
 
-    let nextAvatar
-    avatar.position < 7 ? nextAvatar = avatar.position + 1 : nextAvatar = 0;
-    
-    setAvatar({ path: AVATARS[nextAvatar], position: nextAvatar })
-    setAvatarUser(nextAvatar)
+    setAvatar({ path: AVATARS[nextAvatar], position: nextAvatar });
+    setAvatarUser(nextAvatar);
   };
 
   return (
@@ -95,7 +100,17 @@ const Aside = () => {
         <h2>{user.username}</h2>
         <LevelInfo>
           <FaTrophy />
-          <span>Level iniciante</span>
+          {level <= 2 ? (
+            <span>Iniciante</span>
+          ) : level <= 9 ? (
+            <span>Aspirante</span>
+          ) : level <= 19 ? (
+            <span>Experiente</span>
+          ) : level <= 20 ? (
+            <span>Especialista</span>
+          ) : (
+            <span>Veterano</span>
+          )}
         </LevelInfo>
       </ProfileWrapper>
       <div>

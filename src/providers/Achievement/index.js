@@ -2,12 +2,16 @@ import { notification } from "antd";
 import { createContext, useContext, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import initialAchievements from "../../utils/initialAchievements";
+
 export const AchievementContext = createContext([]);
 
 export const AchievementProvider = ({ children }) => {
   const [achievements, setAchievements] = useState(
     JSON.parse(localStorage.getItem("@Habitare:Achievements")) ||
       initialAchievements
+  );
+  const [level, setLevel] = useState(
+    JSON.parse(localStorage.getItem("@Habitare:Level")) || 0
   );
 
   const completeAchievement = (achievementsId) => {
@@ -20,6 +24,13 @@ export const AchievementProvider = ({ children }) => {
         return achievement.id === achievementId;
       });
       if (!updateAchiviement[0].achieved) {
+        localStorage.setItem(
+          "@Habitare:Level",
+          JSON.stringify(level + achievementsId.length)
+        );
+
+        setLevel(level + achievementsId.length);
+
         const data = {
           id: updateAchiviement[0].id,
           title: updateAchiviement[0].title,
@@ -59,11 +70,14 @@ export const AchievementProvider = ({ children }) => {
         });
       }
     });
+
     setAchievements(InitialState);
   };
 
   return (
-    <AchievementContext.Provider value={{ achievements, completeAchievement }}>
+    <AchievementContext.Provider
+      value={{ achievements, completeAchievement, level }}
+    >
       {children}
     </AchievementContext.Provider>
   );

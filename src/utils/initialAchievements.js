@@ -42,7 +42,7 @@ const initialAchievements = [
     id: "2",
     title: "Olá Mr. Robot!",
     notification: "Elliot Alderson, é você?",
-    description: "Acesse o DevTools de seu navegador.",
+    description: "Aperte f + 1 + 2 na página conquistas.",
     achieved: false,
     secret: true,
     image: FSociety,
