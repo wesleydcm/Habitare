@@ -289,7 +289,7 @@ const initialAchievements = [
   {
     id: "29",
     title: "Cooperação amigável",
-    notification: "Porque não tem companhia nessa jornada, não é mesmo?",
+    notification: "Porque não ter companhia nessa jornada, não é mesmo?",
     description: "Entrou para um grupo",
     achieved: false,
     secret: false,

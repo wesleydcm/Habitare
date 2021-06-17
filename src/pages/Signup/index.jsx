@@ -16,7 +16,10 @@ import { FaGrinAlt, FaTimes } from "react-icons/fa";
 const Signup = () => {
   const { authenticated } = useContext(UserContext);
   const schema = yup.object().shape({
-    username: yup.string().required("Todos os campos são obrigatórios!"),
+    username: yup
+      .string()
+      .required("Todos os campos são obrigatórios!")
+      .matches(/^[A-Za-z0-9-_]+$/, "Apenas letras minúsculas e maiúsculas "),
     email: yup
       .string()
       .email("E-mail inválido")
