@@ -26,8 +26,6 @@ export const GlobalStyles = createGlobalStyle`
         --colorFit-hover: #5cc9c7;
         --colorFocus: #F93676;
         --colorFocus-hover: #e23169;
-
-
     }
 
     html, body, div, span, applet, object, iframe,
@@ -80,5 +78,26 @@ export const GlobalStyles = createGlobalStyle`
     body {
         background-color: var(--gray);
         padding-top: 90px;
+    }
+
+    /* para estilizar a scrollbar */
+    ::-webkit-scrollbar{
+        width: 8px;
+        transition: 500ms;
+    }
+    ::-webkit-scrollbar:hover{
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track{
+        background: var(--gray);
+        box-shadow: inset 0 0 2px grey;
+    }
+    ::-webkit-scrollbar-thumb{
+        background: var(--light-purple);
+        border-radius: 24px;
+        transition: 350ms;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--purple);
     }
 `;

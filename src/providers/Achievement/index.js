@@ -2,12 +2,16 @@ import { notification } from "antd";
 import { createContext, useContext, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import initialAchievements from "../../utils/initialAchievements";
+
 export const AchievementContext = createContext([]);
 
 export const AchievementProvider = ({ children }) => {
   const [achievements, setAchievements] = useState(
     JSON.parse(localStorage.getItem("@Habitare:Achievements")) ||
       initialAchievements
+  );
+  const [level, setLevel] = useState(
+    JSON.parse(localStorage.getItem("@Habitare:Level")) || 0
   );
 
   const completeAchievement = (achievementsId) => {
@@ -34,6 +38,7 @@ export const AchievementProvider = ({ children }) => {
           "@Habitare:Achievements",
           JSON.stringify([...newAchievements, data])
         );
+
         notification.open({
           message: "Insígnia desbloqueada!",
           closeIcon: <FaTimes />,
@@ -43,15 +48,41 @@ export const AchievementProvider = ({ children }) => {
             WebkitBorderRadius: 14,
           },
           description: data.notification,
-          icon: <img style={{ width: "50px" }} src={data.image} alt=""></img>,
+          duration: 8,
+          icon: (
+            <img
+              style={{
+                width: "50px",
+
+                position: "relative",
+                right: "13px",
+              }}
+              src={data.image}
+              alt=""
+            ></img>
+          ),
         });
       }
     });
+
     setAchievements(InitialState);
+
+    const achievementsCompleted = InitialState.filter(
+      (achievement) => achievement.achieved === true
+    );
+
+    localStorage.setItem(
+      "@Habitare:Level",
+      JSON.stringify(achievementsCompleted.length)
+    );
+
+    setLevel(achievementsCompleted.length);
   };
 
   return (
-    <AchievementContext.Provider value={{ achievements, completeAchievement }}>
+    <AchievementContext.Provider
+      value={{ achievements, completeAchievement, level }}
+    >
       {children}
     </AchievementContext.Provider>
   );

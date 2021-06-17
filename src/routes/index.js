@@ -39,7 +39,7 @@ const Routes = () => {
       <Route path="/groups/:id">
         <Group authenticated={authenticated} />
       </Route>
-      <Route>
+      <Route path="*">
         <NotFound />
       </Route>
     </Switch>

@@ -21,6 +21,7 @@ import Avatar5 from "../../assets/images/avatar/avatar5.png";
 import Avatar6 from "../../assets/images/avatar/avatar6.png";
 import Avatar7 from "../../assets/images/avatar/avatar7.png";
 import Avatar8 from "../../assets/images/avatar/avatar8.png";
+import { useAchievement } from "../../providers/Achievement";
 
 const AVATARS = [
   Avatar1,
@@ -44,6 +45,11 @@ const Aside = () => {
     path: AVATARS[user.avatar],
     position: user.avatar,
   });
+<<<<<<< HEAD
+=======
+
+  const { level } = useAchievement();
+>>>>>>> develop
 
   const indicator = useRef(null);
   const navLinks = useRef([]);
@@ -97,7 +103,17 @@ const Aside = () => {
         <h2>{user.username}</h2>
         <LevelInfo>
           <FaTrophy />
-          <span>Level iniciante</span>
+          {level <= 2 ? (
+            <span>Iniciante</span>
+          ) : level <= 9 ? (
+            <span>Aspirante</span>
+          ) : level <= 19 ? (
+            <span>Experiente</span>
+          ) : level <= 20 ? (
+            <span>Especialista</span>
+          ) : (
+            <span>Veterano</span>
+          )}
         </LevelInfo>
       </ProfileWrapper>
       <div>
