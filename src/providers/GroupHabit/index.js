@@ -5,7 +5,6 @@ import api from "../../services/api";
 import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
 import { categoryFormat } from "../../utils/format";
-import { useHistory } from "react-router-dom";
 
 export const GroupContext = createContext([]);
 
@@ -17,9 +16,10 @@ export const GroupHabitProvider = ({ children }) => {
   const [loadingGroups, setLoadingGroups] = useState(true);
   const [render, setRender] = useState(false);
   const [id, setId] = useState(false);
+  const [groupNotFound, setGroupNotFound] = useState(false);
 
   const getGlobalGroupsHabits = () => {
-    setLoadingGroups(true)
+    setLoadingGroups(true);
 
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
@@ -45,8 +45,8 @@ export const GroupHabitProvider = ({ children }) => {
         setGlobalGroupsHabits(data);
       })
       .then((_) => {
-        setLoadingGroups(false)
-      })
+        setLoadingGroups(false);
+      });
   };
 
   const createGroupHabit = (data) => {
@@ -146,7 +146,7 @@ export const GroupHabitProvider = ({ children }) => {
   };
 
   const loadGroupHabits = () => {
-    setLoadingGroups(true)
+    setLoadingGroups(true);
 
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
@@ -173,7 +173,7 @@ export const GroupHabitProvider = ({ children }) => {
       })
       .then((_) => {
         setLoadingGroups(false);
-      })
+      });
   };
 
   const subscribeGroupHabit = (groupId) => {
@@ -260,7 +260,7 @@ export const GroupHabitProvider = ({ children }) => {
   };
 
   const getSpecificGroup = (idGroup) => {
-    setLoadingGroup(true)
+    setLoadingGroup(true);
 
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     const user = JSON.parse(localStorage.getItem("@Habitare:User")) || "";
@@ -309,8 +309,11 @@ export const GroupHabitProvider = ({ children }) => {
         setSpecificGroup(output);
       })
       .then((_) => {
-        setLoadingGroup(false)
+        setLoadingGroup(false);
       })
+      .catch((err) => {
+        setGroupNotFound(true);
+      });
   };
 
   const deleteGroup = (groupId) => {
@@ -370,7 +373,9 @@ export const GroupHabitProvider = ({ children }) => {
         setRender,
         id,
         loadingGroup,
-        loadingGroups
+        loadingGroups,
+        groupNotFound,
+        setGroupNotFound,
       }}
     >
       {children}

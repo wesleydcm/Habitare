@@ -45,11 +45,11 @@ export const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
 
   button {
     font-size: 16px;
     padding: 4px 8px;
+    margin-left: 8px;
   }
 
   @media screen and (min-width: 720px) {

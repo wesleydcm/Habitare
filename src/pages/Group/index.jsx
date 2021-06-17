@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Lottie from "react-lottie";
 import { FaUsers, FaCheckDouble, FaTasks } from "react-icons/fa";
 
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import { useGroupHabit } from "../../providers/GroupHabit";
 import {
   GroupContainer,
@@ -34,6 +34,8 @@ const Group = () => {
     setSpecificGroup,
     subscribeGroupHabit,
     unsubscribeGroupHabit,
+    groupNotFound,
+    setGroupNotFound
   } = useGroupHabit();
 
   let { id } = useParams();
@@ -55,6 +57,12 @@ const Group = () => {
   const handleUnsubcription = () => {
     unsubscribeGroupHabit(id);
   };
+
+  if (groupNotFound) {
+    setGroupNotFound(false)
+
+    return <Redirect to="/404" />
+  }
 
   return (
     <GroupContainer>

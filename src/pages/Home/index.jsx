@@ -95,7 +95,7 @@ const Home = () => {
   const whoDoesCard = useRef([])
 
   useEffect(() => {
-    const totalLengtTop = Math.ceil(SVGTopLine.current.getTotalLength());
+    const totalLengtTop = Math.ceil(SVGTopLine.current?.getTotalLength());
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.set(SVGTopLine.current, {
@@ -346,12 +346,8 @@ const Home = () => {
 
       gsap.from(whoDoesCard.current, {
         opacity: 0,
-        translateY: 150,
+        translateY: 80,
         scale: .5,
-        stagger: {
-          amount: .5,
-          from: "center"
-        },
         scrollTrigger: {
           trigger: whoDoesCard.current,
           start: "top 90%",
@@ -904,13 +900,13 @@ const Home = () => {
               <div>
                 <h4>Guilherme Lemes</h4>
                 <div>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/guilemes-freitas/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedinIn />
                   </a>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/guilemes-freitas" target="_blank" rel="noopener noreferrer">
                     <FaGithub />
                   </a>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://gitlab.com/guilemes-freitas" target="_blank" rel="noopener noreferrer">
                     <FaGitlab />
                   </a>
                 </div>
@@ -923,13 +919,13 @@ const Home = () => {
               <div>
                 <h4>Leomar Romanzini</h4>
                 <div>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/leomarromanzini/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedinIn />
                   </a>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/leomarromazini" target="_blank" rel="noopener noreferrer">
                     <FaGithub />
                   </a>
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
+                  <a href="https://gitlab.com/leomarromanzini" target="_blank" rel="noopener noreferrer">
                     <FaGitlab />
                   </a>
                 </div>

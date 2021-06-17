@@ -26,7 +26,7 @@ export const PresentationWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   height: calc(99vh - 90px);
-  min-height: 300px;
+  min-height: 500px;
   padding: 0 12px;
 
   > div:first-child {
@@ -36,6 +36,8 @@ export const PresentationWrapper = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
+    position: relative;
+    z-index: 500;
 
     h1 {
       font-size: 34px;
@@ -54,6 +56,8 @@ export const PresentationWrapper = styled.div`
   > div:last-child {
     display: none;
     opacity: 0;
+    position: relative;
+    z-index: 400;
 
     div {
       width: 30vw !important;

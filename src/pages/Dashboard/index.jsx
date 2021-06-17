@@ -124,9 +124,21 @@ const Dashboard = () => {
         ) : (
           <CardsList>
             {displayHabitsAchieved ? (
-              myHabitsCompleted.map((habit) => (
-                <HabitCard habit={habit} key={habit.id} />
-              ))
+              <>
+                {myHabitsCompleted.length === 0 ? (
+                  <NewProfile>
+                    <h1>Você ainda não concluiu nenhum hábito!</h1>
+                    <h2>
+                      Estamos aqui para te ajudar, volte agora mesmo para sua
+                      lista de hábitos em andamento e mão na massa.
+                    </h2>
+                  </NewProfile>
+                ) : (
+                  myHabitsCompleted.map((habit) => (
+                    <HabitCard habit={habit} key={habit.id} />
+                  ))
+                )}
+              </>
             ) : habits.length > 0 && !allHabits ? (
               myHabits.map((habit) => (
                 <HabitCard habit={habit} key={habit.id} />

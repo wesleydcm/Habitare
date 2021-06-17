@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import Dashboard from "../pages/Dashboard";
 import Home from "../pages/Home";
@@ -39,9 +39,12 @@ const Routes = () => {
       <Route path="/groups/:id">
         <Group authenticated={authenticated} />
       </Route>
-      <Route>
+      <Route path="/404">
         <NotFound />
       </Route>
+      <Redirect to="/404" />
+
+
     </Switch>
   );
 };
