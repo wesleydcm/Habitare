@@ -10,6 +10,7 @@ export const Container = styled.div`
   background-size: cover;
   position: relative;
   z-index: 500;
+  min-height: 450px;
 `;
 
 export const Content = styled.section`
@@ -20,13 +21,14 @@ export const Content = styled.section`
 
   width: 95vw;
   max-width: 300px;
+  min-height: 500px;
   max-height: 661px;
 
   form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    transform: translateY(-45px);
+    /* transform: translateY(-45px); */
 
     > h1 {
       font-size: 32px;

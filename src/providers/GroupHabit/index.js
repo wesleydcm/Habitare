@@ -5,7 +5,6 @@ import api from "../../services/api";
 import { notification } from "antd";
 import { FaFrown, FaTimes, FaGrinAlt } from "react-icons/fa";
 import { categoryFormat } from "../../utils/format";
-import { useHistory } from "react-router-dom";
 
 export const GroupContext = createContext([]);
 
@@ -13,11 +12,15 @@ export const GroupHabitProvider = ({ children }) => {
   const [groupHabits, setGroupHabits] = useState([]);
   const [globalGroupHabits, setGlobalGroupsHabits] = useState([]);
   const [specificGroup, setSpecificGroup] = useState({});
-
+  const [loadingGroup, setLoadingGroup] = useState(true);
+  const [loadingGroups, setLoadingGroups] = useState(true);
   const [render, setRender] = useState(false);
   const [id, setId] = useState(false);
+  const [groupNotFound, setGroupNotFound] = useState(false);
 
   const getGlobalGroupsHabits = () => {
+    setLoadingGroups(true);
+
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("groups/?category=%40Habitare%2F", {
@@ -40,6 +43,9 @@ export const GroupHabitProvider = ({ children }) => {
         });
 
         setGlobalGroupsHabits(data);
+      })
+      .then((_) => {
+        setLoadingGroups(false);
       });
   };
 
@@ -140,6 +146,8 @@ export const GroupHabitProvider = ({ children }) => {
   };
 
   const loadGroupHabits = () => {
+    setLoadingGroups(true);
+
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     api
       .get("groups/subscriptions/", {
@@ -162,6 +170,9 @@ export const GroupHabitProvider = ({ children }) => {
         });
 
         setGroupHabits(data);
+      })
+      .then((_) => {
+        setLoadingGroups(false);
       });
   };
 
@@ -249,6 +260,8 @@ export const GroupHabitProvider = ({ children }) => {
   };
 
   const getSpecificGroup = (idGroup) => {
+    setLoadingGroup(true);
+
     const token = JSON.parse(localStorage.getItem("@Habitare:Token")) || "";
     const user = JSON.parse(localStorage.getItem("@Habitare:User")) || "";
 
@@ -294,6 +307,12 @@ export const GroupHabitProvider = ({ children }) => {
         };
 
         setSpecificGroup(output);
+      })
+      .then((_) => {
+        setLoadingGroup(false);
+      })
+      .catch((err) => {
+        setGroupNotFound(true);
       });
   };
 
@@ -353,6 +372,10 @@ export const GroupHabitProvider = ({ children }) => {
         render,
         setRender,
         id,
+        loadingGroup,
+        loadingGroups,
+        groupNotFound,
+        setGroupNotFound,
       }}
     >
       {children}

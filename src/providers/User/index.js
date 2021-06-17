@@ -19,7 +19,8 @@ export const UserProvider = ({ children }) => {
     api.get(`users/${userId}/`).then((response) => {
       let userLogged = response.data;
 
-      if (!localStorage.getItem(`Habitare:User${userId}`)) {
+      if (!localStorage.getItem(`@Habitare:User${userId}`)) {
+        console.log("ok");
         userLogged = {
           ...userLogged,
           avatar: 0,
