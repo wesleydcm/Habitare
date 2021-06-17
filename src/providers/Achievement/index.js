@@ -24,13 +24,6 @@ export const AchievementProvider = ({ children }) => {
         return achievement.id === achievementId;
       });
       if (!updateAchiviement[0].achieved) {
-        localStorage.setItem(
-          "@Habitare:Level",
-          JSON.stringify(level + achievementsId.length)
-        );
-
-        setLevel(level + achievementsId.length);
-
         const data = {
           id: updateAchiviement[0].id,
           title: updateAchiviement[0].title,
@@ -45,6 +38,7 @@ export const AchievementProvider = ({ children }) => {
           "@Habitare:Achievements",
           JSON.stringify([...newAchievements, data])
         );
+
         notification.open({
           message: "Insígnia desbloqueada!",
           closeIcon: <FaTimes />,
@@ -72,6 +66,17 @@ export const AchievementProvider = ({ children }) => {
     });
 
     setAchievements(InitialState);
+
+    const achievementsCompleted = InitialState.filter(
+      (achievement) => achievement.achieved === true
+    );
+
+    localStorage.setItem(
+      "@Habitare:Level",
+      JSON.stringify(achievementsCompleted.length)
+    );
+
+    setLevel(achievementsCompleted.length);
   };
 
   return (
