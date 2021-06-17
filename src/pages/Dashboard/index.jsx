@@ -127,7 +127,7 @@ const Dashboard = () => {
           ) : habits.length > 0 && !allHabits ? (
             myHabits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
           ) : habits.length > 0 && allHabits ? (
-            habits.map((habit) => <HabitCard habit={habit} key={habit.id} />)
+            habits.map((habit) => <HabitCard habit={habit} key={habit.id} /> )
           ) : (
             <NewProfile>
               <h1>Queremos te ajudar a praticar novos hábitos!</h1>

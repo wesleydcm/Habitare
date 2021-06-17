@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Lottie from "react-lottie";
 import { FaUsers, FaCheckDouble, FaTasks } from "react-icons/fa";
 
@@ -22,9 +22,11 @@ import ModalNewActivity from "../../components/ModalNewActivity";
 import ModalActivity from "../../components/ModalActivity";
 import ModalGoals from "../../components/ModalGoals";
 import ModalGroup from "../../components/ModalGroup";
+import { AchievementContext } from "../../providers/Achievement";
 
 const Group = () => {
   const [paused, setPaused] = useState(true);
+  const { completeAchievement } = useContext(AchievementContext);
 
   const {
     getSpecificGroup,
@@ -47,6 +49,7 @@ const Group = () => {
 
   const handleSubcription = () => {
     subscribeGroupHabit(id);
+    completeAchievement(["29"]);
   };
 
   const handleUnsubcription = () => {
@@ -167,7 +170,7 @@ const Group = () => {
           <div>
             <ul>
               {group.users_on_group?.map((user) => {
-                return <li>{user.username}</li>;
+                return <li key={user.id}>{user.username}</li>;
               })}
             </ul>
           </div>

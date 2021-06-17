@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import curveTop from "../../assets/images/curve-top.png";
-import curveBottom from "../../assets/images/curve-bottom.png";
-import curveLeft from "../../assets/images/curve-left.png";
-import curveRight from "../../assets/images/curve-right.png";
+import curveTopSvg from "../../assets/images/curve-top.svg";
+import curveBottom from "../../assets/images/curve-bottom.svg";
+import curveLeft from "../../assets/images/curve-left.svg";
+import curveRight from "../../assets/images/curve-right.svg";
 
 export const AsideContainer = styled.aside`
   width: 100%;
@@ -12,21 +12,18 @@ export const AsideContainer = styled.aside`
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
   z-index: 400;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: var(--purple);
   z-index: 500;
-  
+
   @media screen and (min-width: 720px) {
-    min-height: 100vh;
+    height: 100vh;
+    min-height: 660px;
     width: 275px;
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
+    
     z-index: 400;
     display: flex;
     flex-direction: column;
@@ -43,47 +40,17 @@ export const ProfileWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  img {
-    width: 80px;
-    border-radius: 50%;
-    border: 3px solid var(--white);
-    background-color: var(--white);
-    margin-bottom: 14px;
-  }
-
-  h2 {
-    color: var(--white);
-    font-weight: 700;
-    font-weight: 24px;
-    margin-bottom: 8px;
-    text-align: center;
-  }
-
-  @media screen and (min-width: 720px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 80px;
-
-    img {
-      width: 60%;
+  
+  div.avatar {
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       border: 3px solid var(--white);
-      background-color: var(--white);
-      margin-bottom: 22px;
-    }
-
-    div.avatar {
-      width: 135px;
-      height: 135px;
-      border-radius: 50%;
-      border: 3px solid var(--white);
-      background: url(${props => props.avatar});
+      background: url(${(props) => props.avatar});
       background-color: var(--gray);
       background-size: cover;
       background-repeat: no-repeat;
-      margin-bottom: 22px;
+      margin-bottom: 8px;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -100,7 +67,7 @@ export const ProfileWrapper = styled.div`
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        background-color: rgba(0,0,0,0.4);
+        background-color: rgba(0, 0, 0, 0.4);
         opacity: 0;
         transition: 350ms;
       }
@@ -108,6 +75,27 @@ export const ProfileWrapper = styled.div`
       &:hover::before {
         opacity: 1;
       }
+    }
+  h2 {
+    color: var(--white);
+    font-weight: 700;
+    font-weight: 24px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 720px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 80px;
+
+
+    div.avatar {
+      width: 135px;
+      height: 135px;
+      margin-bottom: 22px;
     }
 
     h2 {
@@ -128,7 +116,6 @@ export const LevelInfo = styled.div`
   align-items: center;
   position: relative;
   z-index: 500;
-
   span {
     text-transform: uppercase;
     color: var(--purple);
@@ -303,9 +290,9 @@ export const MenuWrapper = styled.nav`
 
       &::before {
         content: "";
-        width: 38px;
+        width: 39px;
         height: 24px;
-        background-image: url(${curveTop});
+        background-image: url(${curveTopSvg});
         background-repeat: no-repeat;
         background-size: cover;
         position: absolute;
@@ -316,7 +303,7 @@ export const MenuWrapper = styled.nav`
 
       &::after {
         content: "";
-        width: 38px;
+        width: 39px;
         height: 22px;
         background-image: url(${curveBottom});
         background-repeat: no-repeat;

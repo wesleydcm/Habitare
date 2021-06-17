@@ -26,8 +26,7 @@ export const Content = styled.section`
     display: flex;
     flex-direction: column;
     width: 100%;
-  transform: translateY(-45px);
-
+    transform: translateY(-45px);
 
     > h1 {
       font-size: 32px;
@@ -43,7 +42,6 @@ export const Content = styled.section`
     > p {
       font-size: 16px;
       margin-bottom: 20px;
-
 
       a {
         font-weight: 700;
@@ -73,7 +71,7 @@ export const Background = styled.div`
     object-fit: cover;
     transition: all 300ms;
     opacity: 0;
-    
+
     &.left {
       position: absolute;
       left: -310px;

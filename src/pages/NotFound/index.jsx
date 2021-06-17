@@ -47,22 +47,25 @@ const NotFound = () => {
         opacity: 0,
         translateX: 60,
         translateY: 20,
-        duration: .5,
+        duration: 0.5,
         yoyo: true,
         repeat: -1,
-        ease:"steps(4)"
+        ease: "steps(4)",
       })
-      .to(sticksRight.current, {
-        scale: 0,
-        opacity: 0,
-        translateX: -60,
-        translateY: -20,
-        duration: .5,
-        yoyo: true,
-        repeat: -1,
-        ease:"steps(4)"
-      }, "<")
-      ;
+      .to(
+        sticksRight.current,
+        {
+          scale: 0,
+          opacity: 0,
+          translateX: -60,
+          translateY: -20,
+          duration: 0.5,
+          yoyo: true,
+          repeat: -1,
+          ease: "steps(4)",
+        },
+        "<"
+      );
   });
 
   return (

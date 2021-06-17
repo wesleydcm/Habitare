@@ -54,7 +54,6 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
     const data = { how_much_achieved, achieved };
     how_much_update <= 120 && updateHabit(habit.id, data);
     habit.category === "fit" && arrayAchievements.push("28");
-
     how_much_update === 120
       ? isAchievementComplete(arrayAchievements)
       : completeAchievement(arrayAchievements);
@@ -63,6 +62,13 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
   };
 
   const AchievementMultipleHabits = (arrayAchievements) => {
+<<<<<<< HEAD
+=======
+    const habitsHardQuantity =
+      habitsAchieved.filter((habit) => {
+        return habit.difficulty === "3";
+      }) || [];
+>>>>>>> release
     const habitsMoneyQuantity =
       habitsAchieved.filter((habit) => {
         return habit.category === "money";
@@ -95,11 +101,19 @@ const ModalCheckin = ({ habit, isModalVisible = false, setIsModalVisible }) => {
       habitsSpiritQuantity.length >= 1 &&
       habitsHouseQuantity.length >= 1 &&
       arrayAchievements.push("4");
+<<<<<<< HEAD
+=======
+    console.log(habitsHardQuantity);
+    habitsHardQuantity.length >= 2 && arrayAchievements.push("30");
+>>>>>>> release
     completeAchievement(arrayAchievements);
   };
 
   const isAchievementComplete = (arrayAchievements) => {
     arrayAchievements.push("5");
+    habit.difficulty === "3" &&
+      habit.category === "focus" &&
+      arrayAchievements.push("31");
     const habitExist = mockHabits[habit.title];
     const categoyExist = categoriesAchievements[habit.category];
     !!habitExist && arrayAchievements.push(habitExist);

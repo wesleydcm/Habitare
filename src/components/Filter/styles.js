@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-
   span {
     font-weight: bold;
     margin-bottom: 5px;
@@ -20,14 +19,17 @@ export const IconDisplayAll = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 0.5px;
+  grid-gap: 0.5px;
+  transform: translateY(-3px);
+  transition: all 350ms;
+
   &:hover {
     filter: brightness(0.9);
   }
 `;
 export const SvgContent = styled.div`
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 
   svg {
     width: 100%;
@@ -46,7 +48,7 @@ export const SvgContent = styled.div`
         : "var(--colorNight)"};
     stroke-width: 21;
 
-    color: ${(props) =>
+    fill: ${(props) =>
       props.color === "spirit" && props.filterSelect
         ? "var(--colorSpirit)"
         : props.color === "fit" && props.filterSelect
@@ -59,7 +61,7 @@ export const SvgContent = styled.div`
         ? "var(--colorHouse)"
         : props.color === "night" && props.filterSelect
         ? "var(--colorNight)"
-        : "var(--white)"};
+        : "var(--gray)"};
   }
 `;
 export const IconContainer = styled.div`
@@ -70,8 +72,9 @@ export const IconContainer = styled.div`
   cursor: pointer;
   outline: none;
   overflow: visible;
+  transition: all 350ms;
   &:hover {
-    filter: brightness(0.85);
+    filter: brightness(0.9);
   }
 
   svg {
@@ -91,9 +94,9 @@ export const IconContainer = styled.div`
           : props.color === "house"
           ? "var(--colorHouse)"
           : "var(--colorNight)"};
-      stroke-width: 21;
+      stroke-width: 22px;
 
-      color: ${(props) =>
+      fill: ${(props) =>
         props.color === "spirit" && props.filterSelect
           ? "var(--colorSpirit)"
           : props.color === "fit" && props.filterSelect
@@ -106,7 +109,7 @@ export const IconContainer = styled.div`
           ? "var(--colorHouse)"
           : props.color === "night" && props.filterSelect
           ? "var(--colorNight)"
-          : "var(--white)"};
+          : "var(--gray)"};
     }
   }
 
