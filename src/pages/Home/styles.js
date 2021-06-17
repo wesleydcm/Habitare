@@ -25,7 +25,7 @@ export const PresentationWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  height: calc(98vh - 90px);
+  height: calc(99vh - 90px);
   min-height: 300px;
   padding: 0 12px;
 
@@ -53,6 +53,7 @@ export const PresentationWrapper = styled.div`
 
   > div:last-child {
     display: none;
+    opacity: 0;
 
     div {
       width: 30vw !important;
@@ -154,7 +155,7 @@ export const SVGHomeBottom = styled.div`
 
   .custom-shape-divider-bottom-1623850126 {
     position: absolute;
-    bottom: -1px;
+    bottom: 0px;
     left: 0;
     width: 100%;
     overflow: hidden;
