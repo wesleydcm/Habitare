@@ -30,11 +30,9 @@ Motivar as pessoas a criarem hábitos saudáveis  individuais ou em grupo, atrav
 ### Endpoints da Api
 
         - User 
-        - Habits
-            - _Não iremos usar endpoint de deletar habitos_
+        - Habits         
         - Groups
-        - Goals
-            - _Não iremos usar endpoint de delete goal_
+        - Goals         
         - Activities
 ### Features do Front
 
