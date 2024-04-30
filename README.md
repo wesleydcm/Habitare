@@ -1,5 +1,7 @@
 # Project Details
 
+### Status do Projeto: 🚧 Manutenção... 🚧
+
 ### Integrantes do projeto:
 
         - Product Owner
